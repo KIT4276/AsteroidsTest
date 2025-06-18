@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ShipMove : MonoBehaviour
+public class ShipRotation : MonoBehaviour
 {
     [SerializeField] private float _acceleration = 2;
     [SerializeField] private Rigidbody2D _rigidbody;
@@ -16,13 +16,16 @@ public class ShipMove : MonoBehaviour
     {
         if (_inputHandler != null)
         {
-            float input = _inputHandler.GetMoveInputValue();
+            float input = _inputHandler.GetRotationInputValue();
 
-            if (input != 0)
+            if (_inputHandler != null)
             {
-                Vector3 force = transform.up * input * _acceleration;
-                _rigidbody.AddForce(force);
+                if (input != 0)
+                {
+                    _rigidbody.AddTorque(-input * _acceleration);
+                }
             }
         }
     }
 }
+
