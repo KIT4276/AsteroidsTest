@@ -10,7 +10,7 @@ public abstract class BaseAsteroidsFactory : MonoBehaviour
 
     public  void Despawn(GameObject asteroid)
     {
-        asteroid.GetComponent<AsteroidMove>().StopMove();// bad?!
+        asteroid.GetComponent<BaseAsteroidMove>().StopMove();// bad?!
         asteroid.SetActive(false);
         _pool.Add(asteroid);
     }
@@ -29,7 +29,7 @@ public abstract class BaseAsteroidsFactory : MonoBehaviour
             _pool.Remove(asteroid);
         }
 
-        asteroid.GetComponent<AsteroidMove>().Initialize(GetSpawnPosition(), this);
+        asteroid.GetComponent<BaseAsteroidMove>().Initialize(GetSpawnPosition(), this);
         asteroid.GetComponent<BaseAsteroidCollision>().Initialize(this);
     }
 

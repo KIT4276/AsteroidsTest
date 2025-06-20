@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AsteroidMove : MonoBehaviour
+public class BaseAsteroidMove : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 0.04f;
     [SerializeField] private Vector2 _positionLimits = new Vector2(35, 35);
