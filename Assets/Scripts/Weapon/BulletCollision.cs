@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class BulletCollision : ProjectileCollision
 {
     protected override void HandlingCollisions(Collider2D collision)
     {
-        Debug.Log("BulletCollision HandlingCollisions to " + collision.name);
-        if(collision.gameObject.TryGetComponent<ShipCollision>(out var shipCollision))
+        if (collision.gameObject.TryGetComponent<AsteroidCollision>(out var asteroidCollision))
         {
-            shipCollision.OnBulletCollision();
+            Debug.Log("BulletCollision HandlingCollisions to AsteroidCollision " + collision.name);
+            asteroidCollision.OnBulletCollied();
             //Todo despawn Bullet;
         }
     }
