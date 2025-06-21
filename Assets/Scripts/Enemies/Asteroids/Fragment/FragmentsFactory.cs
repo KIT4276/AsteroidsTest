@@ -2,17 +2,19 @@ using UnityEngine;
 
 public class FragmentsFactory : BaseAsteroidsFactory
 {
-    public void SpawnFragments()
+    public FragmentsFactory(GameStaticData staticData) : base(staticData)
+    {
+        _prefab = staticData.FragmentPrefab;
+        _count = staticData.FragmentsCount;
+    }
+
+    public void SpawnFragments(Transform transform)
     {
         for (int i = _count; i > 0; i--)
         {
-            Spawn();
+            _spawnPoint = transform;
+           Spawn(transform);
         }
-    }
-
-    protected override Vector2 GetSpawnPosition()
-    {
-        return transform.position;
     }
 }
 

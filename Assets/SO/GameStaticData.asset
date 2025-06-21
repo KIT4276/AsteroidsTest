@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11e399eac8c8d64bb1fb99975ba2e2d, type: 3}
+  m_Name: GameStaticData
+  m_EditorClassIdentifier: 
+  _asteroidPrefab: {fileID: 5980004778429158638, guid: d0e895d602ad48d4cbd6f42385765377, type: 3}
+  _fragmentPrefab: {fileID: 63624471386573807, guid: 62b7bd439ea0c5b458f4cdfc4b50f04c, type: 3}
+  _ufoPrefab: {fileID: 0}
+  _bulletPrefab: {fileID: 0}
+  _spawnPosLimit: 35
+  _screenLimits: {x: 9, y: 5}
+  _spawnTime: 1
+  _startCount: 15
+  _fragmentsCount: 5

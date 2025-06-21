@@ -1,19 +1,18 @@
 using UnityEngine;
 
-public class BaseAsteroidMove : MonoBehaviour
+public class BaseAsteroidMove : MonoBehaviour, IMove
 {
     [SerializeField] private float _moveSpeed = 0.04f;
     [SerializeField] private Vector2 _positionLimits = new Vector2(35, 35);
  
     private bool _isActive;
-    private BaseAsteroidsFactory _asteroidsFactory;
+    private BaseFactory _asteroidsFactory;
 
-    public void Initialize(Vector2 position, BaseAsteroidsFactory asteroidsFactory)
+    public void Initialize(Transform transform, BaseFactory asteroidsFactory)
     {
         _asteroidsFactory = asteroidsFactory;
 
-
-        transform.position = position;
+        this.transform.position = transform.position;
         this.gameObject.SetActive(true);
         _isActive = true;
 

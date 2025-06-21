@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 
-public abstract class BaseAsteroidCollision : MonoBehaviour
+public abstract class BaseAsteroidCollision : MonoBehaviour, IDamageable
 {
-    protected BaseAsteroidsFactory _factory;
+    protected BaseFactory _factory;
 
-    public void Initialize(BaseAsteroidsFactory factory)
+    public void Initialize(BaseFactory factory)
     {
         _factory = factory;
+    }
+
+    public void TakeBulletDamage()
+    {
+        OnBulletCollied();
     }
 
     public virtual void OnBulletCollied()
