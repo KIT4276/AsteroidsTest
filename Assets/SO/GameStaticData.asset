@@ -15,7 +15,7 @@ MonoBehaviour:
   _asteroidPrefab: {fileID: 5980004778429158638, guid: d0e895d602ad48d4cbd6f42385765377, type: 3}
   _fragmentPrefab: {fileID: 63624471386573807, guid: 62b7bd439ea0c5b458f4cdfc4b50f04c, type: 3}
   _ufoPrefab: {fileID: 0}
-  _bulletPrefab: {fileID: 0}
+  _bulletPrefab: {fileID: 6481154254085632278, guid: abfab34e82f9e1148a3b99ec4f92d2d5, type: 3}
   _spawnPosLimit: 35
   _screenLimits: {x: 9, y: 5}
   _spawnTime: 1

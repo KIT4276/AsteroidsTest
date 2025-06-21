@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public class ShipRotation : MonoBehaviour
 {
@@ -7,7 +8,8 @@ public class ShipRotation : MonoBehaviour
 
     private IInputHandler _inputHandler;
 
-    public void Initialize(IInputHandler inputHandler)
+    [Inject]
+    private void Initialize(IInputHandler inputHandler)
     {
         _inputHandler = inputHandler;
     }

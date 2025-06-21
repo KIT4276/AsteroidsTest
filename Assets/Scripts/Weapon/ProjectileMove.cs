@@ -9,6 +9,7 @@ public class ProjectileMove : MonoBehaviour, IMove
 
     public void Initialize(Transform point, BaseFactory factory)
     {
+        Debug.Log("Initialize");
         _factory = factory;
 
         _isActive = true;

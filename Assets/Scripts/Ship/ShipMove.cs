@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class ShipMove : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class ShipMove : MonoBehaviour
 
     private IInputHandler _inputHandler;
 
-    public void Initialize(IInputHandler inputHandler)
+    [Inject]
+    private void Initialize(IInputHandler inputHandler)
     {
         _inputHandler = inputHandler;
     }

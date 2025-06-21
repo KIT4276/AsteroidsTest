@@ -19,7 +19,7 @@ public abstract class BaseFactory
         _pool.Add(despawnedObject);
     }
 
-    protected virtual void Spawn(Transform spawnTransform)
+    public virtual void Spawn(Transform spawnTransform)
     {
         GameObject spawnedObject;
 

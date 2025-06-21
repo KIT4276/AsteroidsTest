@@ -1,17 +1,19 @@
 using UnityEngine;
 
-public class BulletFactory : BaseFactory
+public class BulletsFactory : BaseFactory
 {
     private Transform _gunBarrel;
 
-    public BulletFactory(GameStaticData staticData) : base(staticData)
+    public BulletsFactory(GameStaticData staticData) : base(staticData)
     {
+        _prefab = staticData.BulletPrefab;
     }
 
-    protected override void Spawn(Transform gunBarrel)
+    public override void Spawn(Transform gunBarrel)
     {
         //TODO
         _gunBarrel = gunBarrel;
+        base.Spawn(gunBarrel);
     }
 
     protected override void InitializeSpawnedObject(GameObject spawnedObject)

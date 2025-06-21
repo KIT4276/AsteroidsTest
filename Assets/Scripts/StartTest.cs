@@ -10,9 +10,9 @@ public class StartTest : MonoBehaviour
 
     private void Start()
     {
-        var inputHandler = new PCInputHandler(_playerInput);
+    //    var inputHandler = new PCInputHandler(_playerInput);
 
-        _shipMove.Initialize(inputHandler);
-        _shipRotation.Initialize(inputHandler);
+    //    _shipMove.Initialize(inputHandler);
+    //    _shipRotation.Initialize(inputHandler);
     }
 }

@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "BulletFire",
+                    "type": "Button",
+                    "id": "78bf0bb6-71d7-4e20-806b-9c60a6df6279",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -437,6 +446,17 @@
                     "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c2494c66-41f8-4a79-be68-5f0701ba915c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BulletFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
