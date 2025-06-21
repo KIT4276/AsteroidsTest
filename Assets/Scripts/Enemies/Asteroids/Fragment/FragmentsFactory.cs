@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FragmentsFactory : BaseAsteroidsFactory
+public class FragmentsFactory : BaseEnemyFactory
 {
     public FragmentsFactory(GameStaticData staticData) : base(staticData)
     {

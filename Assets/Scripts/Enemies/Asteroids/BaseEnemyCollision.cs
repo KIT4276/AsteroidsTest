@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class BaseAsteroidCollision : MonoBehaviour, IDamageable
+public abstract class BaseEnemyCollision : MonoBehaviour, IDamageable
 {
     protected BaseFactory _factory;
 

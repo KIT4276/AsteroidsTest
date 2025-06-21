@@ -1,23 +1,23 @@
 using System.Collections;
 using UnityEngine;
 
-public class AsteroidsFactory : BaseAsteroidsFactory
+public class AsteroidsFactory : BaseEnemyFactory
 {
-    private float _spawnPosLimit = 1000;
-    private Vector2 _screenLimits = new Vector2(11.2f, 5.25f);
-    private float _spawnTime = 3;
+    private float _spawnPosLimit;
+    private Vector2 _screenLimits;
+    private float _spawnTime;
 
     private FragmentsFactory _fragmentsFactory;
 
     protected ICoroutineRunner _coroutineRunner;
 
-    public AsteroidsFactory(GameStaticData staticData, Transform spawnPoint,FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner)
+    public AsteroidsFactory(GameStaticData staticData, Transform spawnPoint, FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner)
         : base(staticData)
     {
         _prefab = staticData.AsteroidPrefab;
-        _spawnPosLimit = staticData.AsteroidsSpawnPosLimit;
-        _screenLimits = staticData.AsteroidsScreenLimits;
-        _spawnTime = staticData.AsteroidsSpawnTime; 
+        _spawnPosLimit = staticData.SpawnPosLimit;
+        _screenLimits = staticData.ScreenLimits;
+        _spawnTime = staticData.AsteroidsSpawnTime;
         _count = staticData.AsteroidsStartCount;
 
         _spawnPoint = spawnPoint;

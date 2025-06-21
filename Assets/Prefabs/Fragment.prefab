@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6124396167846238956}
   - component: {fileID: 5809443474063407168}
+  - component: {fileID: -3867889291065277295}
   - component: {fileID: 8646222973148852211}
   - component: {fileID: 672182697197318896}
-  - component: {fileID: -3867889291065277295}
   m_Layer: 0
   m_Name: Fragment
   m_TagString: Untagged
@@ -90,32 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8646222973148852211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 63624471386573807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d96f9189a9ba8d468073b836b752372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &672182697197318896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 63624471386573807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 037d42f0dfb3d054faf883a513476f5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 0.05
-  _positionLimits: {x: 35, y: 35}
 --- !u!58 &-3867889291065277295
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -152,3 +126,28 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &8646222973148852211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63624471386573807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d96f9189a9ba8d468073b836b752372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &672182697197318896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63624471386573807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037d42f0dfb3d054faf883a513476f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 0.05

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AsteroidCollision : BaseAsteroidCollision
+public class AsteroidCollision : BaseEnemyCollision
 {
    private FragmentsFactory _fragmentsFactory;
 

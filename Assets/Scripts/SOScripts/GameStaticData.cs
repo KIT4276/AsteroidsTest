@@ -9,11 +9,15 @@ public class GameStaticData : ScriptableObject
     [SerializeField] private GameObject _ufoPrefab;
     [SerializeField] private GameObject _bulletPrefab;
 
-    [Header("Asteroids Data")]
+    [Header("Asteroids and UFO Data")]
     [SerializeField] private float _spawnPosLimit = 18;
     [SerializeField] private Vector2 _screenLimits = new Vector2(11.2f, 5.25f);
-    [SerializeField] private float _spawnTime = 1;
-    [SerializeField] private int _startCount = 15;
+    [Header("Asteroids Data")]
+    [SerializeField] private float _spawnTimeAster = 1;
+    [SerializeField] private int _startCountAster = 15;
+    [Header("UFO Data")]
+    [SerializeField] private float _spawnTimeUFO = 3;
+    [SerializeField] private int _startCountUFO = 5;
     [Header("Fragments Data")]
     [SerializeField] private int _fragmentsCount = 5;
     [Header("For all IMove")]
@@ -25,10 +29,14 @@ public class GameStaticData : ScriptableObject
     public GameObject UFOPrefab => _ufoPrefab;
     public GameObject BulletPrefab => _bulletPrefab;
 
-    public float AsteroidsSpawnPosLimit => _spawnPosLimit;
-    public Vector2 AsteroidsScreenLimits => _screenLimits;
-    public float AsteroidsSpawnTime => _spawnTime;
-    public int AsteroidsStartCount => _startCount;
+    public float SpawnPosLimit => _spawnPosLimit;
+    public Vector2 ScreenLimits => _screenLimits;
+
+    public float AsteroidsSpawnTime => _spawnTimeAster;
+    public int AsteroidsStartCount => _startCountAster;
+
+    public float UFOSpawnTime => _spawnTimeUFO;
+    public int UFOStartCount => _startCountUFO;
 
     public int FragmentsCount => _fragmentsCount;
 

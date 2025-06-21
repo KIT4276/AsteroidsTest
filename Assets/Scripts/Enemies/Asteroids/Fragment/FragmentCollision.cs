@@ -1,3 +1,3 @@
-﻿public class FragmentCollision : BaseAsteroidCollision
+﻿public class FragmentCollision : BaseEnemyCollision
 {
 }

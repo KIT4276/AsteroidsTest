@@ -9,17 +9,37 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     [Space]
     [SerializeField] private GameStaticData _gameStaticData;
     [SerializeField] private Transform _asteroidsSpawnPoint;
+    [SerializeField] private ShipCollision _ship;
 
     public override void InstallBindings()
     {
+        InstallShip();
+
         InstallGameStaticData();
 
         InstallInput();
 
         InstallFragmentsFactory();
         InstallAsteroidsFactory();
+       // InstallUFOFactory();
 
         InstallBulletsFactory();
+    }
+
+    private void InstallUFOFactory()
+    {
+        Container.Bind<UFOFactory>().
+            FromNew().
+            AsSingle().
+            WithArguments(_asteroidsSpawnPoint, this).
+            NonLazy();
+    }
+
+    private void InstallShip()
+    {
+        Container.Bind<ShipCollision>().
+            FromInstance(_ship).
+            AsSingle();
     }
 
     private void InstallGameStaticData()
