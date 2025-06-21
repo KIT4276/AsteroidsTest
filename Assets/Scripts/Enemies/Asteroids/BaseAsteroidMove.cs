@@ -3,18 +3,19 @@ using UnityEngine;
 public class BaseAsteroidMove : MonoBehaviour, IMove
 {
     [SerializeField] private float _moveSpeed = 0.04f;
-    [SerializeField] private Vector2 _positionLimits = new Vector2(35, 35);
- 
+    private float _positionLimits;
+
     private bool _isActive;
     private BaseFactory _asteroidsFactory;
 
-    public void Initialize(Transform transform, BaseFactory asteroidsFactory)
+    public void Initialize(Transform transform, BaseFactory asteroidsFactory, GameStaticData gameStaticData)
     {
         _asteroidsFactory = asteroidsFactory;
 
         this.transform.position = transform.position;
         this.gameObject.SetActive(true);
         _isActive = true;
+        _positionLimits = gameStaticData.MoveLimits;
 
         SelectRandomRotate();
     }
@@ -34,12 +35,22 @@ public class BaseAsteroidMove : MonoBehaviour, IMove
     {
         if (_isActive)
         {
-            transform.Translate(transform.up * _moveSpeed);
-            if (transform.position.x > _positionLimits.x || transform.position.y > _positionLimits.y
-                || transform.position.x< -_positionLimits.x || transform.position.y < -_positionLimits.y)
-            {
-                _asteroidsFactory.Despawn(this.gameObject);
-            }
+            Move();
+            CheckPosition();
+        }
+    }
+
+    protected void Move()
+    {
+        transform.Translate(transform.up * _moveSpeed);
+    }
+
+    protected void CheckPosition()
+    {
+        if (transform.position.x > _positionLimits || transform.position.y > _positionLimits
+            || transform.position.x < -_positionLimits || transform.position.y < -_positionLimits)
+        {
+            _asteroidsFactory.Despawn(this.gameObject);
         }
     }
 }

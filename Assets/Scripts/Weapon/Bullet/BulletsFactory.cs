@@ -11,14 +11,15 @@ public class BulletsFactory : BaseFactory
 
     public override void Spawn(Transform gunBarrel)
     {
-        //TODO
         _gunBarrel = gunBarrel;
         base.Spawn(gunBarrel);
     }
 
     protected override void InitializeSpawnedObject(GameObject spawnedObject)
     {
-        spawnedObject.GetComponent<ProjectileMove>().Initialize(GetSpawnPoint(_gunBarrel), this);
+        spawnedObject.SetActive(true);
+        spawnedObject.GetComponent<ProjectileMove>().Initialize(GetSpawnPoint(_gunBarrel), this, _staticData);
+        spawnedObject.GetComponent<BulletCollision>().Initialize(this);
     }
    
 

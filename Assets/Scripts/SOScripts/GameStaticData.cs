@@ -10,12 +10,14 @@ public class GameStaticData : ScriptableObject
     [SerializeField] private GameObject _bulletPrefab;
 
     [Header("Asteroids Data")]
-    [SerializeField] private float _spawnPosLimit = 35;
+    [SerializeField] private float _spawnPosLimit = 18;
     [SerializeField] private Vector2 _screenLimits = new Vector2(11.2f, 5.25f);
     [SerializeField] private float _spawnTime = 1;
     [SerializeField] private int _startCount = 15;
     [Header("Fragments Data")]
     [SerializeField] private int _fragmentsCount = 5;
+    [Header("For all IMove")]
+    [SerializeField] private float _moveLimits = 35;
 
 
     public GameObject AsteroidPrefab => _asteroidPrefab;
@@ -30,6 +32,6 @@ public class GameStaticData : ScriptableObject
 
     public int FragmentsCount => _fragmentsCount;
 
-
+    public float MoveLimits => _moveLimits;
 
 }
