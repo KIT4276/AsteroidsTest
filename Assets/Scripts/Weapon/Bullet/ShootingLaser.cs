@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 using Zenject;
 
@@ -16,8 +15,13 @@ public class ShootingLaser : MonoBehaviour
     [SerializeField] private float _oneShotRecoveryTime = 15;
 
     private IInputHandler _inputHandler;
-    private float _timer;
+    private bool _isRunning = false;
+
+    public float OneShotRecoveryTime { get => _oneShotRecoveryTime; }
+    public float Timer { get; private set; }
     public int ShotsLeft { get; private set; }
+
+    public event Action NumberOfShotsChange;
 
     [Inject]
     private void Initialize(IInputHandler inputHandler)
@@ -26,7 +30,7 @@ public class ShootingLaser : MonoBehaviour
         inputHandler.LaserFireAction += LaserFire;
 
         ShotsLeft = _numberOfShots;
-        _timer = _oneShotRecoveryTime;
+        Timer = 0;
     }
 
     private void LaserFire()
@@ -50,26 +54,51 @@ public class ShootingLaser : MonoBehaviour
                     .LaserEffect(_gunBarrel.position, _gunBarrel.position + _gunBarrel.up * _distance, _laserThickness));
             }
             ShotsLeft--;
-            
+
             if (ShotsLeft < 0)
             {
                 ShotsLeft = 0;
             }
 
-            StartCoroutine(RecoveryRoutine());
+            NumberOfShotsChange?.Invoke();
         }
     }
 
-    private IEnumerator RecoveryRoutine()
+    private void Update()
     {
-        yield return new WaitForSeconds(_oneShotRecoveryTime);
+        if (!_isRunning && ShotsLeft < _numberOfShots)
+        {
+            _isRunning = true;
+            Timer = 0;
+        }
 
+        if (_isRunning)
+        {
+            RecoveryTimer();
+        }
+    }
+
+    private void RecoveryTimer()
+    {
+        Timer += Time.deltaTime;
+
+        if (Timer >= _oneShotRecoveryTime)
+        {
+            _isRunning = false;
+
+            RecoverShots();
+        }
+    }
+
+    private void RecoverShots()
+    {
         ShotsLeft++;
-        
+        Debug.Log("RecoverShots");
         if (ShotsLeft > _numberOfShots)
         {
             ShotsLeft = _numberOfShots;
         }
+        NumberOfShotsChange?.Invoke();
     }
 
     private void OnDestroy()
