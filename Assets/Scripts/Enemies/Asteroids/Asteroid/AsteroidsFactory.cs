@@ -8,8 +8,7 @@ public class AsteroidsFactory : BigEnemyFactory
         : base(staticData, coroutineRunner, spawnPoint)
     {
         _prefab = staticData.AsteroidPrefab;
-        _spawnPosLimit = staticData.SpawnPosLimit;
-        _screenLimits = staticData.ScreenLimits;
+
         _spawnTime = staticData.AsteroidsSpawnTime;
         _count = staticData.AsteroidsStartCount;
 

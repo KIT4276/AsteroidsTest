@@ -18,7 +18,7 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 6481154254085632278, guid: abfab34e82f9e1148a3b99ec4f92d2d5, type: 3}
   _spawnPosLimit: 18
   _screenLimits: {x: 9, y: 5}
-  _spawnTimeAster: 1
+  _spawnTimeAster: 3
   _startCountAster: 15
   _spawnTimeUFO: 5
   _fragmentsCount: 5

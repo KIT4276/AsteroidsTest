@@ -11,6 +11,9 @@ public class BigEnemyFactory : BaseEnemyFactory
     protected BigEnemyFactory(GameStaticData staticData, ICoroutineRunner coroutineRunner, Transform spawnPoint)
         : base(staticData)
     {
+        _spawnPosLimit = staticData.SpawnPosLimit;
+        _screenLimits = staticData.ScreenLimits;
+
         _coroutineRunner = coroutineRunner;
         _spawnPoint = spawnPoint;
     }
@@ -19,6 +22,13 @@ public class BigEnemyFactory : BaseEnemyFactory
     {
         _coroutineRunner.StartCoroutine(SpawnRoutine());
     }
+
+    public override void Spawn(Transform spawnTransform)
+    {
+        base.Spawn(spawnTransform);
+        _spawnedObject.transform.position = GetSpawnPoint(_spawnPoint).position;
+    }
+
 
     protected IEnumerator SpawnRoutine()
     {

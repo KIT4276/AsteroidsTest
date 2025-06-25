@@ -8,6 +8,8 @@ public abstract class BaseFactory
     protected List<GameObject> _pool = new();
     protected GameStaticData _staticData;
 
+    protected GameObject _spawnedObject;
+
     public BaseFactory(GameStaticData staticData)
     {
         _staticData = staticData;
@@ -22,29 +24,17 @@ public abstract class BaseFactory
 
     public virtual void Spawn(Transform spawnTransform)
     {
-        GameObject spawnedObject;
-
         if(_pool.Count>0)
         {
-            spawnedObject = _pool[_pool.Count - 1];
-            _pool.Remove(spawnedObject);
+            _spawnedObject = _pool[_pool.Count - 1];
+            _pool.Remove(_spawnedObject);
         }
         else
         {
-            spawnedObject = Object.Instantiate(_prefab, spawnTransform.position, Quaternion.identity);
+            _spawnedObject = Object.Instantiate(_prefab, spawnTransform.position, Quaternion.identity);
         }
-
-        //if (_pool.Count == 0)
-        //{
-        //    spawnedObject = Object.Instantiate(_prefab, spawnTransform.position, Quaternion.identity);
-        //}
-        //else
-        //{
-        //    spawnedObject = _pool[_pool.Count -1];
-        //    _pool.Remove(spawnedObject);
-        //}
-
-        InitializeSpawnedObject(spawnedObject);
+        
+        InitializeSpawnedObject(_spawnedObject);
     }
 
     protected abstract void InitializeSpawnedObject(GameObject spawnedObject);

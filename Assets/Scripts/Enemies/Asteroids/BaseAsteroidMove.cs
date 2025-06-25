@@ -40,12 +40,12 @@ public class BaseAsteroidMove : MonoBehaviour, IMove
         }
     }
 
-    protected void Move()
+    private void Move()
     {
-        transform.Translate(transform.up * _moveSpeed);
+        transform.position += transform.up * _moveSpeed;
     }
 
-    protected void CheckPosition()
+    private void CheckPosition()
     {
         if (transform.position.x > _positionLimits || transform.position.y > _positionLimits
             || transform.position.x < -_positionLimits || transform.position.y < -_positionLimits)

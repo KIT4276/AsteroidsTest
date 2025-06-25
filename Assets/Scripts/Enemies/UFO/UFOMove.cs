@@ -1,15 +1,20 @@
-using System;
+using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class UFOMove : MonoBehaviour, IMove
 {
     [SerializeField] private float _moveSpeed = 5;
     [SerializeField] private float _minDistance = 1;
+    [Space]
+    [SerializeField] private float _avoidanceTurningAngle = 30;
+    [SerializeField] private float _avoidTime = 5;
 
-    private bool _isActive;
-    private BaseFactory _factory;
+
+    private bool _isActive = false;
     private Transform _target;
+    private bool _isAvoidance = false;
+    public Vector2 Direction { get; private set; }
+
 
     public void SetTarget(ShipCollision shipCollision)
     {
@@ -23,7 +28,6 @@ public class UFOMove : MonoBehaviour, IMove
 
 
         _isActive = true;
-        _factory = factory;
     }
 
     public void StopMove()
@@ -31,15 +35,34 @@ public class UFOMove : MonoBehaviour, IMove
         _isActive = false;
     }
 
+    public void Avoid()
+    {
+        _isAvoidance = true;
+        StartCoroutine(WaitForAvoid());
+
+        Direction = new Vector2
+            (Direction.x * Mathf.Cos(_avoidanceTurningAngle) - Direction.y * Mathf.Sin(_avoidanceTurningAngle),
+             Direction.x * Mathf.Sin(_avoidanceTurningAngle) + Direction.y * Mathf.Cos(_avoidanceTurningAngle));
+    }
+
     private void Update()
     {
         if (_isActive && _target != null)
         {
-            Vector2 direction = (_target.position - transform.position).normalized;
-            transform.position += (Vector3)(direction * _moveSpeed * Time.deltaTime);
+            if (!_isAvoidance)
+            {
+                Direction = (_target.position - transform.position).normalized;
 
+            }
+            transform.position += (Vector3)(Direction * _moveSpeed * Time.deltaTime);
             CheckDistance();
         }
+    }
+
+    private IEnumerator WaitForAvoid()
+    {
+        yield return new WaitForSeconds(_avoidTime);
+        _isAvoidance = false;
     }
 
     private void CheckDistance()
@@ -48,7 +71,7 @@ public class UFOMove : MonoBehaviour, IMove
 
         if (distance < _minDistance)
         {
-            _isActive = false ;
+            _isActive = false;
         }
     }
 }
