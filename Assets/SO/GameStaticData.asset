@@ -20,7 +20,6 @@ MonoBehaviour:
   _screenLimits: {x: 9, y: 5}
   _spawnTimeAster: 1
   _startCountAster: 15
-  _spawnTimeUFO: 2
-  _startCountUFO: 5
+  _spawnTimeUFO: 5
   _fragmentsCount: 5
   _moveLimits: 35

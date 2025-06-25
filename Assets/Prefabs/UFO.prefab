@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1900223066291547052}
   - component: {fileID: 105285798282102617}
   - component: {fileID: -5078766763109667664}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UFO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddeb2dc4b8d63245bcc1f55491aaa21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 2
+  _moveSpeed: 0.8
   _minDistance: 0.5
 --- !u!114 &-5078766763109667664
 MonoBehaviour:
@@ -109,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1371654388977631249}
   - component: {fileID: 6113368940209657877}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4069648541357471267}
   - component: {fileID: 7787821410281051610}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

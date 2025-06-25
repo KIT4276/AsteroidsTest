@@ -6,12 +6,15 @@ public class BaceInputHandler : IInputHandler
     protected const string MoveForwardActionName = "MoveForward";
     protected const string RotationActionName = "Rotation";
     protected const string BulletFireActionName = "BulletFire";
+    protected const string LaserFireActionName = "LaserFire";
 
     protected InputAction _moveAction;
     protected InputAction _rotationAction;
     protected InputAction _bulletFireAction;
+    protected InputAction _LaserFireAction;
 
     public event Action BulletFireAction;
+    public event Action LaserFireAction;
 
     public BaceInputHandler(PlayerInput playerInput)
     {
@@ -24,7 +27,16 @@ public class BaceInputHandler : IInputHandler
         _bulletFireAction = playerInput.actions[BulletFireActionName];
         _bulletFireAction.Enable();
 
+        _LaserFireAction = playerInput.actions[LaserFireActionName];
+        _LaserFireAction.Enable();
+
         _bulletFireAction.performed += BulletFire;
+        _LaserFireAction.performed += LaserFire;
+    }
+
+    private void LaserFire(InputAction.CallbackContext context)
+    {
+        LaserFireAction?.Invoke();
     }
 
     private void BulletFire(InputAction.CallbackContext context)

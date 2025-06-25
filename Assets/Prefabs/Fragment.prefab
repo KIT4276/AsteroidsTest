@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3867889291065277295}
   - component: {fileID: 8646222973148852211}
   - component: {fileID: 672182697197318896}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fragment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,4 +150,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037d42f0dfb3d054faf883a513476f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 0.035
+  _moveSpeed: 0.02

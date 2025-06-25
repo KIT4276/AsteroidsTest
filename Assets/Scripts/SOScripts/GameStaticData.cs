@@ -17,7 +17,7 @@ public class GameStaticData : ScriptableObject
     [SerializeField] private int _startCountAster = 15;
     [Header("UFO Data")]
     [SerializeField] private float _spawnTimeUFO = 3;
-    [SerializeField] private int _startCountUFO = 5;
+   // [SerializeField] private int _startCountUFO = 5;
     [Header("Fragments Data")]
     [SerializeField] private int _fragmentsCount = 5;
     [Header("For all IMove")]
@@ -36,7 +36,7 @@ public class GameStaticData : ScriptableObject
     public int AsteroidsStartCount => _startCountAster;
 
     public float UFOSpawnTime => _spawnTimeUFO;
-    public int UFOStartCount => _startCountUFO;
+    //public int UFOStartCount => _startCountUFO;
 
     public int FragmentsCount => _fragmentsCount;
 

@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LaserFire",
+                    "type": "Button",
+                    "id": "92f506ba-6522-4c5b-baae-b78a090a37a4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -455,6 +464,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "BulletFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9eb25bc4-19c1-4afd-a6e4-16bfbce94c95",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LaserFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

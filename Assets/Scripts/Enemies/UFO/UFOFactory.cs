@@ -9,7 +9,7 @@ public class UFOFactory : BigEnemyFactory
         base(staticData, coroutineRunner, spawnPoint)
     {
         _prefab = staticData.UFOPrefab;
-        _count = staticData.UFOStartCount;
+       // _count = staticData.UFOStartCount;
         _spawnTime = staticData.UFOSpawnTime;
 
         _shipCollision = shipCollision;
