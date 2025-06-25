@@ -21,7 +21,7 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
 
         InstallFragmentsFactory();
         InstallAsteroidsFactory();
-       // InstallUFOFactory();
+        InstallUFOFactory();
 
         InstallBulletsFactory();
     }

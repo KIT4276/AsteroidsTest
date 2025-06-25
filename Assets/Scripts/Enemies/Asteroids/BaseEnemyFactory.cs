@@ -5,6 +5,7 @@ public abstract class BaseEnemyFactory : BaseFactory
     protected int _count = 15;
     protected Transform _spawnPoint;
 
+
     protected BaseEnemyFactory(GameStaticData staticData) : base(staticData)
     {
     }

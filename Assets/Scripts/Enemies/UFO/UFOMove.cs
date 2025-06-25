@@ -1,15 +1,17 @@
+using System;
 using UnityEngine;
-using Zenject;
+using static UnityEngine.GraphicsBuffer;
 
 public class UFOMove : MonoBehaviour, IMove
 {
+    [SerializeField] private float _moveSpeed = 5;
+    [SerializeField] private float _minDistance = 1;
+
     private bool _isActive;
     private BaseFactory _factory;
-
     private Transform _target;
 
-    [Inject]
-    private void SetTarget(ShipCollision shipCollision)
+    public void SetTarget(ShipCollision shipCollision)
     {
         _target = shipCollision.gameObject.transform;
     }
@@ -18,6 +20,7 @@ public class UFOMove : MonoBehaviour, IMove
     {
         this.transform.position = transform.position;
         this.gameObject.SetActive(true);
+
 
         _isActive = true;
         _factory = factory;
@@ -28,11 +31,24 @@ public class UFOMove : MonoBehaviour, IMove
         _isActive = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (_isActive)
+        if (_isActive && _target != null)
         {
-            transform.Translate(_target.position * 0.01f);
+            Vector2 direction = (_target.position - transform.position).normalized;
+            transform.position += (Vector3)(direction * _moveSpeed * Time.deltaTime);
+
+            CheckDistance();
+        }
+    }
+
+    private void CheckDistance()
+    {
+        float distance = Vector2.Distance(_target.position, transform.position);
+
+        if (distance < _minDistance)
+        {
+            _isActive = false ;
         }
     }
 }

@@ -13,8 +13,12 @@ public class FragmentsFactory : BaseEnemyFactory
         for (int i = _count; i > 0; i--)
         {
             _spawnPoint = transform;
-           Spawn(transform);
+            Spawn(transform);
         }
+    }
+    protected override Transform GetSpawnPoint(Transform spawnPoint)
+    {
+        return spawnPoint;
     }
 }
 
