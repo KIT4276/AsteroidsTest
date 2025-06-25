@@ -618,11 +618,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootingLaserRenderer: {fileID: 707749560}
   _gunBarrel: {fileID: 707749553}
-  _distance: 100
   _layerMask:
     serializedVersion: 2
     m_Bits: 128
-  _laserThickness: 0.2
+  _distance: 100
+  _laserThickness: 0.15
+  _numberOfShots: 5
+  _oneShotRecoveryTime: 15
 --- !u!120 &707749559
 LineRenderer:
   serializedVersion: 2
@@ -647,7 +649,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: eeda8e5511ed0494ea45f29b908d1d8c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -716,7 +718,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -744,7 +746,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lineRenderer: {fileID: 707749559}
   _laserDuration: 0.1
-  _laserThickness: 0.1
 --- !u!1 &885046520
 GameObject:
   m_ObjectHideFlags: 0
