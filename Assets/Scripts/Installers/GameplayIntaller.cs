@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -13,6 +14,7 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
 
     public override void InstallBindings()
     {
+        InstallGameOver();
         InstallTargetDefeatPoints();
         InstallShip();
         InstallData();
@@ -20,30 +22,37 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
         InstallFactories();
     }
 
+    private void InstallGameOver()
+    {
+        Container.Bind<GameOver>().
+            FromNew().
+            AsSingle().
+            NonLazy();
+    }
 
     private void InstallTargetDefeatPoints()
     {
         Container.Bind<EnemiesDefeatPoints>().
             FromNew().
-            AsSingle();
+            AsSingle().NonLazy();
     }
 
     private void InstallShip()
     {
         Container.Bind<ShipCollision>().
             FromInstance(_ship).
-            AsSingle();
+            AsSingle().NonLazy();
     }
 
     private void InstallData()
     {
         Container.Bind<GameStaticData>().
             FromInstance(_gameStaticData).
-            AsSingle();
+            AsSingle().NonLazy();
 
         Container.Bind<DefeatPointsData>().
            FromInstance(_defeatPointsData).
-           AsSingle();
+           AsSingle().NonLazy();
     }
 
     private void InstallInput()
@@ -51,7 +60,7 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
         Container.BindInterfacesAndSelfTo<PCInputHandler>().
             FromNew().
             AsSingle().
-            WithArguments(_playerInput);
+            WithArguments(_playerInput).NonLazy();
     }
 
     private void InstallFactories()
@@ -75,7 +84,7 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     {
         Container.Bind<BulletsFactory>().
              FromNew().
-             AsSingle();
+             AsSingle().NonLazy();
     }
 
     private void InstallFragmentsFactory()

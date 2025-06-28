@@ -20,6 +20,8 @@ public class AsteroidsFactory : BigEnemyFactory
         StartSpawn();
     }
 
+    
+
     protected override void StartSpawn()
     {
         for (int i = _count; i > 0; i--)
