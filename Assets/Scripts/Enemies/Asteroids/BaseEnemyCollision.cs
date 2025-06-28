@@ -3,19 +3,19 @@
 public abstract class BaseEnemyCollision : MonoBehaviour, IDamageable
 {
     protected BaseFactory _factory;
+    protected EnemiesDefeatPoints _targetDefeatPoints;
+    protected int _numDefeatPoints;
 
-    public void Initialize(BaseFactory factory)
+    public virtual void Initialize(BaseFactory factory, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints)
     {
         _factory = factory;
+        _targetDefeatPoints= targetDefeatPoints;
+        
     }
 
-    public void TakeBulletDamage()
+    public virtual void TakeDamage()
     {
-        OnBulletCollied();
-    }
-
-    public virtual void OnBulletCollied()
-    {
+        _targetDefeatPoints.OnEnemyDestroyed(_numDefeatPoints);
         _factory.Despawn(this.gameObject);
     }
 }

@@ -4,12 +4,12 @@ public class UFOFactory : BigEnemyFactory
 {
     private ShipCollision _shipCollision;
 
-    public UFOFactory(GameStaticData staticData, ICoroutineRunner coroutineRunner, Transform spawnPoint, ShipCollision shipCollision) :
-        base(staticData, coroutineRunner, spawnPoint)
+    public UFOFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints, 
+        ICoroutineRunner coroutineRunner, Transform spawnPoint, ShipCollision shipCollision) :
+        base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint)
     {
         _prefab = staticData.UFOPrefab;
         _spawnTime = staticData.UFOSpawnTime;
-
         _shipCollision = shipCollision;
 
         StartSpawn();
@@ -27,7 +27,7 @@ public class UFOFactory : BigEnemyFactory
         ufo.SetTarget(_shipCollision);
         ufo.Initialize(_spawnPoint, this, _staticData);
 
-        spawnedObject.GetComponent<UFOCollision>().Initialize(this);
+        spawnedObject.GetComponent<UFOCollision>().Initialize(this, _defeatPointsData, _targetDefeatPoints);
     }
 }
 

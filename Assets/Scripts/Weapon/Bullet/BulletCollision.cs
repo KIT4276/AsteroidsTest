@@ -13,7 +13,7 @@ public class BulletCollision : ProjectileCollision
     {
         if (collision.gameObject.TryGetComponent<IDamageable>(out var damageable))
         {
-            damageable.TakeBulletDamage();
+            damageable.TakeDamage();
             _bulletsFactory.Despawn(gameObject);
         }
     }

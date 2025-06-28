@@ -2093,6 +2093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 885046521}
   _gameStaticData: {fileID: 11400000, guid: 0102f27407ef6924a8ee7c9dcd95eebb, type: 2}
+  _defeatPointsData: {fileID: 11400000, guid: a8ebf8b6c1e77da4f98f18cde443c705, type: 2}
   _asteroidsSpawnPoint: {fileID: 973701170}
   _ship: {fileID: 707749556}
 --- !u!114 &1326734169

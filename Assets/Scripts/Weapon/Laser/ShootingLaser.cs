@@ -44,7 +44,7 @@ public class ShootingLaser : MonoBehaviour
             {
                 if (hit.collider != null && hit.collider.TryGetComponent<IDamageable>(out var damageable))
                 {
-                    damageable.TakeBulletDamage();
+                    damageable.TakeDamage();
                 }
             }
 
@@ -93,7 +93,7 @@ public class ShootingLaser : MonoBehaviour
     private void RecoverShots()
     {
         ShotsLeft++;
-        Debug.Log("RecoverShots");
+        
         if (ShotsLeft > _numberOfShots)
         {
             ShotsLeft = _numberOfShots;

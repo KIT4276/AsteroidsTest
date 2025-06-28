@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -8,21 +7,58 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     [SerializeField] private PlayerInput _playerInput;
     [Space]
     [SerializeField] private GameStaticData _gameStaticData;
+    [SerializeField] private DefeatPointsData _defeatPointsData;
     [SerializeField] private Transform _asteroidsSpawnPoint;
     [SerializeField] private ShipCollision _ship;
 
     public override void InstallBindings()
     {
+        InstallTargetDefeatPoints();
         InstallShip();
-
-        InstallGameStaticData();
-
+        InstallData();
         InstallInput();
+        InstallFactories();
+    }
 
+
+    private void InstallTargetDefeatPoints()
+    {
+        Container.Bind<EnemiesDefeatPoints>().
+            FromNew().
+            AsSingle();
+    }
+
+    private void InstallShip()
+    {
+        Container.Bind<ShipCollision>().
+            FromInstance(_ship).
+            AsSingle();
+    }
+
+    private void InstallData()
+    {
+        Container.Bind<GameStaticData>().
+            FromInstance(_gameStaticData).
+            AsSingle();
+
+        Container.Bind<DefeatPointsData>().
+           FromInstance(_defeatPointsData).
+           AsSingle();
+    }
+
+    private void InstallInput()
+    {
+        Container.BindInterfacesAndSelfTo<PCInputHandler>().
+            FromNew().
+            AsSingle().
+            WithArguments(_playerInput);
+    }
+
+    private void InstallFactories()
+    {
         InstallFragmentsFactory();
         InstallAsteroidsFactory();
         InstallUFOFactory();
-
         InstallBulletsFactory();
     }
 
@@ -33,28 +69,6 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
             AsSingle().
             WithArguments(_asteroidsSpawnPoint, this).
             NonLazy();
-    }
-
-    private void InstallShip()
-    {
-        Container.Bind<ShipCollision>().
-            FromInstance(_ship).
-            AsSingle();
-    }
-
-    private void InstallGameStaticData()
-    {
-        Container.Bind<GameStaticData>().
-            FromInstance(_gameStaticData).
-            AsSingle();
-    }
-
-    private void InstallInput()
-    {
-        Container.BindInterfacesAndSelfTo<PCInputHandler>().
-            FromNew().
-            AsSingle().
-            WithArguments(_playerInput);
     }
 
     private void InstallBulletsFactory()

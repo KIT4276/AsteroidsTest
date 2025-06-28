@@ -17,11 +17,11 @@ public class GameStaticData : ScriptableObject
     [SerializeField] private int _startCountAster = 15;
     [Header("UFO Data")]
     [SerializeField] private float _spawnTimeUFO = 3;
-   // [SerializeField] private int _startCountUFO = 5;
     [Header("Fragments Data")]
     [SerializeField] private int _fragmentsCount = 5;
     [Header("For all IMove")]
     [SerializeField] private float _moveLimits = 35;
+    [SerializeField] private Vector2 _bulletsMoveLimits = new Vector2(9.5f, 6);
 
 
     public GameObject AsteroidPrefab => _asteroidPrefab;
@@ -36,10 +36,25 @@ public class GameStaticData : ScriptableObject
     public int AsteroidsStartCount => _startCountAster;
 
     public float UFOSpawnTime => _spawnTimeUFO;
-    //public int UFOStartCount => _startCountUFO;
 
     public int FragmentsCount => _fragmentsCount;
 
     public float MoveLimits => _moveLimits;
+
+    public Vector2 BulletsMoveLimits => _bulletsMoveLimits;
+
+}
+
+[CreateAssetMenu(fileName = "DefeatPointsData", menuName = "ScriptableObjects/DefeatPointsData", order = 2)]
+
+public class DefeatPointsData : ScriptableObject
+{
+    [SerializeField] private int _asteroidPoints = 3;
+    [SerializeField] private int _fragmentPoints = 1;
+    [SerializeField] private int _ufoPoints = 5;
+
+    public int AsteroidPoints => _asteroidPoints;
+    public int FragmentPoints => _fragmentPoints;
+    public int UFOPoints => _ufoPoints;
 
 }

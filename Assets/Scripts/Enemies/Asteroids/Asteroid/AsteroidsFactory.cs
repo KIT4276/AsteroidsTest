@@ -4,8 +4,9 @@ public class AsteroidsFactory : BigEnemyFactory
 {
     private FragmentsFactory _fragmentsFactory;
 
-    public AsteroidsFactory(GameStaticData staticData, Transform spawnPoint, FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner)
-        : base(staticData, coroutineRunner, spawnPoint)
+    public AsteroidsFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
+        Transform spawnPoint, FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner)
+        : base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint)
     {
         _prefab = staticData.AsteroidPrefab;
 

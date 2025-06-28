@@ -23,3 +23,4 @@ MonoBehaviour:
   _spawnTimeUFO: 5
   _fragmentsCount: 5
   _moveLimits: 35
+  _bulletsMoveLimits: {x: 9.5, y: 6}

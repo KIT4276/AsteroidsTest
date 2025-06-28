@@ -6,7 +6,7 @@ public class ProjectileMove : MonoBehaviour, IMove
 
     private BaseFactory _factory;
     private bool _isActive;
-    private float _positionLimits;
+    private Vector2 _positionLimits;
 
     public void Initialize(Transform point, BaseFactory factory, GameStaticData gameStaticData)
     {
@@ -15,7 +15,7 @@ public class ProjectileMove : MonoBehaviour, IMove
         transform.position = point.position;
         transform.rotation = point.rotation;
 
-        _positionLimits = gameStaticData.MoveLimits;
+        _positionLimits = gameStaticData.BulletsMoveLimits;
     }
 
     public void StopMove()
@@ -39,8 +39,8 @@ public class ProjectileMove : MonoBehaviour, IMove
 
     protected void CheckPosition()
     {
-        if (transform.position.x > _positionLimits || transform.position.y > _positionLimits
-            || transform.position.x < -_positionLimits || transform.position.y < -_positionLimits)
+        if (transform.position.x > _positionLimits.x || transform.position.y > _positionLimits.y
+            || transform.position.x < -_positionLimits.x || transform.position.y < -_positionLimits.x)
         {
             _factory.Despawn(this.gameObject);
         }
