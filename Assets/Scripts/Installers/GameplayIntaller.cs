@@ -8,31 +8,24 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     [SerializeField] private PlayerInput _playerInput;
     [Space]
     [SerializeField] private GameStaticData _gameStaticData;
+    [SerializeField] private DefeatPointsData _defeatPointsData;
     [SerializeField] private Transform _asteroidsSpawnPoint;
     [SerializeField] private ShipCollision _ship;
 
     public override void InstallBindings()
     {
+        InstallTargetDefeatPoints();
         InstallShip();
-
-        InstallGameStaticData();
-
+        InstallStaticData();
         InstallInput();
-
-        InstallFragmentsFactory();
-        InstallAsteroidsFactory();
-        InstallUFOFactory();
-
-        InstallBulletsFactory();
+        InstallFactories();
     }
 
-    private void InstallUFOFactory()
+    private void InstallTargetDefeatPoints()
     {
-        Container.Bind<UFOFactory>().
+        Container.Bind<TargetDefeatPoints>().
             FromNew().
-            AsSingle().
-            WithArguments(_asteroidsSpawnPoint, this).
-            NonLazy();
+            AsSingle();
     }
 
     private void InstallShip()
@@ -42,10 +35,14 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
             AsSingle();
     }
 
-    private void InstallGameStaticData()
+    private void InstallStaticData()
     {
         Container.Bind<GameStaticData>().
             FromInstance(_gameStaticData).
+            AsSingle();
+
+        Container.Bind<DefeatPointsData>().
+            FromInstance(_defeatPointsData).
             AsSingle();
     }
 
@@ -55,6 +52,14 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
             FromNew().
             AsSingle().
             WithArguments(_playerInput);
+    }
+
+    private void InstallFactories()
+    {
+        InstallFragmentsFactory();
+        InstallAsteroidsFactory();
+        InstallUFOFactory();
+        InstallBulletsFactory();
     }
 
     private void InstallBulletsFactory()
@@ -75,6 +80,14 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     private void InstallAsteroidsFactory()
     {
         Container.Bind<AsteroidsFactory>().
+            FromNew().
+            AsSingle().
+            WithArguments(_asteroidsSpawnPoint, this).
+            NonLazy();
+    }
+    private void InstallUFOFactory()
+    {
+        Container.Bind<UFOFactory>().
             FromNew().
             AsSingle().
             WithArguments(_asteroidsSpawnPoint, this).

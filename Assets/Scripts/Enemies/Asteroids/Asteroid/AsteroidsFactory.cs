@@ -4,8 +4,10 @@ public class AsteroidsFactory : BigEnemyFactory
 {
     private FragmentsFactory _fragmentsFactory;
 
-    public AsteroidsFactory(GameStaticData staticData, Transform spawnPoint, FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner)
-        : base(staticData, coroutineRunner, spawnPoint)
+    public AsteroidsFactory(GameStaticData staticData, DefeatPointsData defeatPointsData,
+        TargetDefeatPoints targetDefeatPoints, Transform spawnPoint, FragmentsFactory fragmentsFactory, 
+        ICoroutineRunner coroutineRunner)
+        : base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint)
     {
         _prefab = staticData.AsteroidPrefab;
 
@@ -32,6 +34,6 @@ public class AsteroidsFactory : BigEnemyFactory
     protected override void InitializeSpawnedObject(GameObject spawnedObject)
     {
         base.InitializeSpawnedObject(spawnedObject);
-        spawnedObject.GetComponent<AsteroidCollision>().SetFactory(_fragmentsFactory);
+        spawnedObject.GetComponent<AsteroidCollision>().SetFragmentsFactory(_fragmentsFactory);
     }
 }

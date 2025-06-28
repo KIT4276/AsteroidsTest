@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public abstract class BaseEnemyCollision : MonoBehaviour, IDamageable
 {
     protected BaseFactory _factory;
+    protected TargetDefeatPoints _targetDefeatPoints;
+    protected int _defeatPoints;
 
-    public void Initialize(BaseFactory factory)
+    public virtual void Initialize(BaseFactory factory, DefeatPointsData defeatPointsData, TargetDefeatPoints targetDefeatPoints)
     {
         _factory = factory;
+        _targetDefeatPoints = targetDefeatPoints;
     }
 
     public void TakeBulletDamage()
@@ -17,5 +21,6 @@ public abstract class BaseEnemyCollision : MonoBehaviour, IDamageable
     public virtual void OnBulletCollied()
     {
         _factory.Despawn(this.gameObject);
+        _targetDefeatPoints.OnEnemyDestroyed(_defeatPoints);
     }
 }

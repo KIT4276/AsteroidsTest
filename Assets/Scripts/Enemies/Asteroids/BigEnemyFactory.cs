@@ -8,8 +8,9 @@ public class BigEnemyFactory : BaseEnemyFactory
     protected float _spawnPosLimit;
     protected Vector2 _screenLimits;
 
-    protected BigEnemyFactory(GameStaticData staticData, ICoroutineRunner coroutineRunner, Transform spawnPoint)
-        : base(staticData)
+    protected BigEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, 
+        TargetDefeatPoints targetDefeatPoints, ICoroutineRunner coroutineRunner, Transform spawnPoint)
+        : base(staticData, defeatPointsData, targetDefeatPoints)
     {
         _spawnPosLimit = staticData.SpawnPosLimit;
         _screenLimits = staticData.ScreenLimits;
