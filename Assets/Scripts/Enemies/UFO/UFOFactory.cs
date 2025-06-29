@@ -20,7 +20,6 @@ public class UFOFactory : BigEnemyFactory
         return base.GetSpawnPoint(spawnPoint);
     }
 
-
     protected override void InitializeSpawnedObject(GameObject spawnedObject)
     {
         var ufo = spawnedObject.GetComponent<UFOMove>();

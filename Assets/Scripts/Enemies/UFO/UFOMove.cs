@@ -55,6 +55,7 @@ public class UFOMove : MonoBehaviour, IMove
 
             }
             transform.position += (Vector3)(Direction * _moveSpeed * Time.deltaTime);
+
             CheckDistance();
         }
     }

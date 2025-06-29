@@ -19,11 +19,8 @@ public class BigEnemyFactory : BaseEnemyFactory
         _spawnPoint = spawnPoint;
     }
 
-   
-
     protected virtual void StartSpawn()
     {
-        Debug.Log("StartSpawn " + this);
         _coroutineRunner.StartCoroutine(SpawnRoutine());
     }
 

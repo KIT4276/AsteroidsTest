@@ -31,30 +31,10 @@ public class GameStaticData : ScriptableObject
 
     public float SpawnPosLimit => _spawnPosLimit;
     public Vector2 ScreenLimits => _screenLimits;
-
     public float AsteroidsSpawnTime => _spawnTimeAster;
     public int AsteroidsStartCount => _startCountAster;
-
     public float UFOSpawnTime => _spawnTimeUFO;
-
     public int FragmentsCount => _fragmentsCount;
-
     public float MoveLimits => _moveLimits;
-
     public Vector2 BulletsMoveLimits => _bulletsMoveLimits;
-
-}
-
-[CreateAssetMenu(fileName = "DefeatPointsData", menuName = "ScriptableObjects/DefeatPointsData", order = 2)]
-
-public class DefeatPointsData : ScriptableObject
-{
-    [SerializeField] private int _asteroidPoints = 3;
-    [SerializeField] private int _fragmentPoints = 1;
-    [SerializeField] private int _ufoPoints = 5;
-
-    public int AsteroidPoints => _asteroidPoints;
-    public int FragmentPoints => _fragmentPoints;
-    public int UFOPoints => _ufoPoints;
-
 }

@@ -7,7 +7,6 @@ public abstract class BaseFactory
 
     protected List<GameObject> _pool = new();
     protected GameStaticData _staticData;
-
     protected GameObject _spawnedObject;
 
     public BaseFactory(GameStaticData staticData)
@@ -17,7 +16,7 @@ public abstract class BaseFactory
 
     public virtual void Despawn(GameObject despawnedObject)
     {
-        despawnedObject.GetComponent<IMove>().StopMove();// bad?!
+        despawnedObject.GetComponent<IMove>().StopMove();
         despawnedObject.SetActive(false);
         _pool.Add(despawnedObject);
     }

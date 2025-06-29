@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class EnemiesDefeatPoints 
 {
     public int CurrentPoints { get; private set; }
@@ -12,6 +10,5 @@ public class EnemiesDefeatPoints
     public void OnEnemyDestroyed(int points)
     {
         CurrentPoints += points;
-        Debug.Log(CurrentPoints);
     }
 }

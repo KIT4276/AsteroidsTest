@@ -10,7 +10,6 @@ public abstract class BaseEnemyCollision : MonoBehaviour, IDamageable
     {
         _factory = factory;
         _targetDefeatPoints= targetDefeatPoints;
-        
     }
 
     public virtual void TakeDamage()

@@ -15,9 +15,7 @@ public class StartNewGame : MonoBehaviour
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
 #else
-
         Application.Quit();
 #endif
-
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -24,7 +23,6 @@ public class GameOverUI : MonoBehaviour
     {
         _mainPanel.SetActive(true);
         _gameOverPanel.SetActive(false);
-        
     }
 
     private void OnGameOver()

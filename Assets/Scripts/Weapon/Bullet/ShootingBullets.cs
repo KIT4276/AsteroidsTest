@@ -12,8 +12,8 @@ public class ShootingBullets : MonoBehaviour
     private void Initialize(IInputHandler inputHandler, BulletsFactory bulletsFactory)
     {
         _bulletsFactory = bulletsFactory;
-
         _inputHandler = inputHandler;
+
         inputHandler.BulletFireAction += BulletFire;
     }
 

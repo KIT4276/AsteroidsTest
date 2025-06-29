@@ -1,24 +1,23 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
 public class GameplayIntaller : MonoInstaller, ICoroutineRunner
 {
-    [SerializeField] private PlayerInput _playerInput;
-    [Space]
     [SerializeField] private GameStaticData _gameStaticData;
     [SerializeField] private DefeatPointsData _defeatPointsData;
-    [SerializeField] private Transform _asteroidsSpawnPoint;
+    [SerializeField] private Transform _bigEnemiesSpawnPoint;
     [SerializeField] private ShipCollision _ship;
+    [SerializeField] private GameObject _playerInputPrefab;
 
     public override void InstallBindings()
     {
+        InstallInput();
+        
         InstallGameOver();
         InstallTargetDefeatPoints();
         InstallShip();
         InstallData();
-        InstallInput();
         InstallFactories();
     }
 
@@ -57,10 +56,15 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
 
     private void InstallInput()
     {
+        Container.Bind<PlayerInput>().
+            FromComponentInNewPrefab(_playerInputPrefab).
+            AsSingle().
+            NonLazy();
+
         Container.BindInterfacesAndSelfTo<PCInputHandler>().
             FromNew().
             AsSingle().
-            WithArguments(_playerInput).NonLazy();
+            NonLazy();
     }
 
     private void InstallFactories()
@@ -76,7 +80,7 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
         Container.Bind<UFOFactory>().
             FromNew().
             AsSingle().
-            WithArguments(_asteroidsSpawnPoint, this).
+            WithArguments(_bigEnemiesSpawnPoint, this).
             NonLazy();
     }
 
@@ -100,7 +104,7 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
         Container.Bind<AsteroidsFactory>().
             FromNew().
             AsSingle().
-            WithArguments(_asteroidsSpawnPoint, this).
+            WithArguments(_bigEnemiesSpawnPoint, this).
             NonLazy();
     }
 }
