@@ -43,7 +43,6 @@ public class BaseAsteroidMove : MonoBehaviour, IMove
 
     private void Move()
     {
-        // transform.position += transform.up * _moveSpeed;
         _rigidbody.linearVelocity = transform.up * _moveSpeed;
     }
 
