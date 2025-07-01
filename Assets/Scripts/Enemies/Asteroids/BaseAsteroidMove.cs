@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BaseAsteroidMove : MonoBehaviour, IMove
 {
+    [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _moveSpeed = 0.04f;
     private float _positionLimits;
 
@@ -42,7 +43,8 @@ public class BaseAsteroidMove : MonoBehaviour, IMove
 
     private void Move()
     {
-        transform.position += transform.up * _moveSpeed;
+        // transform.position += transform.up * _moveSpeed;
+        _rigidbody.linearVelocity = transform.up * _moveSpeed;
     }
 
     private void CheckPosition()

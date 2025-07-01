@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class UFOMove : MonoBehaviour, IMove
 {
+    [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _moveSpeed = 5;
     [SerializeField] private float _minDistance = 1;
     [Space]
@@ -45,7 +46,7 @@ public class UFOMove : MonoBehaviour, IMove
              Direction.x * Mathf.Sin(_avoidanceTurningAngle) + Direction.y * Mathf.Cos(_avoidanceTurningAngle));
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_isActive && _target != null)
         {
@@ -54,7 +55,7 @@ public class UFOMove : MonoBehaviour, IMove
                 Direction = (_target.position - transform.position).normalized;
 
             }
-            transform.position += (Vector3)(Direction * _moveSpeed * Time.deltaTime);
+            _rigidbody.linearVelocity = Direction * _moveSpeed;
 
             CheckDistance();
         }
