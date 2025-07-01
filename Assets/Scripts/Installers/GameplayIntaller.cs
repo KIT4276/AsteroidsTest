@@ -24,7 +24,6 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     private void InstallGameOver()
     {
         Container.Bind<GameOver>().
-            FromNew().
             AsSingle().
             NonLazy();
     }
@@ -32,8 +31,8 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     private void InstallTargetDefeatPoints()
     {
         Container.Bind<EnemiesDefeatPoints>().
-            FromNew().
-            AsSingle().NonLazy();
+            AsSingle().
+            NonLazy();
     }
 
     private void InstallShip()
@@ -47,22 +46,22 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     {
         Container.Bind<GameStaticData>().
             FromInstance(_gameStaticData).
-            AsSingle().NonLazy();
+            AsSingle().
+            NonLazy();
 
         Container.Bind<DefeatPointsData>().
            FromInstance(_defeatPointsData).
-           AsSingle().NonLazy();
+           AsSingle().
+           NonLazy();
     }
 
     private void InstallInput()
     {
         Container.Bind<PlayerInput>().
             FromComponentInNewPrefab(_playerInputPrefab).
-            AsSingle().
             NonLazy();
 
         Container.BindInterfacesAndSelfTo<PCInputHandler>().
-            FromNew().
             AsSingle().
             NonLazy();
     }
@@ -78,7 +77,6 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     private void InstallUFOFactory()
     {
         Container.Bind<UFOFactory>().
-            FromNew().
             AsSingle().
             WithArguments(_bigEnemiesSpawnPoint, this).
             NonLazy();
@@ -87,22 +85,20 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     private void InstallBulletsFactory()
     {
         Container.Bind<BulletsFactory>().
-             FromNew().
-             AsSingle().NonLazy();
+             AsSingle().
+             NonLazy();
     }
 
     private void InstallFragmentsFactory()
     {
         Container.Bind<FragmentsFactory>().
-            FromNew().
             AsSingle().
             NonLazy();
     }
 
     private void InstallAsteroidsFactory()
     {
-        Container.Bind<AsteroidsFactory>().
-            FromNew().
+        Container.Bind<AsteroidsFactory>().           
             AsSingle().
             WithArguments(_bigEnemiesSpawnPoint, this).
             NonLazy();
