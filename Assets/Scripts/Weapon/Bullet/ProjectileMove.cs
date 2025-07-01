@@ -2,7 +2,8 @@
 
 public class ProjectileMove : MonoBehaviour, IMove
 {
-    [SerializeField] private float _moveSpeed = 0.05f;
+    [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private float _moveSpeed = 5f;
 
     private BaseFactory _factory;
     private bool _isActive;
@@ -34,7 +35,7 @@ public class ProjectileMove : MonoBehaviour, IMove
 
     private void Move()
     {
-        transform.position += transform.up * _moveSpeed;
+        _rigidbody.linearVelocity = transform.up * _moveSpeed;
     }
 
     protected void CheckPosition()
