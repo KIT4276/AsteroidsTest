@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class UFOMove : MonoBehaviour, IMove
+public class UFOMove : MonoBehaviour, IMove, IPausable
 {
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _moveSpeed = 5;
@@ -12,6 +12,7 @@ public class UFOMove : MonoBehaviour, IMove
 
 
     private bool _isActive = false;
+    private bool _isMoving = true; 
     private Transform _target;
     private bool _isAvoidance = false;
     public Vector2 Direction { get; private set; }
@@ -48,7 +49,7 @@ public class UFOMove : MonoBehaviour, IMove
 
     private void FixedUpdate()
     {
-        if (_isActive && _target != null)
+        if (_isMoving && _isActive && _target != null)
         {
             if (!_isAvoidance)
             {
@@ -75,5 +76,15 @@ public class UFOMove : MonoBehaviour, IMove
         {
             _isActive = false;
         }
+    }
+
+    public void Pause()
+    {
+        _isMoving = false;
+    }
+
+    public void Resume()
+    {
+        _isMoving = true;
     }
 }

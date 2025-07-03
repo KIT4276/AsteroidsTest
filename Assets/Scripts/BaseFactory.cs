@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseFactory
+public abstract class BaseFactory 
 {
     protected GameObject _prefab;
 
     protected List<GameObject> _pool = new();
     protected GameStaticData _staticData;
     protected GameObject _spawnedObject;
+
+   
 
     public BaseFactory(GameStaticData staticData)
     {
@@ -23,6 +25,8 @@ public abstract class BaseFactory
 
     public virtual void Spawn(Transform spawnTransform)
     {
+      
+
         if(_pool.Count>0)
         {
             _spawnedObject = _pool[_pool.Count - 1];
@@ -39,4 +43,6 @@ public abstract class BaseFactory
     protected abstract void InitializeSpawnedObject(GameObject spawnedObject);
 
     protected abstract Transform GetSpawnPoint(Transform spawnTransform);
+
+    
 }

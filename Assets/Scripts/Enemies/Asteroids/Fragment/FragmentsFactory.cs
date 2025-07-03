@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class FragmentsFactory : BaseEnemyFactory
 {
-    public FragmentsFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints) 
-        : base(staticData, defeatPointsData, targetDefeatPoints)
+    public FragmentsFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints, Pauser pauser) 
+        : base(staticData, defeatPointsData, targetDefeatPoints, pauser)
     {
         _prefab = staticData.FragmentPrefab;
         _count = staticData.FragmentsCount;

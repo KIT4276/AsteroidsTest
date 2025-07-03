@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ProjectileMove : MonoBehaviour, IMove
+public class ProjectileMove : MonoBehaviour, IMove, IPausable
 {
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _moveSpeed = 5f;
@@ -45,5 +45,15 @@ public class ProjectileMove : MonoBehaviour, IMove
         {
             _factory.Despawn(this.gameObject);
         }
+    }
+
+    public void Pause()
+    {
+        _isActive = false;
+    }
+
+    public void Resume()
+    {
+        _isActive = true;
     }
 }

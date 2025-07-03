@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 8349482216869072569}
   - component: {fileID: -4928195337608164864}
   - component: {fileID: 8878073143625431725}
+  - component: {fileID: 4565944592130385485}
+  - component: {fileID: 8732814668678203260}
   m_Layer: 7
   m_Name: UFO
   m_TagString: Untagged
@@ -165,6 +167,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4565944592130385485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4147509825606575589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053d54c764d828245b7c4dc9996230c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8732814668678203260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4147509825606575589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9b9a39444e788469f5684bc6f082bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 8878073143625431725}
 --- !u!1 &4853403561497264607
 GameObject:
   m_ObjectHideFlags: 0

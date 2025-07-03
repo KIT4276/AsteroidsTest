@@ -1,12 +1,13 @@
 using UnityEngine;
+using Zenject;
 
 public class AsteroidsFactory : BigEnemyFactory
 {
     private FragmentsFactory _fragmentsFactory;
 
     public AsteroidsFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
-        Transform spawnPoint, FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner)
-        : base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint)
+        Transform spawnPoint, FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner, Pauser pauser)
+        : base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint, pauser)
     {
         _prefab = staticData.AsteroidPrefab;
 
@@ -16,11 +17,10 @@ public class AsteroidsFactory : BigEnemyFactory
         _spawnPoint = spawnPoint;
         _fragmentsFactory = fragmentsFactory;
         _coroutineRunner = coroutineRunner;
-
-        StartSpawn();
     }
 
-    
+
+ 
 
     protected override void StartSpawn()
     {
@@ -36,5 +36,7 @@ public class AsteroidsFactory : BigEnemyFactory
     {
         base.InitializeSpawnedObject(spawnedObject);
         spawnedObject.GetComponent<AsteroidCollision>().SetFactory(_fragmentsFactory);
+        spawnedObject.GetComponent<PausableRegistrator>().Initialize(_pauser);
     }
+
 }

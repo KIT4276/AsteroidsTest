@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class BaseAsteroidMove : MonoBehaviour, IMove
+public class BaseAsteroidMove : MonoBehaviour, IMove, IPausable
 {
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _moveSpeed = 0.04f;
     private float _positionLimits;
 
     private bool _isActive;
+    private bool _isMoving = true;
     private BaseFactory _asteroidsFactory;
 
     public void Initialize(Transform transform, BaseFactory asteroidsFactory, GameStaticData gameStaticData)
@@ -34,8 +35,9 @@ public class BaseAsteroidMove : MonoBehaviour, IMove
 
     private void FixedUpdate()
     {
-        if (_isActive)
+        if (_isMoving && _isActive)
         {
+            Debug.Log("_isActive");
             Move();
             CheckPosition();
         }
@@ -53,5 +55,15 @@ public class BaseAsteroidMove : MonoBehaviour, IMove
         {
             _asteroidsFactory.Despawn(this.gameObject);
         }
+    }
+
+    public void Pause()
+    {
+        _isMoving = false;
+    }
+
+    public void Resume()
+    {
+        _isMoving = true;
     }
 }

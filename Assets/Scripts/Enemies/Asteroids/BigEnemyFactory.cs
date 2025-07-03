@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Zenject;
 
-public class BigEnemyFactory : BaseEnemyFactory
+public class BigEnemyFactory : BaseEnemyFactory, IInitializable
 {
     protected ICoroutineRunner _coroutineRunner;
     protected float _spawnTime;
@@ -9,14 +10,20 @@ public class BigEnemyFactory : BaseEnemyFactory
     protected Vector2 _screenLimits;
 
     protected BigEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints, 
-        ICoroutineRunner coroutineRunner, Transform spawnPoint)
-        : base(staticData, defeatPointsData, targetDefeatPoints)
+        ICoroutineRunner coroutineRunner, Transform spawnPoint, Pauser pauser)
+        : base(staticData, defeatPointsData, targetDefeatPoints, pauser)
     {
         _spawnPosLimit = staticData.SpawnPosLimit;
         _screenLimits = staticData.ScreenLimits;
 
         _coroutineRunner = coroutineRunner;
         _spawnPoint = spawnPoint;
+    }
+
+    public void Initialize()
+    {
+        _pauser.Register(this);
+        StartSpawn();
     }
 
     protected virtual void StartSpawn()

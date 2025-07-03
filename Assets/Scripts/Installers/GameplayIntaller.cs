@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -13,12 +14,20 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     public override void InstallBindings()
     {
         InstallInput();
-        
+        InstallPause();
+
         InstallGameOver();
         InstallTargetDefeatPoints();
         InstallShip();
         InstallData();
         InstallFactories();
+    }
+
+    private void InstallPause()
+    {
+        Container.Bind<Pauser>().
+             AsSingle().
+             NonLazy();
     }
 
     private void InstallGameOver()
@@ -72,7 +81,7 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
 
     private void InstallUFOFactory()
     {
-        Container.Bind<UFOFactory>().
+        Container.BindInterfacesAndSelfTo<UFOFactory>().
             AsSingle().
             WithArguments(_bigEnemiesSpawnPoint, this).
             NonLazy();
@@ -86,13 +95,13 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
 
     private void InstallFragmentsFactory()
     {
-        Container.Bind<FragmentsFactory>().
+        Container.BindInterfacesAndSelfTo<FragmentsFactory>().
             AsSingle();
     }
 
     private void InstallAsteroidsFactory()
     {
-        Container.Bind<AsteroidsFactory>().           
+        Container.BindInterfacesAndSelfTo<AsteroidsFactory>().           
             AsSingle().
             WithArguments(_bigEnemiesSpawnPoint, this).
             NonLazy();

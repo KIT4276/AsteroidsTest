@@ -1,13 +1,21 @@
 using System;
-using UnityEngine;
 
 public class GameOver 
 {
+    private readonly Pauser _pauser;
+
+    public GameOver(Pauser pauser)
+    {
+       _pauser = pauser;
+    }
+    
     public event Action GameOverAction;
 
     public void OnGameOver()
     {
-        Time.timeScale = 0;
+        _pauser.Pause();
+
+        //Time.timeScale = 0;
         GameOverAction?.Invoke();
     }
 }
