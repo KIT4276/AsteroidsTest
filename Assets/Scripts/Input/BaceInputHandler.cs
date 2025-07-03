@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.InputSystem;
 
-public class BaceInputHandler : IInputHandler
+public class BaceInputHandler
 {
     protected const string MoveForwardActionName = "MoveForward";
     protected const string RotationActionName = "Rotation";

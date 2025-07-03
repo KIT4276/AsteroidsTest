@@ -6,10 +6,10 @@ public class ShootingBullets : MonoBehaviour
     [SerializeField] private Transform _gunBarrel;
 
     private BulletsFactory _bulletsFactory;
-    private IInputHandler _inputHandler;
+    private BaceInputHandler _inputHandler;
 
     [Inject]
-    private void Initialize(IInputHandler inputHandler, BulletsFactory bulletsFactory)
+    private void Initialize(BaceInputHandler inputHandler, BulletsFactory bulletsFactory)
     {
         _bulletsFactory = bulletsFactory;
         _inputHandler = inputHandler;

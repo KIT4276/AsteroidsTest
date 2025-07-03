@@ -6,10 +6,10 @@ public class ShipRotation : MonoBehaviour
     [SerializeField] private float _acceleration = 2;
     [SerializeField] private Rigidbody2D _rigidbody;
 
-    private IInputHandler _inputHandler;
+    private BaceInputHandler _inputHandler;
 
     [Inject]
-    private void Initialize(IInputHandler inputHandler)
+    private void Initialize(BaceInputHandler inputHandler)
     {
         _inputHandler = inputHandler;
     }

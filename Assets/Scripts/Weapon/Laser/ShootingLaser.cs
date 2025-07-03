@@ -14,7 +14,7 @@ public class ShootingLaser : MonoBehaviour
     [SerializeField] private int _numberOfShots = 5;
     [SerializeField] private float _oneShotRecoveryTime = 15;
 
-    private IInputHandler _inputHandler;
+    private BaceInputHandler _inputHandler;
     private bool _isRunning = false;
 
     public float OneShotRecoveryTime { get => _oneShotRecoveryTime; }
@@ -24,7 +24,7 @@ public class ShootingLaser : MonoBehaviour
     public event Action NumberOfShotsChange;
 
     [Inject]
-    private void Initialize(IInputHandler inputHandler)
+    private void Initialize(BaceInputHandler inputHandler)
     {
         _inputHandler = inputHandler;
         inputHandler.LaserFireAction += LaserFire;

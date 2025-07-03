@@ -10,10 +10,10 @@ public class ShipMove : MonoBehaviour
     [SerializeField] private float _y_limits;
     [SerializeField] private float _indentation = 1;
 
-    private IInputHandler _inputHandler;
+    private BaceInputHandler _inputHandler;
 
     [Inject]
-    private void Initialize(IInputHandler inputHandler)
+    private void Initialize(BaceInputHandler inputHandler)
     {
         _inputHandler = inputHandler;
     }
