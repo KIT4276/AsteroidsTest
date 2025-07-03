@@ -31,35 +31,31 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     private void InstallTargetDefeatPoints()
     {
         Container.Bind<EnemiesDefeatPoints>().
-            AsSingle().
-            NonLazy();
+            AsSingle();
     }
 
     private void InstallShip()
     {
         Container.Bind<ShipCollision>().
             FromInstance(_ship).
-            AsSingle().NonLazy();
+            AsSingle();
     }
 
     private void InstallData()
     {
         Container.Bind<GameStaticData>().
             FromInstance(_gameStaticData).
-            AsSingle().
-            NonLazy();
+            AsSingle();
 
         Container.Bind<DefeatPointsData>().
            FromInstance(_defeatPointsData).
-           AsSingle().
-           NonLazy();
+           AsSingle();
     }
 
     private void InstallInput()
     {
         Container.Bind<PlayerInput>().
-            FromComponentInNewPrefab(_playerInputPrefab).
-            NonLazy();
+            FromComponentInNewPrefab(_playerInputPrefab);
 
         Container.BindInterfacesAndSelfTo<PCInputHandler>().
             AsSingle().
@@ -85,15 +81,13 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     private void InstallBulletsFactory()
     {
         Container.Bind<BulletsFactory>().
-             AsSingle().
-             NonLazy();
+             AsSingle();
     }
 
     private void InstallFragmentsFactory()
     {
         Container.Bind<FragmentsFactory>().
-            AsSingle().
-            NonLazy();
+            AsSingle();
     }
 
     private void InstallAsteroidsFactory()
