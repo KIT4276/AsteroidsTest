@@ -55,7 +55,7 @@ public class GameplayIntaller : MonoInstaller, ICoroutineRunner
     private void InstallInput()
     {
         Container.Bind<PlayerInput>().
-            FromComponentInNewPrefab(_playerInputPrefab);
+            FromComponentInNewPrefab(_playerInputPrefab).AsSingle();
 
         Container.BindInterfacesAndSelfTo<PCInputHandler>().
             AsSingle().
