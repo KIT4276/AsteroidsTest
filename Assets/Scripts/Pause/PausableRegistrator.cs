@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class PausableRegistrator : MonoBehaviour
+namespace AsteroidsTest.Pause
 {
-    public void Initialize(Pauser pauser)
+    public class PausableRegistrator : MonoBehaviour
     {
-
-        foreach( var monoMeh in GetComponentsInChildren<MonoBehaviour>() )
+        public void Initialize(Pauser pauser)
         {
-            if( monoMeh is IPausable pausable)
+    
+            foreach( var monoMeh in GetComponentsInChildren<MonoBehaviour>() )
             {
-                pauser.Register(pausable);
+                if( monoMeh is IPausable pausable)
+                {
+                    pauser.Register(pausable);
+                }
             }
         }
     }

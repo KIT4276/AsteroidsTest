@@ -1,20 +1,23 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class BulletCollision : ProjectileCollision
+namespace AsteroidsTest.Weapon.Bullet
 {
-    private BulletsFactory _bulletsFactory;
-
-    public void Initialize(BulletsFactory bulletsFactory)
+    public class BulletCollision : ProjectileCollision
     {
-        _bulletsFactory = bulletsFactory;
-    }
-
-    protected override void HandlingCollisions(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<IDamageable>(out var damageable))
+        private BulletsFactory _bulletsFactory;
+    
+        public void Initialize(BulletsFactory bulletsFactory)
         {
-            damageable.TakeDamage();
-            _bulletsFactory.Despawn(gameObject);
+            _bulletsFactory = bulletsFactory;
+        }
+    
+        protected override void HandlingCollisions(Collider2D collision)
+        {
+            if (collision.gameObject.TryGetComponent<IDamageable>(out var damageable))
+            {
+                damageable.TakeDamage();
+                _bulletsFactory.Despawn(gameObject);
+            }
         }
     }
 }

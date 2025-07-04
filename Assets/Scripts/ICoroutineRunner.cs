@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public interface ICoroutineRunner
+namespace AsteroidsTest
 {
-    Coroutine StartCoroutine(IEnumerator coroutine);
-    void StopCoroutine(Coroutine spawnCoroutine);
+    public interface ICoroutineRunner
+    {
+        Coroutine StartCoroutine(IEnumerator coroutine);
+        void StopCoroutine(Coroutine spawnCoroutine);
+    }
 }

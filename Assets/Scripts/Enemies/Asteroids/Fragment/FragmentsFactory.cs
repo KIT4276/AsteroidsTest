@@ -1,25 +1,29 @@
+using AsteroidsTest.SOScripts;
 using UnityEngine;
 
-public class FragmentsFactory : BaseEnemyFactory
+namespace AsteroidsTest.Enemies.Asteroids.Fragment
 {
-    public FragmentsFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints) 
-        : base(staticData, defeatPointsData, targetDefeatPoints)
+    public class FragmentsFactory : BaseEnemyFactory
     {
-        _prefab = staticData.FragmentPrefab;
-        _count = staticData.FragmentsCount;
-    }
-
-    public void SpawnFragments(Transform transform)
-    {
-        for (int i = _count; i > 0; i--)
+        public FragmentsFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints) 
+            : base(staticData, defeatPointsData, targetDefeatPoints)
         {
-            _spawnPoint = transform;
-            Spawn(transform);
+            _prefab = staticData.FragmentPrefab;
+            _count = staticData.FragmentsCount;
+        }
+    
+        public void SpawnFragments(Transform transform)
+        {
+            for (int i = _count; i > 0; i--)
+            {
+                _spawnPoint = transform;
+                Spawn(transform);
+            }
+        }
+        protected override Transform GetSpawnPoint(Transform spawnPoint)
+        {
+            return spawnPoint;
         }
     }
-    protected override Transform GetSpawnPoint(Transform spawnPoint)
-    {
-        return spawnPoint;
-    }
+    
 }
-

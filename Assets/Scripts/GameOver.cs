@@ -1,21 +1,24 @@
+using AsteroidsTest.Pause;
 using System;
 
-public class GameOver 
+namespace AsteroidsTest
 {
-    private readonly Pauser _pauser;
-
-    public GameOver(Pauser pauser)
+    public class GameOver 
     {
-       _pauser = pauser;
-    }
+        private readonly Pauser _pauser;
     
-    public event Action GameOverAction;
-
-    public void OnGameOver()
-    {
-        _pauser.Pause();
-
-        //Time.timeScale = 0;
-        GameOverAction?.Invoke();
+        public GameOver(Pauser pauser)
+        {
+           _pauser = pauser;
+        }
+        
+        public event Action GameOverAction;
+    
+        public void OnGameOver()
+        {
+            _pauser.Pause();
+    
+            GameOverAction?.Invoke();
+        }
     }
 }

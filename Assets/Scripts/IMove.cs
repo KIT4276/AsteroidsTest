@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+using AsteroidsTest.SOScripts;
+using UnityEngine;
 
-public interface IMove
+namespace AsteroidsTest
 {
-
-    public void Initialize(Transform transform, BaseFactory factory, GameStaticData gameStaticData);
-
-
-    public void StopMove();
+    public interface IMove
+    {
+    
+        public void Initialize(Transform transform, BaseFactory factory, GameStaticData gameStaticData);
+    
+    
+        public void StopMove();
+    }
 }

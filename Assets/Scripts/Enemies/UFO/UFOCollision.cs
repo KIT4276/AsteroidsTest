@@ -1,10 +1,15 @@
-﻿using UnityEngine;
+using AsteroidsTest.Enemies.Asteroids;
+using AsteroidsTest.SOScripts;
+using UnityEngine;
 
-public class UFOCollision : BaseEnemyCollision
+namespace AsteroidsTest.Enemies.UFO
 {
-    public override void Initialize(BaseFactory factory, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints)
+    public class UFOCollision : BaseEnemyCollision
     {
-        base.Initialize(factory, defeatPointsData, targetDefeatPoints);
-        _numDefeatPoints = defeatPointsData.UFOPoints;
+        public override void Initialize(BaseFactory factory, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints)
+        {
+            base.Initialize(factory, defeatPointsData, targetDefeatPoints);
+            _numDefeatPoints = defeatPointsData.UFOPoints;
+        }
     }
 }

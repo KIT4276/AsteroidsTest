@@ -1,48 +1,52 @@
+using AsteroidsTest.SOScripts;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseFactory 
+namespace AsteroidsTest
 {
-    protected GameObject _prefab;
-
-    protected List<GameObject> _pool = new();
-    protected GameStaticData _staticData;
-    protected GameObject _spawnedObject;
-
-    public BaseFactory(GameStaticData staticData)
+    public abstract class BaseFactory 
     {
-        _staticData = staticData;
-    }
-
-    public virtual void Despawn(GameObject despawnedObject)
-    {
-        var rb = despawnedObject.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        protected GameObject _prefab;
+    
+        protected List<GameObject> _pool = new();
+        protected GameStaticData _staticData;
+        protected GameObject _spawnedObject;
+    
+        public BaseFactory(GameStaticData staticData)
         {
-            rb.linearVelocity = Vector2.zero;
+            _staticData = staticData;
         }
-
-        despawnedObject.GetComponent<IMove>().StopMove();
-        despawnedObject.SetActive(false);
-        _pool.Add(despawnedObject);
-    }
-
-    public virtual void Spawn(Transform spawnTransform)
-    {
-        if(_pool.Count>0)
+    
+        public virtual void Despawn(GameObject despawnedObject)
         {
-            _spawnedObject = _pool[_pool.Count - 1];
-            _pool.Remove(_spawnedObject);
+            var rb = despawnedObject.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+    
+            despawnedObject.GetComponent<IMove>().StopMove();
+            despawnedObject.SetActive(false);
+            _pool.Add(despawnedObject);
         }
-        else
+    
+        public virtual void Spawn(Transform spawnTransform)
         {
-            _spawnedObject = Object.Instantiate(_prefab, spawnTransform.position, Quaternion.identity);
+            if(_pool.Count>0)
+            {
+                _spawnedObject = _pool[_pool.Count - 1];
+                _pool.Remove(_spawnedObject);
+            }
+            else
+            {
+                _spawnedObject = Object.Instantiate(_prefab, spawnTransform.position, Quaternion.identity);
+            }
+            
+            InitializeSpawnedObject(_spawnedObject);
         }
-        
-        InitializeSpawnedObject(_spawnedObject);
+    
+        protected abstract void InitializeSpawnedObject(GameObject spawnedObject);
+    
+        protected abstract Transform GetSpawnPoint(Transform spawnTransform);
     }
-
-    protected abstract void InitializeSpawnedObject(GameObject spawnedObject);
-
-    protected abstract Transform GetSpawnPoint(Transform spawnTransform);
 }

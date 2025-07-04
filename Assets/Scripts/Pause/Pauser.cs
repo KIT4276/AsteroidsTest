@@ -1,54 +1,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pauser
+namespace AsteroidsTest.Pause
 {
-    private readonly List<IPausable> _pausables = new();
-    private bool _isPaused;
-
-    public void Register(IPausable pausable)
+    public class Pauser
     {
-
-        if (!_pausables.Contains(pausable))
+        private readonly List<IPausable> _pausables = new();
+        private bool _isPaused;
+    
+        public void Register(IPausable pausable)
         {
-            _pausables.Add(pausable);
-        }
-    }
-
-    public void Unregister(IPausable pausable)
-    {
-        _pausables.Remove(pausable);
-
-    }
-
-    public void Pause()
-    {
-        if (!_isPaused)
-        {
-            _isPaused = true;
-
-            foreach (var pausable in _pausables)
+    
+            if (!_pausables.Contains(pausable))
             {
-                pausable.Pause();
+                _pausables.Add(pausable);
             }
         }
-    }
-
-    public void Resume()
-    {
-        if (_isPaused)
+    
+        public void Unregister(IPausable pausable)
         {
+            _pausables.Remove(pausable);
+    
+        }
+    
+        public void Pause()
+        {
+            if (!_isPaused)
+            {
+                _isPaused = true;
+    
+                foreach (var pausable in _pausables)
+                {
+                    pausable.Pause();
+                }
+            }
+        }
+    
+        public void Resume()
+        {
+            if (_isPaused)
+            {
+                _isPaused = false;
+                foreach (var pausable in _pausables)
+                {
+                    pausable.Resume();
+                }
+            }
+        }
+    
+        public void Reset()
+        {
+            _pausables.Clear();
             _isPaused = false;
-            foreach (var pausable in _pausables)
-            {
-                pausable.Resume();
-            }
         }
-    }
-
-    public void Reset()
-    {
-        _pausables.Clear();
-        _isPaused = false;
     }
 }

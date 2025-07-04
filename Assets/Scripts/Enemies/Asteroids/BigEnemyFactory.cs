@@ -1,93 +1,98 @@
-﻿using System.Collections;
+using AsteroidsTest.Pause;
+using AsteroidsTest.SOScripts;
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
-public class BigEnemyFactory : BaseEnemyFactory, IInitializable, IPausable
+namespace AsteroidsTest.Enemies.Asteroids
 {
-    protected ICoroutineRunner _coroutineRunner;
-    protected float _spawnTime;
-    protected float _spawnPosLimit;
-    protected Vector2 _screenLimits;
-    private Coroutine _spawnCoroutine;
-    protected Pauser _pauser;
-
-    protected BigEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
-        ICoroutineRunner coroutineRunner, Transform spawnPoint, Pauser pauser)
-        : base(staticData, defeatPointsData, targetDefeatPoints)
+    public class BigEnemyFactory : BaseEnemyFactory, IInitializable, IPausable
     {
-        _spawnPosLimit = staticData.SpawnPosLimit;
-        _screenLimits = staticData.ScreenLimits;
-
-        _coroutineRunner = coroutineRunner;
-        _spawnPoint = spawnPoint;
-        _pauser = pauser;
-    }
-
-    public void Initialize()
-    {
-        _pauser.Register(this);
-        StartSpawn();
-    }
-
-    public void Pause()
-    {
-        if (_spawnCoroutine != null)
+        protected ICoroutineRunner _coroutineRunner;
+        protected float _spawnTime;
+        protected float _spawnPosLimit;
+        protected Vector2 _screenLimits;
+        private Coroutine _spawnCoroutine;
+        protected Pauser _pauser;
+    
+        protected BigEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
+            ICoroutineRunner coroutineRunner, Transform spawnPoint, Pauser pauser)
+            : base(staticData, defeatPointsData, targetDefeatPoints)
         {
-            _coroutineRunner.StopCoroutine(_spawnCoroutine);
-            _spawnCoroutine = null;
+            _spawnPosLimit = staticData.SpawnPosLimit;
+            _screenLimits = staticData.ScreenLimits;
+    
+            _coroutineRunner = coroutineRunner;
+            _spawnPoint = spawnPoint;
+            _pauser = pauser;
         }
-    }
-
-    public void Resume()
-    {
-        if (_spawnCoroutine == null)
+    
+        public void Initialize()
+        {
+            _pauser.Register(this);
             StartSpawn();
-    }
-
-    protected virtual void StartSpawn()
-    {
-        _spawnCoroutine = _coroutineRunner.StartCoroutine(SpawnRoutine());
-    }
-
-    public override void Spawn(Transform spawnTransform)
-    {
-        base.Spawn(spawnTransform);
-        _spawnedObject.transform.position = GetSpawnPoint(_spawnPoint).position;
-    }
-
-
-    protected IEnumerator SpawnRoutine()
-    {
-        while (true)
-        {
-            Spawn(_spawnPoint);
-            yield return new WaitForSeconds(_spawnTime);
         }
-    }
-
-    protected float GenRandom()
-    {
-        return Random.Range(-_spawnPosLimit, _spawnPosLimit);
-    }
-
-    protected override Transform GetSpawnPoint(Transform spawnPoint)
-    {
-        var x = GenRandom();
-        while (x > -_screenLimits.x && x < _screenLimits.x)
+    
+        public void Pause()
         {
-            x = GenRandom();
+            if (_spawnCoroutine != null)
+            {
+                _coroutineRunner.StopCoroutine(_spawnCoroutine);
+                _spawnCoroutine = null;
+            }
         }
-
-        var y = GenRandom();
-        while (y > -_screenLimits.y && y < _screenLimits.y)
+    
+        public void Resume()
         {
-            y = GenRandom();
+            if (_spawnCoroutine == null)
+                StartSpawn();
         }
-
-        var tr = _spawnPoint;//I know that transform is passed by reference and I change its position.
-                             //No problem, its position doesn't matter
-        tr.position = new Vector2(x, y);
-
-        return tr;
+    
+        protected virtual void StartSpawn()
+        {
+            _spawnCoroutine = _coroutineRunner.StartCoroutine(SpawnRoutine());
+        }
+    
+        public override void Spawn(Transform spawnTransform)
+        {
+            base.Spawn(spawnTransform);
+            _spawnedObject.transform.position = GetSpawnPoint(_spawnPoint).position;
+        }
+    
+    
+        protected IEnumerator SpawnRoutine()
+        {
+            while (true)
+            {
+                Spawn(_spawnPoint);
+                yield return new WaitForSeconds(_spawnTime);
+            }
+        }
+    
+        protected float GenRandom()
+        {
+            return Random.Range(-_spawnPosLimit, _spawnPosLimit);
+        }
+    
+        protected override Transform GetSpawnPoint(Transform spawnPoint)
+        {
+            var x = GenRandom();
+            while (x > -_screenLimits.x && x < _screenLimits.x)
+            {
+                x = GenRandom();
+            }
+    
+            var y = GenRandom();
+            while (y > -_screenLimits.y && y < _screenLimits.y)
+            {
+                y = GenRandom();
+            }
+    
+            var tr = _spawnPoint;//I know that transform is passed by reference and I change its position.
+                                 //No problem, its position doesn't matter
+            tr.position = new Vector2(x, y);
+    
+            return tr;
+        }
     }
 }

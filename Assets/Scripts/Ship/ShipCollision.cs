@@ -1,26 +1,30 @@
-﻿using UnityEngine;
+using AsteroidsTest.Enemies.Asteroids;
+using UnityEngine;
 using Zenject;
 
-public class ShipCollision : MonoBehaviour, IDamageable
+namespace AsteroidsTest.Ship
 {
-    private GameOver _gameOver;
-
-    [Inject]
-    private void PseudoConstruct(GameOver gameOver)
+    public class ShipCollision : MonoBehaviour, IDamageable
     {
-        _gameOver = gameOver;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<BaseEnemyCollision>(out var enemy))
+        private GameOver _gameOver;
+    
+        [Inject]
+        private void PseudoConstruct(GameOver gameOver)
         {
-            TakeDamage();
+            _gameOver = gameOver;
         }
-    }
-
-    public void TakeDamage()
-    {
-        _gameOver.OnGameOver();
+    
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.TryGetComponent<BaseEnemyCollision>(out var enemy))
+            {
+                TakeDamage();
+            }
+        }
+    
+        public void TakeDamage()
+        {
+            _gameOver.OnGameOver();
+        }
     }
 }

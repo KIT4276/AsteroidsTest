@@ -1,24 +1,30 @@
-﻿public class AsteroidCollision : BaseEnemyCollision
+using AsteroidsTest.Enemies.Asteroids.Fragment;
+using AsteroidsTest.SOScripts;
+
+namespace AsteroidsTest.Enemies.Asteroids.Asteroid
 {
-   private FragmentsFactory _fragmentsFactory;
-
-    public override void Initialize(BaseFactory factory, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints)
+    public class AsteroidCollision : BaseEnemyCollision
     {
-        base.Initialize(factory, defeatPointsData, targetDefeatPoints);
-        _numDefeatPoints = defeatPointsData.AsteroidPoints;
-    }
+        private FragmentsFactory _fragmentsFactory;
 
-    public void SetFactory(FragmentsFactory fragmentsFactory)
-    {
-        _fragmentsFactory = fragmentsFactory;
-    }
-
-    public override void TakeDamage()
-    {
-        if (_fragmentsFactory != null)
+        public override void Initialize(BaseFactory factory, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints)
         {
-            base.TakeDamage();
-            _fragmentsFactory.SpawnFragments(this.transform);
+            base.Initialize(factory, defeatPointsData, targetDefeatPoints);
+            _numDefeatPoints = defeatPointsData.AsteroidPoints;
+        }
+
+        public void SetFactory(FragmentsFactory fragmentsFactory)
+        {
+            _fragmentsFactory = fragmentsFactory;
+        }
+
+        public override void TakeDamage()
+        {
+            if (_fragmentsFactory != null)
+            {
+                base.TakeDamage();
+                _fragmentsFactory.SpawnFragments(this.transform);
+            }
         }
     }
 }

@@ -1,20 +1,24 @@
-﻿using UnityEngine;
+using AsteroidsTest.SOScripts;
+using UnityEngine;
 
-public abstract class BaseEnemyCollision : MonoBehaviour, IDamageable
+namespace AsteroidsTest.Enemies.Asteroids
 {
-    protected BaseFactory _factory;
-    protected EnemiesDefeatPoints _targetDefeatPoints;
-    protected int _numDefeatPoints;
-
-    public virtual void Initialize(BaseFactory factory, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints)
+    public abstract class BaseEnemyCollision : MonoBehaviour, IDamageable
     {
-        _factory = factory;
-        _targetDefeatPoints= targetDefeatPoints;
-    }
-
-    public virtual void TakeDamage()
-    {
-        _targetDefeatPoints.OnEnemyDestroyed(_numDefeatPoints);
-        _factory.Despawn(this.gameObject);
+        protected BaseFactory _factory;
+        protected EnemiesDefeatPoints _targetDefeatPoints;
+        protected int _numDefeatPoints;
+    
+        public virtual void Initialize(BaseFactory factory, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints)
+        {
+            _factory = factory;
+            _targetDefeatPoints= targetDefeatPoints;
+        }
+    
+        public virtual void TakeDamage()
+        {
+            _targetDefeatPoints.OnEnemyDestroyed(_numDefeatPoints);
+            _factory.Despawn(this.gameObject);
+        }
     }
 }

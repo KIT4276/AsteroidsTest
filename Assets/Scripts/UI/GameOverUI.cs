@@ -2,38 +2,41 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class GameOverUI : MonoBehaviour
+namespace AsteroidsTest.UI
 {
-    [SerializeField] private GameObject _gameOverPanel;
-    [SerializeField] private GameObject _mainPanel;
-    [SerializeField] private TMP_Text _points;
-
-    private EnemiesDefeatPoints _enemiesDefeatPoints;
-    private GameOver _gameOver;
-
-    [Inject]
-    private void PseudoConstruct(GameOver gameOver, EnemiesDefeatPoints enemiesDefeatPoints)
+    public class GameOverUI : MonoBehaviour
     {
-        _enemiesDefeatPoints = enemiesDefeatPoints;
-        _gameOver = gameOver;
-        _gameOver.GameOverAction += OnGameOver;
-    }
+        [SerializeField] private GameObject _gameOverPanel;
+        [SerializeField] private GameObject _mainPanel;
+        [SerializeField] private TMP_Text _points;
 
-    private void Start()
-    {
-        _mainPanel.SetActive(true);
-        _gameOverPanel.SetActive(false);
-    }
+        private EnemiesDefeatPoints _enemiesDefeatPoints;
+        private GameOver _gameOver;
 
-    private void OnGameOver()
-    {
-        _gameOverPanel.SetActive(true);
-        _mainPanel.SetActive(false);
-        _points.text = "SCORE: " + _enemiesDefeatPoints.CurrentPoints.ToString();
-    }
+        [Inject]
+        private void PseudoConstruct(GameOver gameOver, EnemiesDefeatPoints enemiesDefeatPoints)
+        {
+            _enemiesDefeatPoints = enemiesDefeatPoints;
+            _gameOver = gameOver;
+            _gameOver.GameOverAction += OnGameOver;
+        }
 
-    private void OnDestroy()
-    {
-        _gameOver.GameOverAction -= OnGameOver;
+        private void Start()
+        {
+            _mainPanel.SetActive(true);
+            _gameOverPanel.SetActive(false);
+        }
+
+        private void OnGameOver()
+        {
+            _gameOverPanel.SetActive(true);
+            _mainPanel.SetActive(false);
+            _points.text = "SCORE: " + _enemiesDefeatPoints.CurrentPoints.ToString();
+        }
+
+        private void OnDestroy()
+        {
+            _gameOver.GameOverAction -= OnGameOver;
+        }
     }
 }

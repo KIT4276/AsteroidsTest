@@ -1,13 +1,16 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Collider2D))]
-public abstract class ProjectileCollision : MonoBehaviour
+namespace AsteroidsTest.Weapon.Bullet
 {
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    [RequireComponent (typeof(Collider2D))]
+    public abstract class ProjectileCollision : MonoBehaviour
     {
-        HandlingCollisions(collision);
+    
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            HandlingCollisions(collision);
+        }
+    
+        protected abstract void HandlingCollisions(Collider2D collision);
     }
-
-    protected abstract void HandlingCollisions(Collider2D collision);
 }

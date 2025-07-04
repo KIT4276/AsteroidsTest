@@ -1,42 +1,48 @@
+using AsteroidsTest.Enemies.Asteroids.Fragment;
+using AsteroidsTest.Pause;
+using AsteroidsTest.SOScripts;
 using UnityEngine;
 using Zenject;
 
-public class AsteroidsFactory : BigEnemyFactory
+namespace AsteroidsTest.Enemies.Asteroids.Asteroid
 {
-    private FragmentsFactory _fragmentsFactory;
-
-    public AsteroidsFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
-        Transform spawnPoint, FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner, Pauser pauser)
-        : base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint, pauser)
+    public class AsteroidsFactory : BigEnemyFactory
     {
-        _prefab = staticData.AsteroidPrefab;
-
-        _spawnTime = staticData.AsteroidsSpawnTime;
-        _count = staticData.AsteroidsStartCount;
-
-        _spawnPoint = spawnPoint;
-        _fragmentsFactory = fragmentsFactory;
-        _coroutineRunner = coroutineRunner;
-    }
-
-
- 
-
-    protected override void StartSpawn()
-    {
-        for (int i = _count; i > 0; i--)
+        private FragmentsFactory _fragmentsFactory;
+    
+        public AsteroidsFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
+            Transform spawnPoint, FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner, Pauser pauser)
+            : base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint, pauser)
         {
-            Spawn(_spawnPoint);
+            _prefab = staticData.AsteroidPrefab;
+    
+            _spawnTime = staticData.AsteroidsSpawnTime;
+            _count = staticData.AsteroidsStartCount;
+    
+            _spawnPoint = spawnPoint;
+            _fragmentsFactory = fragmentsFactory;
+            _coroutineRunner = coroutineRunner;
         }
-
-        base.StartSpawn();
+    
+    
+     
+    
+        protected override void StartSpawn()
+        {
+            for (int i = _count; i > 0; i--)
+            {
+                Spawn(_spawnPoint);
+            }
+    
+            base.StartSpawn();
+        }
+    
+        protected override void InitializeSpawnedObject(GameObject spawnedObject)
+        {
+            base.InitializeSpawnedObject(spawnedObject);
+            spawnedObject.GetComponent<AsteroidCollision>().SetFactory(_fragmentsFactory);
+            spawnedObject.GetComponent<PausableRegistrator>().Initialize(_pauser);
+        }
+    
     }
-
-    protected override void InitializeSpawnedObject(GameObject spawnedObject)
-    {
-        base.InitializeSpawnedObject(spawnedObject);
-        spawnedObject.GetComponent<AsteroidCollision>().SetFactory(_fragmentsFactory);
-        spawnedObject.GetComponent<PausableRegistrator>().Initialize(_pauser);
-    }
-
 }

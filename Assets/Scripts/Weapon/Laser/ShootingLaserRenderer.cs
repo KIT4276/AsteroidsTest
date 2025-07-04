@@ -1,20 +1,23 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
-public class ShootingLaserRenderer : MonoBehaviour
+namespace AsteroidsTest.Weapon.Laser
 {
-    [SerializeField] private LineRenderer _lineRenderer;
-    [SerializeField] private float _laserDuration = 0.1f;
-
-    public IEnumerator LaserEffect(Vector3 start, Vector3 end, float laserThickness)
+    public class ShootingLaserRenderer : MonoBehaviour
     {
-        _lineRenderer.startWidth = laserThickness;
-        _lineRenderer.endWidth = laserThickness;
-        _lineRenderer.SetPosition(0, start);
-        _lineRenderer.SetPosition(1, end);
-        _lineRenderer.enabled = true;
-
-        yield return new WaitForSeconds(_laserDuration);
-        _lineRenderer.enabled = false;
+        [SerializeField] private LineRenderer _lineRenderer;
+        [SerializeField] private float _laserDuration = 0.1f;
+    
+        public IEnumerator LaserEffect(Vector3 start, Vector3 end, float laserThickness)
+        {
+            _lineRenderer.startWidth = laserThickness;
+            _lineRenderer.endWidth = laserThickness;
+            _lineRenderer.SetPosition(0, start);
+            _lineRenderer.SetPosition(1, end);
+            _lineRenderer.enabled = true;
+    
+            yield return new WaitForSeconds(_laserDuration);
+            _lineRenderer.enabled = false;
+        }
     }
 }

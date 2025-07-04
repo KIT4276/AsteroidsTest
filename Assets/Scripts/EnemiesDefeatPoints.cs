@@ -1,14 +1,17 @@
-public class EnemiesDefeatPoints 
+namespace AsteroidsTest
 {
-    public int CurrentPoints { get; private set; }
-
-    public EnemiesDefeatPoints()
+    public class EnemiesDefeatPoints
     {
-        CurrentPoints = 0;
-    }
+        public int CurrentPoints { get; private set; }
 
-    public void OnEnemyDestroyed(int points)
-    {
-        CurrentPoints += points;
+        public EnemiesDefeatPoints()
+        {
+            CurrentPoints = 0;
+        }
+
+        public void OnEnemyDestroyed(int points)
+        {
+            CurrentPoints += points;
+        }
     }
 }
