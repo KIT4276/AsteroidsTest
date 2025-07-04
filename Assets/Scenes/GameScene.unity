@@ -1293,7 +1293,7 @@ GameObject:
   - component: {fileID: 707749557}
   - component: {fileID: 707749558}
   - component: {fileID: 707749560}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2335,7 +2335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1403345743}
   - component: {fileID: 1403345744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2421,7 +2421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1417037729}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GunBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
