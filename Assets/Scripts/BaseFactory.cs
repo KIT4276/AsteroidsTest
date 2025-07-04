@@ -9,8 +9,6 @@ public abstract class BaseFactory
     protected GameStaticData _staticData;
     protected GameObject _spawnedObject;
 
-   
-
     public BaseFactory(GameStaticData staticData)
     {
         _staticData = staticData;
@@ -18,6 +16,12 @@ public abstract class BaseFactory
 
     public virtual void Despawn(GameObject despawnedObject)
     {
+        var rb = despawnedObject.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+
         despawnedObject.GetComponent<IMove>().StopMove();
         despawnedObject.SetActive(false);
         _pool.Add(despawnedObject);
@@ -25,8 +29,6 @@ public abstract class BaseFactory
 
     public virtual void Spawn(Transform spawnTransform)
     {
-      
-
         if(_pool.Count>0)
         {
             _spawnedObject = _pool[_pool.Count - 1];
@@ -43,6 +45,4 @@ public abstract class BaseFactory
     protected abstract void InitializeSpawnedObject(GameObject spawnedObject);
 
     protected abstract Transform GetSpawnPoint(Transform spawnTransform);
-
-    
 }

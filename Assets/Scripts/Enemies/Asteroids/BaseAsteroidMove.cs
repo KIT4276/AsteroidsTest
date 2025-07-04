@@ -37,7 +37,6 @@ public class BaseAsteroidMove : MonoBehaviour, IMove, IPausable
     {
         if (_isMoving && _isActive)
         {
-            Debug.Log("_isActive");
             Move();
             CheckPosition();
         }

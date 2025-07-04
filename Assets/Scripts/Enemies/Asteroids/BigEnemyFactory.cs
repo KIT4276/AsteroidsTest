@@ -2,22 +2,25 @@
 using UnityEngine;
 using Zenject;
 
-public class BigEnemyFactory : BaseEnemyFactory, IInitializable
+public class BigEnemyFactory : BaseEnemyFactory, IInitializable, IPausable
 {
     protected ICoroutineRunner _coroutineRunner;
     protected float _spawnTime;
     protected float _spawnPosLimit;
     protected Vector2 _screenLimits;
+    private Coroutine _spawnCoroutine;
+    protected Pauser _pauser;
 
-    protected BigEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints, 
+    protected BigEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
         ICoroutineRunner coroutineRunner, Transform spawnPoint, Pauser pauser)
-        : base(staticData, defeatPointsData, targetDefeatPoints, pauser)
+        : base(staticData, defeatPointsData, targetDefeatPoints)
     {
         _spawnPosLimit = staticData.SpawnPosLimit;
         _screenLimits = staticData.ScreenLimits;
 
         _coroutineRunner = coroutineRunner;
         _spawnPoint = spawnPoint;
+        _pauser = pauser;
     }
 
     public void Initialize()
@@ -26,9 +29,24 @@ public class BigEnemyFactory : BaseEnemyFactory, IInitializable
         StartSpawn();
     }
 
+    public void Pause()
+    {
+        if (_spawnCoroutine != null)
+        {
+            _coroutineRunner.StopCoroutine(_spawnCoroutine);
+            _spawnCoroutine = null;
+        }
+    }
+
+    public void Resume()
+    {
+        if (_spawnCoroutine == null)
+            StartSpawn();
+    }
+
     protected virtual void StartSpawn()
     {
-        _coroutineRunner.StartCoroutine(SpawnRoutine());
+        _spawnCoroutine = _coroutineRunner.StartCoroutine(SpawnRoutine());
     }
 
     public override void Spawn(Transform spawnTransform)

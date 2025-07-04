@@ -19,8 +19,8 @@ MonoBehaviour:
   _spawnPosLimit: 18
   _screenLimits: {x: 9, y: 5}
   _spawnTimeAster: 1
-  _startCountAster: 20
-  _spawnTimeUFO: 3
+  _startCountAster: 15
+  _spawnTimeUFO: 4
   _fragmentsCount: 6
   _moveLimits: 35
   _bulletsMoveLimits: {x: 9.5, y: 6}
