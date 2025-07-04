@@ -1,6 +1,5 @@
 using AsteroidsTest.Ship;
 using AsteroidsTest.SOScripts;
-using System.Collections;
 using UnityEngine;
 
 namespace AsteroidsTest.Enemies.UFO
@@ -18,7 +17,6 @@ namespace AsteroidsTest.Enemies.UFO
         private bool _isActive = false;
         private bool _isMoving = true; 
         private Transform _target;
-        private bool _isAvoidance = false;
         public Vector2 Direction { get; private set; }
     
     
@@ -41,35 +39,16 @@ namespace AsteroidsTest.Enemies.UFO
             _isActive = false;
         }
     
-        public void Avoid()
-        {
-            _isAvoidance = true;
-            StartCoroutine(WaitForAvoid());
-    
-            Direction = new Vector2
-                (Direction.x * Mathf.Cos(_avoidanceTurningAngle) - Direction.y * Mathf.Sin(_avoidanceTurningAngle),
-                 Direction.x * Mathf.Sin(_avoidanceTurningAngle) + Direction.y * Mathf.Cos(_avoidanceTurningAngle));
-        }
-    
         private void FixedUpdate()
         {
             if (_isMoving && _isActive && _target != null)
             {
-                if (!_isAvoidance)
-                {
                     Direction = (_target.position - transform.position).normalized;
     
-                }
                 _rigidbody.linearVelocity = Direction * _moveSpeed;
     
                 CheckDistance();
             }
-        }
-    
-        private IEnumerator WaitForAvoid()
-        {
-            yield return new WaitForSeconds(_avoidTime);
-            _isAvoidance = false;
         }
     
         private void CheckDistance()
