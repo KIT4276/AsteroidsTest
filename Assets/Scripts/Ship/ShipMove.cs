@@ -11,6 +11,7 @@ public class ShipMove : MonoBehaviour
     [SerializeField] private float _indentation = 1;
 
     private BaceInputHandler _inputHandler;
+    private float _currentInput;
 
     [Inject]
     private void Initialize(BaceInputHandler inputHandler)
@@ -18,19 +19,22 @@ public class ShipMove : MonoBehaviour
         _inputHandler = inputHandler;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_inputHandler != null)
         {
-            float input = _inputHandler.GetMoveInputValue();
+            _currentInput = _inputHandler.GetMoveInputValue();
+        }
+    }
 
-            if (input != 0)
-            {
-                Vector3 force = transform.up * input * _acceleration;
-                _rigidbody.AddForce(force);
+    private void FixedUpdate()
+    {
+        if (_currentInput != 0)
+        {
+            Vector3 force = transform.up * _currentInput * _acceleration;
+            _rigidbody.AddForce(force);
 
-                CheckPosition();
-            }
+            CheckPosition();
         }
     }
 

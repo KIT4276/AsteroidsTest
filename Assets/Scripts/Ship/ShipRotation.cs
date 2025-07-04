@@ -7,6 +7,7 @@ public class ShipRotation : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
 
     private BaceInputHandler _inputHandler;
+    private float _input;
 
     [Inject]
     private void Initialize(BaceInputHandler inputHandler)
@@ -14,19 +15,19 @@ public class ShipRotation : MonoBehaviour
         _inputHandler = inputHandler;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_inputHandler != null)
         {
-            float input = _inputHandler.GetRotationInputValue();
+            _input = _inputHandler.GetRotationInputValue();
+        }
+    }
 
-            if (_inputHandler != null)
-            {
-                if (input != 0)
-                {
-                    _rigidbody.AddTorque(-input * _acceleration);
-                }
-            }
+    private void FixedUpdate()
+    {
+        if (_input != 0)
+        {
+            _rigidbody.AddTorque(-_input * _acceleration);
         }
     }
 }
