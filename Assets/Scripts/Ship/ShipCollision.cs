@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class ShipCollision : MonoBehaviour
+public class ShipCollision : MonoBehaviour, IDamageable
 {
     private GameOver _gameOver;
 
@@ -10,12 +10,17 @@ public class ShipCollision : MonoBehaviour
     {
         _gameOver = gameOver;
     }
-    
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.TryGetComponent<BaseEnemyCollision>(out var enemy))
+        if (collision.gameObject.TryGetComponent<BaseEnemyCollision>(out var enemy))
         {
-            _gameOver.OnGameOver();
+            TakeDamage();
         }
+    }
+
+    public void TakeDamage()
+    {
+        _gameOver.OnGameOver();
     }
 }
