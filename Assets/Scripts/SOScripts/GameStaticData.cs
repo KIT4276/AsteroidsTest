@@ -24,8 +24,10 @@ namespace AsteroidsTest.SOScripts
         [Header("For all IMove")]
         [SerializeField] private float _moveLimits = 35;
         [SerializeField] private Vector2 _bulletsMoveLimits = new Vector2(9.5f, 6);
-    
-    
+        [Space]
+        [SerializeField] private float _shipStateViewMultiplier = 100;
+
+
         public GameObject AsteroidPrefab => _asteroidPrefab;
         public GameObject FragmentPrefab => _fragmentPrefab;
         public GameObject UFOPrefab => _ufoPrefab;
@@ -39,5 +41,6 @@ namespace AsteroidsTest.SOScripts
         public int FragmentsCount => _fragmentsCount;
         public float MoveLimits => _moveLimits;
         public Vector2 BulletsMoveLimits => _bulletsMoveLimits;
+        public float ShipStateViewMultiplier => _shipStateViewMultiplier;
     }
 }

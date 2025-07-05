@@ -9,9 +9,9 @@ namespace AsteroidsTest.Enemies.UFO
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _moveSpeed = 5;
         [SerializeField] private float _minDistance = 1;
-        [Space]
-        [SerializeField] private float _avoidanceTurningAngle = 30;
-        [SerializeField] private float _avoidTime = 5;
+        //[Space]
+        //[SerializeField] private float _avoidanceTurningAngle = 30;
+        //[SerializeField] private float _avoidTime = 5;
     
     
         private bool _isActive = false;
