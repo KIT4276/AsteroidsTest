@@ -1293,6 +1293,7 @@ GameObject:
   - component: {fileID: 707749557}
   - component: {fileID: 707749558}
   - component: {fileID: 707749560}
+  - component: {fileID: 707749561}
   m_Layer: 8
   m_Name: Ship
   m_TagString: Untagged
@@ -1647,6 +1648,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lineRenderer: {fileID: 707749559}
   _laserDuration: 0.1
+--- !u!114 &707749561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707749549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29937497749d5e548ad19d11060db866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody2D: {fileID: 707749550}
 --- !u!1 &822937397
 GameObject:
   m_ObjectHideFlags: 0
@@ -2293,6 +2307,7 @@ MonoBehaviour:
   _bigEnemiesSpawnPoint: {fileID: 973701170}
   _ship: {fileID: 707749556}
   _playerInputPrefab: {fileID: 8731351379348086582, guid: b8419167e650ba5499eefa870e70fcab, type: 3}
+  _updater: {fileID: 707749561}
 --- !u!114 &1326734169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2984,12 +2999,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3ebd971de030547bd2734270010ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ship: {fileID: 707749550}
+  _staticData: {fileID: 11400000, guid: 0102f27407ef6924a8ee7c9dcd95eebb, type: 2}
   _coordinateX: {fileID: 529740061}
   _coordinateY: {fileID: 511037204}
   _angle: {fileID: 130354323}
   _speed: {fileID: 1476433104}
-  _multiplier: 100
 --- !u!114 &1547259267
 MonoBehaviour:
   m_ObjectHideFlags: 0

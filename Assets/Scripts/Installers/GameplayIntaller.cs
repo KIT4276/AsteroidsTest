@@ -19,7 +19,8 @@ namespace AsteroidsTest.Installers
         [SerializeField] private Transform _bigEnemiesSpawnPoint;
         [SerializeField] private ShipCollision _ship;
         [SerializeField] private GameObject _playerInputPrefab;
-    
+        [SerializeField] private ShipStateUpdater _updater;
+
         public override void InstallBindings()
         {
             InstallInput();
@@ -56,6 +57,13 @@ namespace AsteroidsTest.Installers
         {
             Container.Bind<ShipCollision>().
                 FromInstance(_ship).
+                AsSingle();
+
+            Container.Bind<ShipStateModel>().
+                AsSingle();
+
+            Container.Bind<ShipStateUpdater>().
+                FromInstance(_updater).
                 AsSingle();
         }
     

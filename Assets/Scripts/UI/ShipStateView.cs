@@ -8,7 +8,6 @@ namespace AsteroidsTest.UI
 {
     public class ShipStateView : MonoBehaviour
     {
-        [SerializeField] private ShipStateModel _ship;
         [SerializeField] private GameStaticData _staticData;
         [Space]
         [SerializeField] private TMP_Text _coordinateX;
@@ -18,9 +17,10 @@ namespace AsteroidsTest.UI
 
         private ShipStateViewModel _viewModel;
 
-        private void Awake()
+        [Inject]
+        public void Construct(ShipStateModel shipModel)
         {
-            _viewModel = new(_ship, _staticData);
+            _viewModel = new(shipModel, _staticData);
 
             _viewModel.PositionXChanged += OnPositionXChanged;
             _viewModel.PositionYChanged += OnPositionYChanged;

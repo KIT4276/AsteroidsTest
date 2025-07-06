@@ -3,10 +3,8 @@ using UnityEngine;
 
 namespace AsteroidsTest.Ship
 {
-    public class ShipStateModel : MonoBehaviour
+    public class ShipStateModel 
     {
-        [SerializeField] private Rigidbody2D _rigidbody2D;
-
         private float _positionX;
         private float _positionY;
         private float _angle;
@@ -17,17 +15,17 @@ namespace AsteroidsTest.Ship
         public event Action<float> AngleChanged;
         public event Action<float> SpeedChanged;
 
-        private void Update()
+        public void UpdateState(Rigidbody2D rigidbody2D)
         {
-            UpdateXPosition();
-            UpdateYPosition();
-            UpdateAngle();
-            UpdateSpeed();
+            UpdateXPosition(rigidbody2D);
+            UpdateYPosition(rigidbody2D);
+            UpdateAngle(rigidbody2D);
+            UpdateSpeed(rigidbody2D);
         }
 
-        private void UpdateXPosition()
+        private void UpdateXPosition(Rigidbody2D rigidbody2D)
         {
-            float newPositionX = _rigidbody2D.transform.position.x;
+            float newPositionX = rigidbody2D.transform.position.x;
 
             if (newPositionX != _positionX)
             {
@@ -37,9 +35,9 @@ namespace AsteroidsTest.Ship
             }
         }
 
-        private void UpdateYPosition()
+        private void UpdateYPosition(Rigidbody2D rigidbody2D)
         {
-            float newPositionY = _rigidbody2D.transform.position.y;
+            float newPositionY = rigidbody2D.transform.position.y;
 
             if ( newPositionY != _positionY)
             {
@@ -49,9 +47,9 @@ namespace AsteroidsTest.Ship
             }
         }
 
-        private void UpdateAngle()
+        private void UpdateAngle(Rigidbody2D rigidbody2D)
         {
-            float newAngle = _rigidbody2D.transform.eulerAngles.z;
+            float newAngle = rigidbody2D.transform.eulerAngles.z;
 
             if (newAngle != _angle)
             {
@@ -61,9 +59,9 @@ namespace AsteroidsTest.Ship
             }
         }
 
-        private void UpdateSpeed()
+        private void UpdateSpeed(Rigidbody2D rigidbody2D)
         {
-            float newSpeed = _rigidbody2D.linearVelocity.magnitude;
+            float newSpeed = rigidbody2D.linearVelocity.magnitude;
 
             if (newSpeed != _speed)
             {
