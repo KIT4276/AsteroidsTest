@@ -5,6 +5,7 @@ using AsteroidsTest.Input;
 using AsteroidsTest.Pause;
 using AsteroidsTest.Ship;
 using AsteroidsTest.SOScripts;
+using AsteroidsTest.UI;
 using AsteroidsTest.Weapon.Bullet;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -42,7 +43,7 @@ namespace AsteroidsTest.Installers
     
         private void InstallGameOver()
         {
-            Container.Bind<GameOver>().
+            Container.Bind<GameOverModel>().
                 AsSingle().
                 NonLazy();
         }

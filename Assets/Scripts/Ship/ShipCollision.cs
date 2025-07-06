@@ -1,4 +1,5 @@
 using AsteroidsTest.Enemies.Asteroids;
+using AsteroidsTest.UI;
 using UnityEngine;
 using Zenject;
 
@@ -6,12 +7,12 @@ namespace AsteroidsTest.Ship
 {
     public class ShipCollision : MonoBehaviour, IDamageable
     {
-        private GameOver _gameOver;
+        private GameOverModel _gameOverModel;
     
         [Inject]
-        private void PseudoConstruct(GameOver gameOver)
+        private void PseudoConstruct(GameOverModel gameOverModel)
         {
-            _gameOver = gameOver;
+            _gameOverModel = gameOverModel;
         }
     
         private void OnCollisionEnter2D(Collision2D collision)
@@ -24,7 +25,7 @@ namespace AsteroidsTest.Ship
     
         public void TakeDamage()
         {
-            _gameOver.OnGameOver();
+            _gameOverModel.GameOver();
         }
     }
 }
