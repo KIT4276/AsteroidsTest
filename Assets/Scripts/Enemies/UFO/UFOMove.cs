@@ -1,3 +1,4 @@
+using AsteroidsTest.Pause;
 using AsteroidsTest.Ship;
 using AsteroidsTest.SOScripts;
 using UnityEngine;
@@ -9,36 +10,26 @@ namespace AsteroidsTest.Enemies.UFO
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _moveSpeed = 5;
         [SerializeField] private float _minDistance = 1;
-        //[Space]
-        //[SerializeField] private float _avoidanceTurningAngle = 30;
-        //[SerializeField] private float _avoidTime = 5;
-    
     
         private bool _isActive = false;
         private bool _isMoving = true; 
         private Transform _target;
         public Vector2 Direction { get; private set; }
-    
-    
-        public void SetTarget(ShipCollision shipCollision)
-        {
+
+        public void SetTarget(ShipCollision shipCollision) => 
             _target = shipCollision.gameObject.transform;
-        }
-    
+
         public void Initialize(Transform transform, BaseFactory factory, GameStaticData gameStaticData)
         {
             this.transform.position = transform.position;
-            this.gameObject.SetActive(true);
-    
+            gameObject.SetActive(true);
     
             _isActive = true;
         }
-    
-        public void StopMove()
-        {
+
+        public void StopMove() => 
             _isActive = false;
-        }
-    
+
         private void FixedUpdate()
         {
             if (_isMoving && _isActive && _target != null)
@@ -60,15 +51,11 @@ namespace AsteroidsTest.Enemies.UFO
                 _isActive = false;
             }
         }
-    
-        public void Pause()
-        {
+
+        public void Pause() => 
             _isMoving = false;
-        }
-    
-        public void Resume()
-        {
+
+        public void Resume() => 
             _isMoving = true;
-        }
     }
 }

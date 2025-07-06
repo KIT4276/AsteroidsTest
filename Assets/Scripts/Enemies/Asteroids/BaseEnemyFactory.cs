@@ -1,3 +1,4 @@
+using AsteroidsTest.Pause;
 using AsteroidsTest.SOScripts;
 using UnityEngine;
 
@@ -9,25 +10,24 @@ namespace AsteroidsTest.Enemies.Asteroids
         protected Transform _spawnPoint;
         protected EnemiesDefeatPoints _targetDefeatPoints;
         protected DefeatPointsData _defeatPointsData;
-    
+        protected Pauser _pauser;
+
         protected BaseEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData,
-            EnemiesDefeatPoints targetDefeatPoints)
+            EnemiesDefeatPoints targetDefeatPoints, Pauser pauser)
             : base(staticData)
         {
             _targetDefeatPoints = targetDefeatPoints;
             _defeatPointsData = defeatPointsData;
+
+            _pauser = pauser;
         }
-    
-        public override void Spawn(Transform spawnTransform)
-        {
+
+        public override void Spawn(Transform spawnTransform) => 
             base.Spawn(spawnTransform);
-        }
-    
-        protected override Transform GetSpawnPoint(Transform transform)
-        {
-            return transform;
-        }
-    
+
+        protected override Transform GetSpawnPoint(Transform transform) =>
+            transform;
+
         protected override void InitializeSpawnedObject(GameObject spawnedObject)
         {
             spawnedObject.GetComponent<IMove>().Initialize(GetSpawnPoint(_spawnPoint), this, _staticData);

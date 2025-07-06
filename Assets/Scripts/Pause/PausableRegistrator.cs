@@ -7,9 +7,9 @@ namespace AsteroidsTest.Pause
         public void Initialize(Pauser pauser)
         {
     
-            foreach( var monoMeh in GetComponentsInChildren<MonoBehaviour>() )
+            foreach( var monoBeh in GetComponentsInChildren<MonoBehaviour>() )
             {
-                if( monoMeh is IPausable pausable)
+                if( monoBeh is IPausable pausable)
                 {
                     pauser.Register(pausable);
                 }

@@ -1,3 +1,4 @@
+using AsteroidsTest.Pause;
 using AsteroidsTest.SOScripts;
 using UnityEngine;
 
@@ -24,12 +25,10 @@ namespace AsteroidsTest.Enemies.Asteroids
     
             SelectRandomRotate();
         }
-    
-        public void StopMove()
-        {
+
+        public void StopMove() => 
             _isActive = false;
-        }
-    
+
         private void SelectRandomRotate()
         {
             float randomAngle = Random.Range(0f, 360f);
@@ -58,15 +57,11 @@ namespace AsteroidsTest.Enemies.Asteroids
                 _asteroidsFactory.Despawn(this.gameObject);
             }
         }
-    
-        public void Pause()
-        {
+
+        public void Pause() => 
             _isMoving = false;
-        }
-    
-        public void Resume()
-        {
+
+        public void Resume() => 
             _isMoving = true;
-        }
     }
 }

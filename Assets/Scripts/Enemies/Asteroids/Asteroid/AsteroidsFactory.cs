@@ -2,7 +2,6 @@ using AsteroidsTest.Enemies.Asteroids.Fragment;
 using AsteroidsTest.Pause;
 using AsteroidsTest.SOScripts;
 using UnityEngine;
-using Zenject;
 
 namespace AsteroidsTest.Enemies.Asteroids.Asteroid
 {
@@ -24,9 +23,6 @@ namespace AsteroidsTest.Enemies.Asteroids.Asteroid
             _coroutineRunner = coroutineRunner;
         }
     
-    
-     
-    
         protected override void StartSpawn()
         {
             for (int i = _count; i > 0; i--)
@@ -43,6 +39,5 @@ namespace AsteroidsTest.Enemies.Asteroids.Asteroid
             spawnedObject.GetComponent<AsteroidCollision>().SetFactory(_fragmentsFactory);
             spawnedObject.GetComponent<PausableRegistrator>().Initialize(_pauser);
         }
-    
     }
 }

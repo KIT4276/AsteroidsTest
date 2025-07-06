@@ -18,14 +18,10 @@ namespace AsteroidsTest.Enemies.UFO
             _spawnTime = staticData.UFOSpawnTime;
             _shipCollision = shipCollision;
         }
-    
-        
-    
-        protected override Transform GetSpawnPoint(Transform spawnPoint)
-        {
-            return base.GetSpawnPoint(spawnPoint);
-        }
-    
+
+        protected override Transform GetSpawnPoint(Transform spawnPoint) =>
+            base.GetSpawnPoint(spawnPoint);
+
         protected override void InitializeSpawnedObject(GameObject spawnedObject)
         {
             var ufo = spawnedObject.GetComponent<UFOMove>();
@@ -36,5 +32,4 @@ namespace AsteroidsTest.Enemies.UFO
             spawnedObject.GetComponent<PausableRegistrator>().Initialize(_pauser);
         }
     }
-    
 }

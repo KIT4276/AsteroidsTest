@@ -13,18 +13,16 @@ namespace AsteroidsTest.Enemies.Asteroids
         protected float _spawnPosLimit;
         protected Vector2 _screenLimits;
         private Coroutine _spawnCoroutine;
-        protected Pauser _pauser;
     
         protected BigEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
             ICoroutineRunner coroutineRunner, Transform spawnPoint, Pauser pauser)
-            : base(staticData, defeatPointsData, targetDefeatPoints)
+            : base(staticData, defeatPointsData, targetDefeatPoints, pauser)
         {
             _spawnPosLimit = staticData.SpawnPosLimit;
             _screenLimits = staticData.ScreenLimits;
     
             _coroutineRunner = coroutineRunner;
             _spawnPoint = spawnPoint;
-            _pauser = pauser;
         }
     
         public void Initialize()
@@ -68,12 +66,10 @@ namespace AsteroidsTest.Enemies.Asteroids
                 yield return new WaitForSeconds(_spawnTime);
             }
         }
-    
-        protected float GenRandom()
-        {
-            return Random.Range(-_spawnPosLimit, _spawnPosLimit);
-        }
-    
+
+        protected float GenRandom() =>
+            Random.Range(-_spawnPosLimit, _spawnPosLimit);
+
         protected override Transform GetSpawnPoint(Transform spawnPoint)
         {
             var x = GenRandom();
