@@ -1,5 +1,6 @@
 using AsteroidsTest.Ship;
 using AsteroidsTest.SOScripts;
+using R3;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -22,10 +23,10 @@ namespace AsteroidsTest.UI
         {
             _viewModel = new(model, _staticData);
 
-            _viewModel.PositionXChanged += OnPositionXChanged;
-            _viewModel.PositionYChanged += OnPositionYChanged;
-            _viewModel.AngleChanged += OnAngleChanged;
-            _viewModel.SpeedChanged += OnSpeedChanged;
+            _viewModel.PositionX.Subscribe(OnPositionXChanged);
+            _viewModel.PositionY.Subscribe(OnPositionYChanged);
+            _viewModel.NormalizeAngle.Subscribe(OnAngleChanged);
+            _viewModel.Speed.Subscribe(OnSpeedChanged);
         }
 
         private void OnPositionXChanged(string x) =>
@@ -39,13 +40,5 @@ namespace AsteroidsTest.UI
 
         private void OnSpeedChanged(string speed) =>
             _speed.text = speed;
-
-        private void OnDestroy()
-        {
-            _viewModel.PositionXChanged -= OnPositionXChanged;
-            _viewModel.PositionYChanged -= OnPositionYChanged;
-            _viewModel.AngleChanged -= OnAngleChanged;
-            _viewModel.SpeedChanged -= OnSpeedChanged;
-        }
     }
 }

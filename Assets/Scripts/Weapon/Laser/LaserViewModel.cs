@@ -1,50 +1,35 @@
-using AsteroidsTest.SOScripts;
-using System;
+using R3;
 
 namespace AsteroidsTest.Weapon.Laser
 {
     public class LaserViewModel 
     {
-        private int _laserShotsLeft;
-        private float _timerLeft;
+        public ReactiveProperty<string> ShotsLeft { get; private set; }
+        public ReactiveProperty<float> ShotsTimer { get; private set; }
 
         private LaserModel _model;
-        private readonly GameStaticData _gameStaticData;
 
-        public event Action<string> ShotsChanged;
-        public event Action<float> TimerChanged;
-
-
-        public LaserViewModel(LaserModel model, GameStaticData gameStaticData)
+        public LaserViewModel(LaserModel model)
         {
             _model = model;
-            _gameStaticData = gameStaticData;
 
-            _model.ShotsChanged += OnShotsChanged;
-            _model.TimerChanged += OnTimerChanged;
+            ShotsLeft = new();
+            ShotsTimer = new();
 
-            OnShotsChanged(_model.ShotsLeft);
-            OnTimerChanged(_model.Timer);
+            _model.ShotsLeft.Subscribe(OnShotsChanged);
+            _model.ShotsTimer.Subscribe(OnTimerChanged);
         }
 
         public void Init()
         {
-            OnShotsChanged(_model.ShotsLeft);
-            OnTimerChanged(_model.Timer);
+            OnShotsChanged(_model.ShotsLeft.Value);
+            OnTimerChanged(_model.ShotsTimer.Value);
         }
 
-        private void OnShotsChanged(int numberOfShotsLeft)
-        {
-            _laserShotsLeft = numberOfShotsLeft;
+        private void OnShotsChanged(int numberOfShotsLeft) => 
+            ShotsLeft.Value = numberOfShotsLeft.ToString("F0");
 
-            ShotsChanged?.Invoke(_laserShotsLeft.ToString());
-        }
-
-        private void OnTimerChanged(float timer)
-        {
-            _timerLeft = (timer / _gameStaticData.LaserShotRecoveryTime);
-
-            TimerChanged?.Invoke(_timerLeft);
-        }
+        private void OnTimerChanged(float timer) => 
+            ShotsTimer.Value = (timer / _model.RecoveryTime);
     }
 }

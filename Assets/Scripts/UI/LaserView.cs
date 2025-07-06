@@ -1,5 +1,5 @@
-using AsteroidsTest.SOScripts;
 using AsteroidsTest.Weapon.Laser;
+using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,30 +15,21 @@ namespace AsteroidsTest.UI
         private LaserViewModel _viewModel;
 
         [Inject]
-        public void Construct(LaserModel model, GameStaticData gameStaticData)
+        public void Construct(LaserModel model)
         {
-            _viewModel = new(model, gameStaticData);
+            _viewModel = new(model);
 
-            _viewModel.ShotsChanged += OnNumberOfShotsChange;
-            _viewModel.TimerChanged += OnTimerChanged;
-
+            _viewModel.ShotsLeft.Subscribe(OnNumberOfShotsChange);
+            _viewModel.ShotsTimer.Subscribe(OnTimerChanged);
         }
 
-        private void Start()
-        {
+        private void Start() => 
             _viewModel.Init();
-        }
 
         private void OnTimerChanged(float fill) => 
             _laserRecovery.fillAmount = fill;
 
         private void OnNumberOfShotsChange(string numberOfShotsLeft) => 
             _laserShotsLeft.text = numberOfShotsLeft;
-
-        private void OnDestroy()
-        {
-            _viewModel.ShotsChanged -= OnNumberOfShotsChange;
-            _viewModel.TimerChanged -= OnTimerChanged;
-        }
     }
 }

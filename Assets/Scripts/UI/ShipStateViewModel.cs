@@ -1,6 +1,6 @@
 using AsteroidsTest.Ship;
 using AsteroidsTest.SOScripts;
-using System;
+using R3;
 
 namespace AsteroidsTest.UI
 {
@@ -8,17 +8,12 @@ namespace AsteroidsTest.UI
     {
         private ShipStateModel _model;
 
-        private float _shipPositionX;
-        private float _shipPositionY;
-        private float _normalizeAngle;
-        private float _speed;
+        public ReactiveProperty<string> PositionX { get; private set; }
+        public ReactiveProperty<string> PositionY { get; private set; }
+        public ReactiveProperty<string> NormalizeAngle { get; private set; }
+        public ReactiveProperty<string> Speed { get; private set; }
 
         private float _multiplier;
-
-        public event Action<string> PositionXChanged;
-        public event Action<string> PositionYChanged;
-        public event Action<string> AngleChanged;
-        public event Action<string> SpeedChanged;
 
 
         public ShipStateViewModel( ShipStateModel model, GameStaticData gameStaticData)
@@ -26,39 +21,27 @@ namespace AsteroidsTest.UI
             _model = model;
             _multiplier = gameStaticData.ShipStateViewMultiplier;
 
-            _model.PositionXChanged += OnPositionXChanged;
-            _model.PositionYChanged += OnPositionYChanged;
-            _model.AngleChanged += OnAngleChanged;
-            _model.SpeedChanged += OnSpeedChanged;
+            PositionX = new();
+            PositionY = new();
+            NormalizeAngle = new();
+            Speed = new();  
+
+            _model.PositionX.Subscribe(OnPositionXChanged);
+            _model.PositionY.Subscribe(OnPositionYChanged);
+            _model.Angle.Subscribe(OnAngleChanged);
+            _model.Speed.Subscribe(OnSpeedChanged);
         }
 
-        private void OnPositionXChanged(float x)
-        {
-            _shipPositionX = x * _multiplier;
+        private void OnPositionXChanged(float x) => 
+            PositionX.Value = (x * _multiplier).ToString("F0");
 
-            PositionXChanged?.Invoke(_shipPositionX.ToString("F0"));
-        }
+        private void OnPositionYChanged(float y) => 
+            PositionY.Value = (y * _multiplier).ToString("F0");
 
-        private void OnPositionYChanged(float y)
-        {
-            _shipPositionY = y * _multiplier;
+        private void OnAngleChanged(float angle) => 
+            NormalizeAngle.Value = (((360 - angle) > 180f) ? (360 - angle) - 360f : (360 - angle)).ToString("F0");
 
-            PositionYChanged?.Invoke(_shipPositionY.ToString("F0"));
-        }
-
-        private void OnAngleChanged(float angle)
-        {
-            float correctedAngle = 360 - angle;
-            _normalizeAngle = (correctedAngle > 180f) ? correctedAngle - 360f : correctedAngle;
-
-            AngleChanged?.Invoke(_normalizeAngle.ToString("F0"));
-        }
-
-        private void OnSpeedChanged(float speed)
-        {
-           _speed = speed * _multiplier;
-
-            SpeedChanged?.Invoke(_speed.ToString("F0"));
-        }
+        private void OnSpeedChanged(float speed) => 
+            Speed.Value = (speed * _multiplier).ToString("F0");
     }
 }

@@ -1,14 +1,12 @@
 using AsteroidsTest.SOScripts;
-using System;
+using R3;
 
 public class LaserModel
 {
-    public int ShotsLeft { get; private set; }
-    public float Timer { get; private set; }
-    public float RecoveryTime { get; }
+    public ReactiveProperty <int> ShotsLeft { get; private set; }
+    public ReactiveProperty<float> ShotsTimer { get; private set; }
 
-    public event Action<int> ShotsChanged;
-    public event Action<float> TimerChanged;
+    public float RecoveryTime { get; }
 
     private int _maxShots;
 
@@ -16,30 +14,32 @@ public class LaserModel
     {
         _maxShots = gameStaticData.NumberOfLaserShots;
         RecoveryTime = gameStaticData.LaserShotRecoveryTime;
-        ShotsLeft = _maxShots;
+
+        ShotsLeft = new();
+        ShotsTimer = new();
+
+        ShotsLeft.Value = _maxShots;
     }
 
     public bool TryFire()
     {
-        if (ShotsLeft <= 0) return false;
+        if (ShotsLeft.Value <= 0) 
+            return false;
 
-        ShotsLeft--;
-        ShotsChanged?.Invoke(ShotsLeft);
+        ShotsLeft.Value--;
         return true;
     }
 
     public void UpdateTimer(float deltaTime)
     {
-        if (ShotsLeft >= _maxShots) return;
+        if (ShotsLeft.Value >= _maxShots) return;
 
-        Timer += deltaTime;
-        TimerChanged?.Invoke(Timer);
+        ShotsTimer.Value += deltaTime;
 
-        if (Timer >= RecoveryTime)
+        if (ShotsTimer.Value >= RecoveryTime)
         {
-            Timer = 0;
-            ShotsLeft++;
-            ShotsChanged?.Invoke(ShotsLeft);
+            ShotsTimer.Value = 0;
+            ShotsLeft.Value++;
         }
     }
 }
