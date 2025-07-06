@@ -1525,8 +1525,6 @@ MonoBehaviour:
     m_Bits: 128
   _distance: 100
   _laserThickness: 0.15
-  _numberOfShots: 5
-  _oneShotRecoveryTime: 15
 --- !u!120 &707749559
 LineRenderer:
   serializedVersion: 2
@@ -2877,10 +2875,10 @@ GameObject:
   - component: {fileID: 1547259264}
   - component: {fileID: 1547259263}
   - component: {fileID: 1547259262}
-  - component: {fileID: 1547259261}
   - component: {fileID: 1547259266}
   - component: {fileID: 1547259267}
   - component: {fileID: 1547259268}
+  - component: {fileID: 1547259269}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2888,21 +2886,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1547259261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547259260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00cc672b97c4d20449b230f4953fabdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shootingLaser: {fileID: 707749558}
-  _laserShotsLeft: {fileID: 635024662}
-  _laserRecovery: {fileID: 911167676000961949}
 --- !u!114 &1547259262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3031,6 +3014,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da114406b1b4c74d8403a055561dbfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1547259269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547259260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5caadc820cfe2e749a413e0213ab90c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laserShotsLeft: {fileID: 635024662}
+  _laserRecovery: {fileID: 911167676000961949}
 --- !u!1 &1566073126
 GameObject:
   m_ObjectHideFlags: 0

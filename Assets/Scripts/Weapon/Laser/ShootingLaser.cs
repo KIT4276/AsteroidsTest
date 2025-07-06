@@ -1,5 +1,4 @@
 using AsteroidsTest.Input;
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -13,32 +12,22 @@ namespace AsteroidsTest.Weapon.Laser
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private float _distance = 100;
         [SerializeField] private float _laserThickness = 0.5f;
-        [Space]
-        [SerializeField] private int _numberOfShots = 5;
-        [SerializeField] private float _oneShotRecoveryTime = 15;
-    
+
+        private LaserModel _laserModel;
         private BaceInputHandler _inputHandler;
-        private bool _isRunning = false;
-    
-        public float OneShotRecoveryTime { get => _oneShotRecoveryTime; }
-        public float Timer { get; private set; }
-        public int ShotsLeft { get; private set; }
-    
-        public event Action NumberOfShotsChange;
-    
+
         [Inject]
-        private void Initialize(BaceInputHandler inputHandler)
+        private void Construct(BaceInputHandler inputHandler, LaserModel laserModel)
         {
+            _laserModel = laserModel;
             _inputHandler = inputHandler;
+
             inputHandler.LaserFireAction += LaserFire;
-    
-            ShotsLeft = _numberOfShots;
-            Timer = 0;
         }
-    
+
         private void LaserFire()
         {
-            if (ShotsLeft > 0)
+            if (_laserModel.TryFire())
             {
                 RaycastHit2D[] hits = Physics2D
                     .CircleCastAll(_gunBarrel.position, _laserThickness, _gunBarrel.up, _distance, _layerMask);
@@ -56,57 +45,13 @@ namespace AsteroidsTest.Weapon.Laser
                     StartCoroutine(_shootingLaserRenderer
                         .LaserEffect(_gunBarrel.position, _gunBarrel.position + _gunBarrel.up * _distance, _laserThickness));
                 }
-                ShotsLeft--;
-    
-                if (ShotsLeft < 0)
-                {
-                    ShotsLeft = 0;
-                }
-    
-                NumberOfShotsChange?.Invoke();
             }
         }
-    
-        private void Update()
-        {
-            if (!_isRunning && ShotsLeft < _numberOfShots)
-            {
-                _isRunning = true;
-                Timer = 0;
-            }
-    
-            if (_isRunning)
-            {
-                RecoveryTimer();
-            }
-        }
-    
-        private void RecoveryTimer()
-        {
-            Timer += Time.deltaTime;
-    
-            if (Timer >= _oneShotRecoveryTime)
-            {
-                _isRunning = false;
-    
-                RecoverShots();
-            }
-        }
-    
-        private void RecoverShots()
-        {
-            ShotsLeft++;
-            
-            if (ShotsLeft > _numberOfShots)
-            {
-                ShotsLeft = _numberOfShots;
-            }
-            NumberOfShotsChange?.Invoke();
-        }
-    
-        private void OnDestroy()
-        {
+
+        private void Update() => 
+            _laserModel.UpdateTimer(Time.deltaTime);
+
+        private void OnDestroy() => 
             _inputHandler.LaserFireAction -= LaserFire;
-        }
     }
 }

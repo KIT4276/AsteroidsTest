@@ -18,9 +18,9 @@ namespace AsteroidsTest.UI
         private ShipStateViewModel _viewModel;
 
         [Inject]
-        public void Construct(ShipStateModel shipModel)
+        public void Construct(ShipStateModel model)
         {
-            _viewModel = new(shipModel, _staticData);
+            _viewModel = new(model, _staticData);
 
             _viewModel.PositionXChanged += OnPositionXChanged;
             _viewModel.PositionYChanged += OnPositionYChanged;
@@ -39,5 +39,13 @@ namespace AsteroidsTest.UI
 
         private void OnSpeedChanged(string speed) =>
             _speed.text = speed;
+
+        private void OnDestroy()
+        {
+            _viewModel.PositionXChanged -= OnPositionXChanged;
+            _viewModel.PositionYChanged -= OnPositionYChanged;
+            _viewModel.AngleChanged -= OnAngleChanged;
+            _viewModel.SpeedChanged -= OnSpeedChanged;
+        }
     }
 }

@@ -55,6 +55,9 @@ namespace AsteroidsTest.Installers
     
         private void InstallShip()
         {
+            Container.Bind<LaserModel>().
+                AsSingle();
+
             Container.Bind<ShipCollision>().
                 FromInstance(_ship).
                 AsSingle();
@@ -65,6 +68,7 @@ namespace AsteroidsTest.Installers
             Container.Bind<ShipStateUpdater>().
                 FromInstance(_updater).
                 AsSingle();
+
         }
     
         private void InstallData()
