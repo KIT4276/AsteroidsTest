@@ -17,12 +17,13 @@ namespace AsteroidsTest.UI
             Score = new();
             _gameOverModel = gameOverModel;
 
-            _gameOverModel.IsGameOver.Subscribe(OnGameOverChanged);
-            _gameOverModel.Points.Subscribe(OnPointsChange);
         }
 
         public void InitState()
         {
+            _gameOverModel.IsGameOver.Subscribe(OnGameOverChanged);
+            _gameOverModel.Points.Subscribe(OnPointsChange);
+
             OnGameOverChanged(_gameOverModel.IsGameOver.Value);
             OnPointsChange(_gameOverModel.Points.Value);
         }
