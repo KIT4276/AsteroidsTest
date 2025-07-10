@@ -9,10 +9,10 @@ namespace AsteroidsTest.Weapon.Bullet
         [SerializeField] private Transform _gunBarrel;
     
         private BulletsFactory _bulletsFactory;
-        private BaceInputHandler _inputHandler;
+        private BaseInputHandler _inputHandler;
     
         [Inject]
-        private void Initialize(BaceInputHandler inputHandler, BulletsFactory bulletsFactory)
+        private void Initialize(BaseInputHandler inputHandler, BulletsFactory bulletsFactory)
         {
             _bulletsFactory = bulletsFactory;
             _inputHandler = inputHandler;

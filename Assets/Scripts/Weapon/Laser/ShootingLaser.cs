@@ -14,10 +14,10 @@ namespace AsteroidsTest.Weapon.Laser
         [SerializeField] private float _laserThickness = 0.5f;
 
         private LaserModel _laserModel;
-        private BaceInputHandler _inputHandler;
+        private BaseInputHandler _inputHandler;
 
         [Inject]
-        private void Construct(BaceInputHandler inputHandler, LaserModel laserModel)
+        private void Construct(BaseInputHandler inputHandler, LaserModel laserModel)
         {
             _laserModel = laserModel;
             _inputHandler = inputHandler;

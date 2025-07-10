@@ -18,6 +18,7 @@ namespace AsteroidsTest.UI
 
         private ShipStateViewModel _viewModel;
 
+
         [Inject]
         public void Construct(ShipStateModel model)
         {

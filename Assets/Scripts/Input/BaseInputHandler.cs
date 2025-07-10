@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace AsteroidsTest.Input
 {
-    public class BaceInputHandler
+    public class BaseInputHandler
     {
         protected const string MoveForwardActionName = "MoveForward";
         protected const string RotationActionName = "Rotation";
@@ -18,7 +18,7 @@ namespace AsteroidsTest.Input
         public event Action BulletFireAction;
         public event Action LaserFireAction;
     
-        public BaceInputHandler(PlayerInput playerInput)
+        public BaseInputHandler(PlayerInput playerInput)
         {
             _moveAction = playerInput.actions[MoveForwardActionName];
             _moveAction.Enable();

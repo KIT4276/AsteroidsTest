@@ -7,6 +7,7 @@ using AsteroidsTest.Ship;
 using AsteroidsTest.SOScripts;
 using AsteroidsTest.UI;
 using AsteroidsTest.Weapon.Bullet;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -26,26 +27,32 @@ namespace AsteroidsTest.Installers
         {
             InstallInput();
             InstallPause();
-    
+
+            InstallSceneLoader();
             InstallGameOver();
             InstallTargetDefeatPoints();
             InstallShip();
             InstallData();
             InstallFactories();
         }
-    
+
+        private void InstallSceneLoader()
+        {
+            Container.Bind<SceneLoader>().
+                AsSingle();
+        }
+
         private void InstallPause()
         {
             Container.Bind<Pauser>().
-                 AsSingle().
-                 NonLazy();
+                 AsSingle();
         }
     
         private void InstallGameOver()
         {
             Container.Bind<GameOverModel>().
-                AsSingle().
-                NonLazy();
+                AsSingle();//.
+               // NonLazy();
         }
     
         private void InstallTargetDefeatPoints()
@@ -87,10 +94,10 @@ namespace AsteroidsTest.Installers
         {
             Container.Bind<PlayerInput>().
                 FromComponentInNewPrefab(_playerInputPrefab).AsSingle();
-    
-            Container.BindInterfacesAndSelfTo<BaceInputHandler>().
-                AsSingle().
-                NonLazy();
+
+            Container.BindInterfacesAndSelfTo<BaseInputHandler>().
+                AsSingle();//.
+               // NonLazy();
         }
     
         private void InstallFactories()
@@ -105,8 +112,7 @@ namespace AsteroidsTest.Installers
         {
             Container.BindInterfacesAndSelfTo<UFOFactory>().
                 AsSingle().
-                WithArguments(_bigEnemiesSpawnPoint, this).
-                NonLazy();
+                WithArguments(_bigEnemiesSpawnPoint, this);
         }
     
         private void InstallBulletsFactory()
@@ -123,10 +129,9 @@ namespace AsteroidsTest.Installers
     
         private void InstallAsteroidsFactory()
         {
-            Container.BindInterfacesAndSelfTo<AsteroidsFactory>().           
+            Container.BindInterfacesAndSelfTo<AsteroidsFactory>().
                 AsSingle().
-                WithArguments(_bigEnemiesSpawnPoint, this).
-                NonLazy();
+                WithArguments(_bigEnemiesSpawnPoint, this);
         }
     }
 }

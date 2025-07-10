@@ -29,6 +29,8 @@ namespace AsteroidsTest.SOScripts
         [SerializeField] private int _numberOfLaserShots = 5;
         [Space]
         [SerializeField] private float _shipStateViewMultiplier = 100;
+        [SerializeField] private int _gameScene = 1;
+        [SerializeField] private int _bootstrapScene = 0;
 
         public GameObject AsteroidPrefab => _asteroidPrefab;
         public GameObject FragmentPrefab => _fragmentPrefab;
@@ -47,5 +49,8 @@ namespace AsteroidsTest.SOScripts
 
         public float LaserShotRecoveryTime => _laserShotRecoveryTime;
         public int NumberOfLaserShots => _numberOfLaserShots;
+
+        public int BootstrapScene => _bootstrapScene;
+        public int GameScene => _gameScene;
     }
 }

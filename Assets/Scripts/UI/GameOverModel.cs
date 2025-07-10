@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using R3;
+﻿using R3;
 using UnityEditor;
-using UnityEngine.SceneManagement;
 using AsteroidsTest.Pause;
 
 namespace AsteroidsTest.UI
@@ -13,8 +11,9 @@ namespace AsteroidsTest.UI
 
         private readonly Pauser _pauser;
         private EnemiesDefeatPoints _enemiesDefeatPoints;
+        private SceneLoader _sceneLoader;
 
-        public GameOverModel(Pauser pauser, EnemiesDefeatPoints enemiesDefeatPoints)
+        public GameOverModel(Pauser pauser, EnemiesDefeatPoints enemiesDefeatPoints, SceneLoader sceneLoader)
         {
             _pauser = pauser;
             _enemiesDefeatPoints = enemiesDefeatPoints;
@@ -23,6 +22,7 @@ namespace AsteroidsTest.UI
             IsGameOver = new();
 
             IsGameOver.Value = false;
+            _sceneLoader = sceneLoader;
         }
 
         public void GameOver()
@@ -36,8 +36,7 @@ namespace AsteroidsTest.UI
         {
             IsGameOver.Value = false;
 
-            SceneManager.LoadScene(0);
-            Time.timeScale = 1;
+            _sceneLoader.LoadGameScene();
         }
 
         public void QuitGame()

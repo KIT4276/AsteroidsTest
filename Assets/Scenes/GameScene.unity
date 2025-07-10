@@ -2875,10 +2875,9 @@ GameObject:
   - component: {fileID: 1547259264}
   - component: {fileID: 1547259263}
   - component: {fileID: 1547259262}
-  - component: {fileID: 1547259266}
-  - component: {fileID: 1547259268}
   - component: {fileID: 1547259269}
   - component: {fileID: 1547259270}
+  - component: {fileID: 1547259271}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2970,35 +2969,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1547259266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547259260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af3ebd971de030547bd2734270010ef9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _staticData: {fileID: 11400000, guid: 0102f27407ef6924a8ee7c9dcd95eebb, type: 2}
-  _coordinateX: {fileID: 529740061}
-  _coordinateY: {fileID: 511037204}
-  _angle: {fileID: 130354323}
-  _speed: {fileID: 1476433104}
---- !u!114 &1547259268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547259260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0da114406b1b4c74d8403a055561dbfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1547259269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3028,6 +2998,23 @@ MonoBehaviour:
   _gameOverPanel: {fileID: 1035851995}
   _mainPanel: {fileID: 323734043}
   _points: {fileID: 822937398}
+--- !u!114 &1547259271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547259260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3ebd971de030547bd2734270010ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _staticData: {fileID: 11400000, guid: 0102f27407ef6924a8ee7c9dcd95eebb, type: 2}
+  _coordinateX: {fileID: 529740061}
+  _coordinateY: {fileID: 511037204}
+  _angle: {fileID: 130354323}
+  _speed: {fileID: 1476433104}
 --- !u!1 &1566073126
 GameObject:
   m_ObjectHideFlags: 0

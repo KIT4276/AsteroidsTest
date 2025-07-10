@@ -13,11 +13,11 @@ namespace AsteroidsTest.Ship
         [SerializeField] private float _y_limits;
         [SerializeField] private float _indentation = 1;
     
-        private BaceInputHandler _inputHandler;
+        private BaseInputHandler _inputHandler;
         private float _currentInput;
     
         [Inject]
-        private void Initialize(BaceInputHandler inputHandler)
+        private void Initialize(BaseInputHandler inputHandler)
         {
             _inputHandler = inputHandler;
         }

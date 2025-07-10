@@ -9,11 +9,11 @@ namespace AsteroidsTest.Ship
         [SerializeField] private float _acceleration = 2;
         [SerializeField] private Rigidbody2D _rigidbody;
     
-        private BaceInputHandler _inputHandler;
+        private BaseInputHandler _inputHandler;
         private float _input;
     
         [Inject]
-        private void Initialize(BaceInputHandler inputHandler)
+        private void Initialize(BaseInputHandler inputHandler)
         {
             _inputHandler = inputHandler;
         }
