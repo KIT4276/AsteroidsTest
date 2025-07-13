@@ -30,9 +30,6 @@ namespace AsteroidsTest.UI
             _timerSub = _viewModel.ShotsTimer.Subscribe(OnTimerChanged);
         }
 
-        private void Start() => 
-            _viewModel.Init();
-
         private void OnTimerChanged(float fill) => 
             _laserRecovery.fillAmount = fill;
 

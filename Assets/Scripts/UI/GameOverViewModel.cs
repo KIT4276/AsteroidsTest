@@ -26,9 +26,6 @@ namespace AsteroidsTest.UI
         {
             _gameOverSub = _gameOverModel.IsGameOver.Subscribe(OnGameOverChanged);
             _pointsSub = _gameOverModel.Points.Subscribe(OnPointsChange);
-
-            OnGameOverChanged(_gameOverModel.IsGameOver.Value);
-            OnPointsChange(_gameOverModel.Points.Value);
         }
 
         public void StartNewGame() =>

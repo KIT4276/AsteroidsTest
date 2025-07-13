@@ -6,8 +6,11 @@ namespace AsteroidsTest.UI
 {
     public class GameOverModel
     {
-        public ReactiveProperty<int> Points { get; private set; }
-        public ReactiveProperty<bool> IsGameOver { get; private set; }
+        private ReactiveProperty<int> _points = new();
+        private ReactiveProperty<bool> _isGameOver = new();
+
+        public Observable<int> Points => _points.AsObservable();
+        public Observable<bool> IsGameOver => _isGameOver.AsObservable();
 
         private readonly Pauser _pauser;
         private EnemiesDefeatPoints _enemiesDefeatPoints;
@@ -18,23 +21,20 @@ namespace AsteroidsTest.UI
             _pauser = pauser;
             _enemiesDefeatPoints = enemiesDefeatPoints;
 
-            Points = new();
-            IsGameOver = new();
-
-            IsGameOver.Value = false;
+            _isGameOver.Value = false;
             _sceneLoader = sceneLoader;
         }
 
         public void GameOver()
         {
             _pauser.Pause();
-            IsGameOver.Value = true;
-            Points.Value = _enemiesDefeatPoints.CurrentPoints;
+            _isGameOver.Value = true;
+            _points.Value = _enemiesDefeatPoints.CurrentPoints;
         }
 
         public void StartNewGame()
         {
-            IsGameOver.Value = false;
+            _isGameOver.Value = false;
 
             _sceneLoader.LoadGameScene();
         }

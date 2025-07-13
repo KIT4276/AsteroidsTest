@@ -5,18 +5,15 @@ namespace AsteroidsTest.Ship
 {
     public class ShipStateModel 
     {
-        public ReactiveProperty<float> PositionX { get; private set; }
-        public ReactiveProperty<float> PositionY { get; private set; }
-        public ReactiveProperty<float> Angle { get; private set; }
-        public ReactiveProperty<float> Speed { get; private set; }
+        private ReactiveProperty<float> _positionX = new();
+        private ReactiveProperty<float> _positionY = new();
+        private ReactiveProperty<float> _angle = new();
+        private ReactiveProperty<float> _speed = new();
 
-        public ShipStateModel()
-        {
-            PositionX = new();
-            PositionY = new();
-            Angle = new();
-            Speed = new();
-        }
+        public Observable<float> PositionX => _positionX.AsObservable();
+        public Observable<float> PositionY => _positionY.AsObservable();
+        public Observable<float> Angle => _angle.AsObservable();
+        public Observable<float> Speed => _speed.AsObservable();
 
         public void UpdateState(Rigidbody2D rigidbody2D)
         {
@@ -30,9 +27,9 @@ namespace AsteroidsTest.Ship
         {
             float newPositionX = rigidbody2D.transform.position.x;
 
-            if (newPositionX != PositionX.Value)
+            if (newPositionX != _positionX.Value)
             {
-                PositionX.Value = newPositionX;
+                _positionX.Value = newPositionX;
             }
         }
 
@@ -40,9 +37,9 @@ namespace AsteroidsTest.Ship
         {
             float newPositionY = rigidbody2D.transform.position.y;
 
-            if ( newPositionY != PositionY.Value)
+            if ( newPositionY != _positionY.Value)
             {
-                PositionY.Value = newPositionY;
+                _positionY.Value = newPositionY;
             }
         }
 
@@ -50,9 +47,9 @@ namespace AsteroidsTest.Ship
         {
             float newAngle = rigidbody2D.transform.eulerAngles.z;
 
-            if (newAngle != Angle.Value)
+            if (newAngle != _angle.Value)
             {
-                Angle.Value = newAngle;
+                _angle.Value = newAngle;
             }
         }
 
@@ -60,9 +57,9 @@ namespace AsteroidsTest.Ship
         {
             float newSpeed = rigidbody2D.linearVelocity.magnitude;
 
-            if (newSpeed != Speed.Value)
+            if (newSpeed != _speed.Value)
             {
-                Speed.Value = newSpeed;
+                _speed.Value = newSpeed;
             }
         }
     }

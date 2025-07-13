@@ -3,8 +3,11 @@ using R3;
 
 public class LaserModel
 {
-    public ReactiveProperty <int> ShotsLeft { get; private set; }
-    public ReactiveProperty<float> ShotsTimer { get; private set; }
+    private ReactiveProperty<int> _shotsLeft = new();
+    private ReactiveProperty<float> _shotsTimer = new();
+
+    public Observable<int> ShotsLeft => _shotsLeft.AsObservable();
+    public Observable<float> ShotsTimer => _shotsTimer.AsObservable();
 
     public float RecoveryTime { get; }
 
@@ -15,31 +18,31 @@ public class LaserModel
         _maxShots = gameStaticData.NumberOfLaserShots;
         RecoveryTime = gameStaticData.LaserShotRecoveryTime;
 
-        ShotsLeft = new();
-        ShotsTimer = new();
+        _shotsLeft = new();
+        _shotsTimer = new();
 
-        ShotsLeft.Value = _maxShots;
+        _shotsLeft.Value = _maxShots;
     }
 
     public bool TryFire()
     {
-        if (ShotsLeft.Value <= 0) 
+        if (_shotsLeft.Value <= 0)
             return false;
 
-        ShotsLeft.Value--;
+        _shotsLeft.Value--;
         return true;
     }
 
     public void UpdateTimer(float deltaTime)
     {
-        if (ShotsLeft.Value >= _maxShots) return;
+        if (_shotsLeft.Value >= _maxShots) return;
 
-        ShotsTimer.Value += deltaTime;
+        _shotsTimer.Value += deltaTime;
 
-        if (ShotsTimer.Value >= RecoveryTime)
+        if (_shotsTimer.Value >= RecoveryTime)
         {
-            ShotsTimer.Value = 0;
-            ShotsLeft.Value++;
+            _shotsTimer.Value = 0;
+            _shotsLeft.Value++;
         }
     }
 }
