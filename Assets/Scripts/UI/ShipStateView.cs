@@ -1,6 +1,5 @@
-using AsteroidsTest.Ship;
-using AsteroidsTest.SOScripts;
 using R3;
+using System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -9,25 +8,30 @@ namespace AsteroidsTest.UI
 {
     public class ShipStateView : MonoBehaviour
     {
-        [SerializeField] private GameStaticData _staticData;
-        [Space]
         [SerializeField] private TMP_Text _coordinateX;
         [SerializeField] private TMP_Text _coordinateY;
         [SerializeField] private TMP_Text _angle;
         [SerializeField] private TMP_Text _speed;
 
+        private IDisposable _positionXSub;
+        private IDisposable _positionYSub;
+        private IDisposable _angleSub;
+        private IDisposable _speedSub;
+
         private ShipStateViewModel _viewModel;
 
-
         [Inject]
-        public void Construct(ShipStateModel model)
+        public void Construct( ShipStateViewModel viewModel)
         {
-            _viewModel = new(model, _staticData);
+            _viewModel = viewModel;
+        }
 
-            _viewModel.PositionX.Subscribe(OnPositionXChanged);
-            _viewModel.PositionY.Subscribe(OnPositionYChanged);
-            _viewModel.NormalizeAngle.Subscribe(OnAngleChanged);
-            _viewModel.Speed.Subscribe(OnSpeedChanged);
+        private void OnEnable()
+        {
+            _positionXSub = _viewModel.PositionX.Subscribe(OnPositionXChanged);
+            _positionYSub = _viewModel.PositionY.Subscribe(OnPositionYChanged);
+            _angleSub = _viewModel.NormalizeAngle.Subscribe(OnAngleChanged);
+            _speedSub = _viewModel.Speed.Subscribe(OnSpeedChanged);
         }
 
         private void OnPositionXChanged(string x) =>
@@ -41,5 +45,13 @@ namespace AsteroidsTest.UI
 
         private void OnSpeedChanged(string speed) =>
             _speed.text = speed;
+
+        private void OnDisable()
+        {
+            _positionXSub?.Dispose();
+            _positionYSub?.Dispose();
+            _angleSub?.Dispose();
+            _speedSub?.Dispose();
+        }
     }
 }

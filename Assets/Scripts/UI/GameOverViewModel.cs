@@ -1,11 +1,15 @@
 ﻿using R3;
 using System;
+using Zenject;
 
 namespace AsteroidsTest.UI
 {
-    public class GameOverViewModel
+    public class GameOverViewModel : IInitializable, IDisposable
     {
         public ReactiveProperty<string> Score { get; private set; }
+
+        private IDisposable _gameOverSub;
+        private IDisposable _pointsSub;
 
         private GameOverModel _gameOverModel;
 
@@ -16,13 +20,12 @@ namespace AsteroidsTest.UI
         {
             Score = new();
             _gameOverModel = gameOverModel;
-
         }
 
-        public void InitState()
+        public void Initialize()
         {
-            _gameOverModel.IsGameOver.Subscribe(OnGameOverChanged);
-            _gameOverModel.Points.Subscribe(OnPointsChange);
+            _gameOverSub = _gameOverModel.IsGameOver.Subscribe(OnGameOverChanged);
+            _pointsSub = _gameOverModel.Points.Subscribe(OnPointsChange);
 
             OnGameOverChanged(_gameOverModel.IsGameOver.Value);
             OnPointsChange(_gameOverModel.Points.Value);
@@ -49,6 +52,12 @@ namespace AsteroidsTest.UI
             {
                 StartGame?.Invoke();
             }
+        }
+
+        public void Dispose()
+        {
+            _gameOverSub?.Dispose();
+            _pointsSub?.Dispose();
         }
     }
 }

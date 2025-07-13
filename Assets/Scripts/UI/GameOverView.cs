@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using R3;
 using Zenject;
+using System;
 
 namespace AsteroidsTest.UI
 {
@@ -11,18 +12,21 @@ namespace AsteroidsTest.UI
         [SerializeField] private GameObject _mainPanel;
         [SerializeField] private TMP_Text _points;
 
+        private IDisposable _scoreSub;
+
         private GameOverViewModel _gameOverViewModel;
 
         [Inject]
-        public void Construct(GameOverModel gameOverModel)
+        public void Construct(GameOverViewModel gameOverViewModel)
         {
-            _gameOverViewModel = new(gameOverModel);
+            _gameOverViewModel = gameOverViewModel;
+        }
 
+        private void OnEnable()
+        {
             _gameOverViewModel.GameOver += OnGameOver;
             _gameOverViewModel.StartGame += OnGameStarted;
-            _gameOverViewModel.Score.Subscribe(OnScoreChanged);
-
-            _gameOverViewModel.InitState();
+            _scoreSub = _gameOverViewModel.Score.Subscribe(OnScoreChanged);
         }
 
         public void NewGame()
@@ -50,6 +54,13 @@ namespace AsteroidsTest.UI
         {
             _gameOverPanel.SetActive(true);
             _mainPanel.SetActive(false);
+        }
+
+        private void OnDisable()
+        {
+            _gameOverViewModel.GameOver -= OnGameOver;
+            _gameOverViewModel.StartGame -= OnGameStarted;
+            _scoreSub?.Dispose();
         }
     }
 }

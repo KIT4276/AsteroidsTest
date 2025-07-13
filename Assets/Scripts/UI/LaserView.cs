@@ -1,5 +1,6 @@
 using AsteroidsTest.Weapon.Laser;
 using R3;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +13,21 @@ namespace AsteroidsTest.UI
         [SerializeField] private TMP_Text _laserShotsLeft;
         [SerializeField] private Image _laserRecovery;
 
+        private IDisposable _numberOfShotsSub;
+        private IDisposable _timerSub;
+
         private LaserViewModel _viewModel;
 
         [Inject]
-        public void Construct(LaserModel model)
+        public void Construct(LaserViewModel viewModel)
         {
-            _viewModel = new(model);
+            _viewModel = viewModel;
+        }
 
-            _viewModel.ShotsLeft.Subscribe(OnNumberOfShotsChange);
-            _viewModel.ShotsTimer.Subscribe(OnTimerChanged);
+        private void OnEnable()
+        {
+            _numberOfShotsSub = _viewModel.ShotsLeft.Subscribe(OnNumberOfShotsChange);
+            _timerSub = _viewModel.ShotsTimer.Subscribe(OnTimerChanged);
         }
 
         private void Start() => 
@@ -31,5 +38,11 @@ namespace AsteroidsTest.UI
 
         private void OnNumberOfShotsChange(string numberOfShotsLeft) => 
             _laserShotsLeft.text = numberOfShotsLeft;
+
+        private void OnDisable()
+        {
+            _numberOfShotsSub?.Dispose();
+            _timerSub?.Dispose();
+        }
     }
 }
