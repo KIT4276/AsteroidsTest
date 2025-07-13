@@ -6,8 +6,11 @@ namespace AsteroidsTest.Weapon.Laser
 {
     public class LaserViewModel : IInitializable, IDisposable
     {
-        public ReactiveProperty<string> ShotsLeft { get; private set; }
-        public ReactiveProperty<float> ShotsTimer { get; private set; }
+        private ReactiveProperty<string> _shotsLeft = new();
+        private ReactiveProperty<float> _shotsTimer = new();
+
+        public Observable<string> ShotsLeft => _shotsLeft.AsObservable();
+        public Observable<float> ShotsTimer => _shotsTimer.AsObservable();
 
         private IDisposable _shotsSub;
         private IDisposable _timerSub;
@@ -17,9 +20,6 @@ namespace AsteroidsTest.Weapon.Laser
         public LaserViewModel(LaserModel model)
         {
             _model = model;
-
-            ShotsLeft = new();
-            ShotsTimer = new();
         }
 
         public void Initialize()
@@ -29,10 +29,10 @@ namespace AsteroidsTest.Weapon.Laser
         }
 
         private void OnShotsChanged(int numberOfShotsLeft) =>
-            ShotsLeft.Value = numberOfShotsLeft.ToString("F0");
+            _shotsLeft.Value = numberOfShotsLeft.ToString("F0");
 
         private void OnTimerChanged(float timer) =>
-            ShotsTimer.Value = (timer / _model.RecoveryTime);
+            _shotsTimer.Value = (timer / _model.RecoveryTime);
 
         public void Dispose()
         {

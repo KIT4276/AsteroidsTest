@@ -17,10 +17,15 @@ MonoBehaviour:
   _ufoPrefab: {fileID: 4147509825606575589, guid: 4d6967d8e254888419786a643940f90a, type: 3}
   _bulletPrefab: {fileID: 6481154254085632278, guid: abfab34e82f9e1148a3b99ec4f92d2d5, type: 3}
   _spawnPosLimit: 18
-  _screenLimits: {x: 9, y: 5}
+  _screenLimits: {x: 8.9, y: 5}
   _spawnTimeAster: 1
   _startCountAster: 15
   _spawnTimeUFO: 4
   _fragmentsCount: 6
   _moveLimits: 35
   _bulletsMoveLimits: {x: 9.5, y: 6}
+  _laserShotRecoveryTime: 15
+  _numberOfLaserShots: 5
+  _shipStateViewMultiplier: 100
+  _gameScene: 1
+  _bootstrapScene: 0

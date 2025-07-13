@@ -1464,8 +1464,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _acceleration: 10
   _rigidbody: {fileID: 707749550}
-  _x_limits: 10.72
-  _y_limits: 4.73
+  _x_limits: 9
+  _y_limits: 5
   _indentation: 0.02
 --- !u!114 &707749555
 MonoBehaviour:
@@ -3010,7 +3010,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3ebd971de030547bd2734270010ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _staticData: {fileID: 11400000, guid: 0102f27407ef6924a8ee7c9dcd95eebb, type: 2}
   _coordinateX: {fileID: 529740061}
   _coordinateY: {fileID: 511037204}
   _angle: {fileID: 130354323}

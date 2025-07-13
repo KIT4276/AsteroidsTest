@@ -6,7 +6,9 @@ namespace AsteroidsTest.UI
 {
     public class GameOverViewModel : IInitializable, IDisposable
     {
-        public ReactiveProperty<string> Score { get; private set; }
+        private ReactiveProperty<string> _score = new();
+
+        public Observable<string> Score => _score.AsObservable();
 
         private IDisposable _gameOverSub;
         private IDisposable _pointsSub;
@@ -18,7 +20,6 @@ namespace AsteroidsTest.UI
 
         public GameOverViewModel(GameOverModel gameOverModel)
         {
-            Score = new();
             _gameOverModel = gameOverModel;
         }
 
@@ -36,7 +37,7 @@ namespace AsteroidsTest.UI
 
         private void OnPointsChange(int points)
         {
-            Score.Value = "SCORE: " + points;
+            _score.Value = "SCORE: " + points;
         }
 
         private void OnGameOverChanged(bool isGameOver)
