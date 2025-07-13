@@ -1,17 +1,35 @@
-using AsteroidsTest.SOScripts;
+using AsteroidsTest;
+using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader 
+namespace AsteroidsTest.Services
 {
-    private readonly GameStaticData _gameStaticData;
+    public class SceneLoader
+    {
+        private readonly ICoroutineRunner _coroutineRunner;
 
-    public SceneLoader(GameStaticData gameStaticData)
-    {
-        _gameStaticData = gameStaticData;
-    }
-    
-    public void LoadGameScene()
-    {
-        SceneManager.LoadScene(_gameStaticData.GameScene);
+        public SceneLoader(ICoroutineRunner coroutineRunner) =>
+            _coroutineRunner = coroutineRunner;
+
+        public void Load(string name, Action onLoaded = null) =>
+            _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
+
+        public IEnumerator LoadScene(string name, Action onLoaded = null)
+        {
+            if (SceneManager.GetActiveScene().name == name)
+            {
+                onLoaded?.Invoke();
+                yield break;
+            }
+
+            AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(name);
+
+            while (!waitNextScene.isDone)
+                yield return null;
+
+            onLoaded?.Invoke();
+        }
     }
 }

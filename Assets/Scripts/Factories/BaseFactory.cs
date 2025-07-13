@@ -2,7 +2,7 @@ using AsteroidsTest.SOScripts;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AsteroidsTest
+namespace AsteroidsTest.Factories
 {
     public abstract class BaseFactory 
     {
