@@ -3,6 +3,7 @@ using AsteroidsTest.Enemies.Asteroids.Fragment;
 using AsteroidsTest.Enemies.UFO;
 using AsteroidsTest.Input;
 using AsteroidsTest.Pause;
+using AsteroidsTest.Services;
 using AsteroidsTest.Ship;
 using AsteroidsTest.SOScripts;
 using AsteroidsTest.UI;

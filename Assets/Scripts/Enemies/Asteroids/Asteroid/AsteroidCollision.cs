@@ -1,4 +1,6 @@
 using AsteroidsTest.Enemies.Asteroids.Fragment;
+using AsteroidsTest.Factories;
+using AsteroidsTest.Services;
 using AsteroidsTest.SOScripts;
 
 namespace AsteroidsTest.Enemies.Asteroids.Asteroid

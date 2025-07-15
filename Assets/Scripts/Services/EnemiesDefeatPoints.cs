@@ -1,29 +1,27 @@
 using AsteroidsTest.Save;
+using AsteroidsTest.Save.Data;
 
 namespace AsteroidsTest.Services
 {
-    public class EnemiesDefeatPoints : ISaved
+    public class EnemiesDefeatPoints : ISavedProgress
     {
         public int CurrentPoints { get; private set; }
-
-        //public EnemiesDefeatPoints()
-        //{
-        //    CurrentPoints = 0;
-        //}
 
         public void OnEnemyDestroyed(int points)
         {
             CurrentPoints += points;
         }
 
-        public void Save(PlayerSaveData playerSaveData)
+        public void UpdateProgress(PlayerProgress progress)
         {
-            playerSaveData.Score = CurrentPoints;
+            progress.Score = CurrentPoints;
+           
         }
 
-        public void Load(PlayerSaveData playerSaveData)
+        public void LoadProgress(PlayerProgress progress)
         {
-            CurrentPoints = playerSaveData.Score;
+            CurrentPoints = progress.Score;
+            
         }
     }
 }

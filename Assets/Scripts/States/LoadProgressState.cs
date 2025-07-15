@@ -1,4 +1,6 @@
-﻿using AsteroidsTest.SOScripts;
+﻿using AsteroidsTest.Progress;
+using AsteroidsTest.Save;
+using AsteroidsTest.Save.Data;
 
 namespace AsteroidsTest.States
 {
@@ -7,24 +9,21 @@ namespace AsteroidsTest.States
         private const string Main = "GameScene";
 
         private readonly StateMachine _gameStateMachine;
-        private readonly IPersistantProgressService _progressService;
-        private readonly ISaveLoadService _saveLoadService;
-        private readonly GameStaticData _gameStaticData;
+        private readonly SaveLoadService _saveLoadService;
+        private readonly ProgressService _progressService;
 
-        public LoadProgressState(StateMachine gameStateMachine, IPersistantProgressService progressService,
-            ISaveLoadService saveLoadService, GameStaticData gameStaticData)
+        public LoadProgressState(StateMachine gameStateMachine, ProgressService progressService,
+            SaveLoadService saveLoadService)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
              _saveLoadService = saveLoadService;
-
-            _gameStaticData = gameStaticData;
         }
 
         public void Enter()
         {
             LoadProgressOrInitNew();
-            _gameStateMachine.Enter<LoadLevelState, string>(_progressService.Progress.WorldData.PositionOnLevel.Level);
+            _gameStateMachine.Enter<LoadLevelState, string>(Main);
         }
 
         public void Exit() { }
@@ -34,15 +33,7 @@ namespace AsteroidsTest.States
 
         private PlayerProgress NewProgress()
         {
-            var progress = new PlayerProgress(initialLevel: Main);
-
-            progress.PlayerState.MaxHP = _gameStaticData.MaxHP;
-            progress.PlayerStats.Damage = _gameStaticData.Damage;
-            progress.PlayerStats.DamageRadius = _gameStaticData.DamageRadius;
-
-            progress.PlayerState.ResetHP();
-
-            return progress;
+            return new PlayerProgress();
         }
     }
 }

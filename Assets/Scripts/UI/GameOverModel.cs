@@ -1,6 +1,7 @@
 ﻿using R3;
 using UnityEditor;
 using AsteroidsTest.Pause;
+using AsteroidsTest.Services;
 
 namespace AsteroidsTest.UI
 {
@@ -36,7 +37,8 @@ namespace AsteroidsTest.UI
         {
             _isGameOver.Value = false;
 
-            _sceneLoader.LoadGameScene();
+            //_sceneLoader.LoadGameScene();
+            //TODO LoadGameScene throw state machine
         }
 
         public void QuitGame()

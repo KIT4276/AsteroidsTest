@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 
-namespace AsteroidsTest.Save
+namespace AsteroidsTest.Save.Data
 {
     [Serializable]
-    public class PlayerSaveData
+    public class PlayerProgress
     {
         public int Score;
         public int LaserShots;

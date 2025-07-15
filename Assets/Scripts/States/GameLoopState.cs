@@ -4,9 +4,9 @@ namespace AsteroidsTest.States
 {
     public class GameLoopState : IState
     {
-        private const string NavMeshSurface = "NavMeshSurface";
-        public void Enter() =>
-            GameObject.FindWithTag(NavMeshSurface).GetComponent<NavMeshSurface>().enabled = true;
+        public void Enter()
+        {
+        }
 
         public void Exit() { }
     }

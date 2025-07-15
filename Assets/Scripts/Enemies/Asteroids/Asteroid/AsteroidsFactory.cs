@@ -1,5 +1,6 @@
 using AsteroidsTest.Enemies.Asteroids.Fragment;
 using AsteroidsTest.Pause;
+using AsteroidsTest.Services;
 using AsteroidsTest.SOScripts;
 using UnityEngine;
 
