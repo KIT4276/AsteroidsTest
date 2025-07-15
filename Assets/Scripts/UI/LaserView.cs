@@ -8,12 +8,12 @@ using Zenject;
 
 namespace AsteroidsTest.UI
 {
-    public class LaserView : MonoBehaviour
+    public class LaserView : MonoBehaviour, IInitializable
     {
         [SerializeField] private TMP_Text _laserShotsLeft;
         [SerializeField] private Image _laserRecovery;
 
-        private IDisposable _numberOfShotsSub;
+        private IDisposable _numberOfShotsSub ;
         private IDisposable _timerSub;
 
         private LaserViewModel _viewModel;
@@ -24,11 +24,16 @@ namespace AsteroidsTest.UI
             _viewModel = viewModel;
         }
 
-        private void OnEnable()
+
+        public void Initialize()
         {
             _numberOfShotsSub = _viewModel.ShotsLeft.Subscribe(OnNumberOfShotsChange);
             _timerSub = _viewModel.ShotsTimer.Subscribe(OnTimerChanged);
         }
+
+        //private void OnEnable()
+        //{
+        //}
 
         private void OnTimerChanged(float fill) => 
             _laserRecovery.fillAmount = fill;

@@ -6,7 +6,7 @@ using Zenject;
 
 namespace AsteroidsTest.UI
 {
-    public class ShipStateView : MonoBehaviour
+    public class ShipStateView : MonoBehaviour, IInitializable
     {
         [SerializeField] private TMP_Text _coordinateX;
         [SerializeField] private TMP_Text _coordinateY;
@@ -26,7 +26,7 @@ namespace AsteroidsTest.UI
             _viewModel = viewModel;
         }
 
-        private void OnEnable()
+        public void Initialize()
         {
             _positionXSub = _viewModel.PositionX.Subscribe(OnPositionXChanged);
             _positionYSub = _viewModel.PositionY.Subscribe(OnPositionYChanged);

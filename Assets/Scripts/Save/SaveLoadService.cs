@@ -1,5 +1,6 @@
 ﻿using AsteroidsTest.Progress;
 using AsteroidsTest.Save.Data;
+using UnityEngine;
 
 namespace AsteroidsTest.Save
 {
@@ -18,19 +19,23 @@ namespace AsteroidsTest.Save
 
         public void SaveProgress()
         {
-            //foreach (ISavedProgress progressWriter in _progressReadersHolder.ProgressWriters)
-            //    progressWriter.UpdateProgress(_progressService.Progress);
+            foreach (ISavedProgress progressWriter in _progressReadersHolder.ProgressWriters)
+                progressWriter.UpdateProgress(_progressService.Progress);
 
-            //PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
-
-            // TODO
+            string json = JsonUtility.ToJson(_progressService.Progress);
+            PlayerPrefs.SetString(ProgressKey, json);
+            PlayerPrefs.Save();
         }
 
         public PlayerProgress LoadProgress()
         {
-            return null; //PlayerPrefs.GetString(ProgressKey)?.ToDeserialized<PlayerProgress>();
+            string json = PlayerPrefs.GetString(ProgressKey);
+            PlayerProgress progress = JsonUtility.FromJson<PlayerProgress>(json);
 
-            // TODO
+            foreach(ISavedProgress progressReader in _progressReadersHolder.ProgressWriters)
+                progressReader.LoadProgress(_progressService.Progress);
+
+            return progress;
         }
     }
 }

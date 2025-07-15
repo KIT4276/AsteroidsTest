@@ -1,48 +1,62 @@
+using AsteroidsTest.Save.Data;
 using AsteroidsTest.SOScripts;
 using R3;
 
-public class LaserModel
+namespace AsteroidsTest.Weapon.Laser
 {
-    private ReactiveProperty<int> _shotsLeft = new();
-    private ReactiveProperty<float> _shotsTimer = new();
-
-    public Observable<int> ShotsLeft => _shotsLeft.AsObservable();
-    public Observable<float> ShotsTimer => _shotsTimer.AsObservable();
-
-    public float RecoveryTime { get; }
-
-    private int _maxShots;
-
-    public LaserModel(GameStaticData gameStaticData)
+    public class LaserModel: ISavedProgress
     {
-        _maxShots = gameStaticData.NumberOfLaserShots;
-        RecoveryTime = gameStaticData.LaserShotRecoveryTime;
+        private ReactiveProperty<int> _shotsLeft = new();
+        private ReactiveProperty<float> _shotsTimer = new();
 
-        _shotsLeft = new();
-        _shotsTimer = new();
+        public Observable<int> ShotsLeft => _shotsLeft.AsObservable();
+        public Observable<float> ShotsTimer => _shotsTimer.AsObservable();
 
-        _shotsLeft.Value = _maxShots;
-    }
+        public float RecoveryTime { get; }
 
-    public bool TryFire()
-    {
-        if (_shotsLeft.Value <= 0)
-            return false;
+        private int _maxShots;
 
-        _shotsLeft.Value--;
-        return true;
-    }
-
-    public void UpdateTimer(float deltaTime)
-    {
-        if (_shotsLeft.Value >= _maxShots) return;
-
-        _shotsTimer.Value += deltaTime;
-
-        if (_shotsTimer.Value >= RecoveryTime)
+        public LaserModel(GameStaticData gameStaticData)
         {
-            _shotsTimer.Value = 0;
-            _shotsLeft.Value++;
+            _maxShots = gameStaticData.NumberOfLaserShots;
+            RecoveryTime = gameStaticData.LaserShotRecoveryTime;
+
+            _shotsLeft = new();
+            _shotsTimer = new();
+
+            _shotsLeft.Value = _maxShots;
+        }
+
+        public bool TryFire()
+        {
+            if (_shotsLeft.Value <= 0)
+                return false;
+
+            _shotsLeft.Value--;
+            return true;
+        }
+
+        public void UpdateTimer(float deltaTime)
+        {
+            if (_shotsLeft.Value >= _maxShots) return;
+
+            _shotsTimer.Value += deltaTime;
+
+            if (_shotsTimer.Value >= RecoveryTime)
+            {
+                _shotsTimer.Value = 0;
+                _shotsLeft.Value++;
+            }
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            progress.LaserShots = _shotsLeft.Value;
+        }
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            _shotsLeft.Value = progress.LaserShots;
         }
     }
 }

@@ -17,7 +17,8 @@ namespace AsteroidsTest.Ship
 
         private void Update()
         {
-            _model.UpdateState(_rigidbody2D);
+            if (_model != null)
+                _model.UpdateState(_rigidbody2D);
         }
     }
 }

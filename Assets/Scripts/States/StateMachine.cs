@@ -1,6 +1,7 @@
 using AsteroidsTest.Factories;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AsteroidsTest.States
 {
@@ -55,7 +56,7 @@ namespace AsteroidsTest.States
 
             TState state = GetState<TState>();
             _activeState = state;
-
+            Debug.Log(state);
             return state;
         }
 

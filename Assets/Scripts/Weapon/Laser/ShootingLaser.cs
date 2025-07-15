@@ -31,7 +31,7 @@ namespace AsteroidsTest.Weapon.Laser
             {
                 RaycastHit2D[] hits = Physics2D
                     .CircleCastAll(_gunBarrel.position, _laserThickness, _gunBarrel.up, _distance, _layerMask);
-    
+
                 foreach (var hit in hits)
                 {
                     if (hit.collider != null && hit.collider.TryGetComponent<IDamageable>(out var damageable))
@@ -39,7 +39,7 @@ namespace AsteroidsTest.Weapon.Laser
                         damageable.TakeDamage();
                     }
                 }
-    
+
                 if (_shootingLaserRenderer != null)
                 {
                     StartCoroutine(_shootingLaserRenderer
@@ -48,10 +48,13 @@ namespace AsteroidsTest.Weapon.Laser
             }
         }
 
-        private void Update() => 
-            _laserModel.UpdateTimer(Time.deltaTime);
+        private void Update()
+        {
+            if (_laserModel != null)
+                _laserModel.UpdateTimer(Time.deltaTime);
+        }
 
-        private void OnDestroy() => 
+        private void OnDestroy() =>
             _inputHandler.LaserFireAction -= LaserFire;
     }
 }

@@ -6,7 +6,7 @@ using System;
 
 namespace AsteroidsTest.UI
 {
-    public class GameOverView : MonoBehaviour
+    public class GameOverView : MonoBehaviour, IInitializable
     {
         [SerializeField] private GameObject _gameOverPanel;
         [SerializeField] private GameObject _mainPanel;
@@ -22,7 +22,7 @@ namespace AsteroidsTest.UI
             _gameOverViewModel = gameOverViewModel;
         }
 
-        private void OnEnable()
+        public void Initialize()
         {
             _gameOverViewModel.GameOver += OnGameOver;
             _gameOverViewModel.StartGame += OnGameStarted;
