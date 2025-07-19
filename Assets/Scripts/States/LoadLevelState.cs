@@ -30,15 +30,13 @@ namespace AsteroidsTest.States
 
         private void InformProgressReaders()
         {
-            //foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
-            //    progressReader.LoadProgress(_progressService.Progress);
 
             //TODO
         }
 
         private void InitGameWorld()
         {
-            //How can I start spawning enemies from here?!
+            //TODO
         }
     }
 }

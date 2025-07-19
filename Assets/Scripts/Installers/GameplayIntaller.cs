@@ -9,10 +9,8 @@ using AsteroidsTest.SOScripts;
 using AsteroidsTest.UI;
 using AsteroidsTest.Weapon.Bullet;
 using AsteroidsTest.Weapon.Laser;
-using System;
 using UnityEngine;
 using Zenject;
-using Zenject.Asteroids;
 
 namespace AsteroidsTest.Installers
 {
