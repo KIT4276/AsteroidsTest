@@ -27,6 +27,8 @@ namespace AsteroidsTest.UI
             _gameOverViewModel.GameOver += OnGameOver;
             _gameOverViewModel.StartGame += OnGameStarted;
             _scoreSub = _gameOverViewModel.Score.Subscribe(OnScoreChanged);
+
+            OnGameStarted();
         }
 
         public void NewGame()

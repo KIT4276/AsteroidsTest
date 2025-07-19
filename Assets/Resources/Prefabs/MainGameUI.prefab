@@ -1679,6 +1679,7 @@ GameObject:
   - component: {fileID: 2841544830112698383}
   - component: {fileID: 6591615664529249524}
   - component: {fileID: 4221246208621881658}
+  - component: {fileID: -7870568409171995433}
   m_Layer: 5
   m_Name: MainGameUI
   m_TagString: Untagged
@@ -1815,6 +1816,18 @@ MonoBehaviour:
   _coordinateY: {fileID: 7151633215997914332}
   _angle: {fileID: 2790974081023706459}
   _speed: {fileID: 2373175096504523715}
+--- !u!114 &-7870568409171995433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184406392187567332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 641f870e7d5614e45b33321003ce18ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7301710519075777618
 GameObject:
   m_ObjectHideFlags: 0

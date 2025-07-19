@@ -7,13 +7,15 @@ using Zenject;
 
 namespace AsteroidsTest.Enemies.Asteroids
 {
-    public class BigEnemyFactory : BaseEnemyFactory, IInitializable, IPausable
+    public class BigEnemyFactory : BaseEnemyFactory, IInitializable, IPausable, ILateDisposable
     {
         protected ICoroutineRunner _coroutineRunner;
         protected float _spawnTime;
         protected float _spawnPosLimit;
         protected Vector2 _screenLimits;
         private Coroutine _spawnCoroutine;
+
+        private bool _canSpawn = false;
     
         protected BigEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
             ICoroutineRunner coroutineRunner, Transform spawnPoint, Pauser pauser)
@@ -28,8 +30,10 @@ namespace AsteroidsTest.Enemies.Asteroids
     
         public void Initialize()
         {
+            _canSpawn = true;
+           
             _pauser.Register(this);
-            StartSpawn();
+           // StartSpawn();
         }
     
         public void Pause()
@@ -47,7 +51,7 @@ namespace AsteroidsTest.Enemies.Asteroids
                 StartSpawn();
         }
     
-        protected virtual void StartSpawn()
+        public virtual void StartSpawn()
         {
             _spawnCoroutine = _coroutineRunner.StartCoroutine(SpawnRoutine());
         }
@@ -61,7 +65,7 @@ namespace AsteroidsTest.Enemies.Asteroids
     
         protected IEnumerator SpawnRoutine()
         {
-            while (true)
+            while (_canSpawn)
             {
                 Spawn(_spawnPoint);
                 yield return new WaitForSeconds(_spawnTime);
@@ -90,6 +94,11 @@ namespace AsteroidsTest.Enemies.Asteroids
             tr.position = new Vector2(x, y);
     
             return tr;
+        }
+
+        public void LateDispose()
+        {
+            _canSpawn = false;
         }
     }
 }

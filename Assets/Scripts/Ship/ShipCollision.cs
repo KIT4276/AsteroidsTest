@@ -14,7 +14,7 @@ namespace AsteroidsTest.Ship
         {
             _gameOverModel = gameOverModel;
         }
-    
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.TryGetComponent<BaseEnemyCollision>(out var enemy))

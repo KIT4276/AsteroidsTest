@@ -1,7 +1,7 @@
+using AsteroidsTest.Enemies;
 using AsteroidsTest.Enemies.Asteroids.Asteroid;
 using AsteroidsTest.Enemies.Asteroids.Fragment;
 using AsteroidsTest.Enemies.UFO;
-using AsteroidsTest.Input;
 using AsteroidsTest.Pause;
 using AsteroidsTest.Services;
 using AsteroidsTest.Ship;
@@ -12,6 +12,7 @@ using AsteroidsTest.Weapon.Laser;
 using System;
 using UnityEngine;
 using Zenject;
+using Zenject.Asteroids;
 
 namespace AsteroidsTest.Installers
 {
@@ -38,15 +39,25 @@ namespace AsteroidsTest.Installers
             InstallShip();
 
             InstallMainUI();
+
+            InstallBigEnemySpawner();
+        }
+
+        private void InstallBigEnemySpawner()
+        {
+            Container.BindInterfacesAndSelfTo<BigEnemySpawner>().
+                AsSingle().
+                NonLazy();
         }
 
         private void InstallMainUI()
         {
             var ui = Container.InstantiatePrefabForComponent<GameOverView>(_mainUIPrefab);
+           // var ui = Instantiate(_mainUIPrefab);
 
-            Container.Bind<GameOverView>().FromInstance(ui).AsSingle();
-            Container.Bind<ShipStateView>().FromInstance(ui.GetComponent<ShipStateView>()).AsSingle();
-            Container.Bind<LaserView>().FromInstance(ui.GetComponent<LaserView>()).AsSingle();
+            Container.BindInterfacesAndSelfTo<GameOverView>().FromInstance(ui.GetComponent <GameOverView>()).AsSingle();
+            Container.BindInterfacesAndSelfTo<ShipStateView>().FromInstance(ui.GetComponent<ShipStateView>()).AsSingle();
+            Container.BindInterfacesAndSelfTo<LaserView>().FromInstance(ui.GetComponent<LaserView>()).AsSingle();
         }
 
         private void InstallPause()
@@ -72,13 +83,12 @@ namespace AsteroidsTest.Installers
 
         private void InstallShip()
         {
-
-
             InstallModels();
             InstallViewModels();
 
             _ship = Container.InstantiatePrefabForComponent<ShipCollision>(_shipPrefab);
-            // GameObject ship = Instantiate(_shipPrefab, Vector3.zero, Quaternion.identity);
+           // _ship = Instantiate(_shipPrefab).GetComponent<ShipCollision>();
+
             Container.Bind<ShipCollision>().
                 FromInstance(_ship.GetComponent<ShipCollision>()).
                 AsSingle();
@@ -87,13 +97,17 @@ namespace AsteroidsTest.Installers
                 FromInstance(_ship.GetComponent<ShipStateUpdater>()).
                 AsSingle();
 
-            Container.Bind<ShootingLaser>().FromInstance(_ship.GetComponent<ShootingLaser>()).AsSingle();
-            Container.Bind<ShootingBullets>().FromInstance(_ship.GetComponent<ShootingBullets>()).AsSingle();
+            Container.Bind<ShootingLaser>().
+                FromInstance(_ship.GetComponent<ShootingLaser>()).
+                AsSingle();
+
+            Container.Bind<ShootingBullets>().
+                FromInstance(_ship.GetComponent<ShootingBullets>()).
+                AsSingle();
         }
 
         private void InstallViewModels()
         {
-
             Container.BindInterfacesAndSelfTo<LaserViewModel>().
                     AsSingle();
             Container.BindInterfacesAndSelfTo<ShipStateViewModel>().
@@ -121,22 +135,22 @@ namespace AsteroidsTest.Installers
                AsSingle();
         }
 
-
-
         private void InstallFactories()
         {
             InstallFragmentsFactory();
             InstallAsteroidsFactory();
             InstallUFOFactory();
             InstallBulletsFactory();
-
         }
 
         private void InstallUFOFactory()
         {
+            //var point = Container.InstantiatePrefabForComponent<EnemiesSpawnPoint>(_UFOSpawnPointPrefab);
+            var point = GameObject.Instantiate(_UFOSpawnPointPrefab);
+
             Container.BindInterfacesAndSelfTo<UFOFactory>().
                 AsSingle().
-                WithArguments(GameObject.Instantiate(_UFOSpawnPointPrefab.GetComponent<Transform>()));
+                WithArguments(point.GetComponent<Transform>());
         }
 
         private void InstallBulletsFactory()
@@ -153,9 +167,12 @@ namespace AsteroidsTest.Installers
 
         private void InstallAsteroidsFactory()
         {
+            //var point = Container.InstantiatePrefabForComponent<EnemiesSpawnPoint>(_astersSpawnPointPewfab);
+            var point = GameObject.Instantiate(_astersSpawnPointPewfab);
+
             Container.BindInterfacesAndSelfTo<AsteroidsFactory>().
                 AsSingle().
-                WithArguments(GameObject.Instantiate(_astersSpawnPointPewfab).GetComponent<Transform>());
+                WithArguments(point.GetComponent<Transform>());
         }
     }
 }

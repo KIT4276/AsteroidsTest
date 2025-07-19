@@ -39,6 +39,7 @@ namespace AsteroidsTest.Factories
             }
             else
             {
+               
                 _spawnedObject = Object.Instantiate(_prefab, spawnTransform.position, Quaternion.identity);
             }
             

@@ -24,7 +24,7 @@ namespace AsteroidsTest.Enemies.Asteroids.Asteroid
             _coroutineRunner = coroutineRunner;
         }
     
-        protected override void StartSpawn()
+        public override void StartSpawn()
         {
             for (int i = _count; i > 0; i--)
             {
