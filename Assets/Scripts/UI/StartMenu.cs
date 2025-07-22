@@ -1,20 +1,23 @@
 using System;
 using UnityEngine;
 
-public class StartMenu : MonoBehaviour
+namespace AsteroidsTest.UI
 {
-    public event Action OnStarted;
-
-    public void StartNewGame()
+    public class StartMenu : MonoBehaviour
     {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
+        public event Action OnStarted;
 
-        ContinueGame();
-    }
+        public void StartNewGame()
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
 
-    public void ContinueGame()
-    {
-        OnStarted?.Invoke();
+            ContinueGame();
+        }
+
+        public void ContinueGame()
+        {
+            OnStarted?.Invoke();
+        }
     }
 }

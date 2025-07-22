@@ -35,7 +35,13 @@ namespace AsteroidsTest.Enemies.Asteroids
             float randomAngle = Random.Range(0f, 360f);
             transform.Rotate(0f, 0f, randomAngle);
         }
-    
+
+        public void Pause() =>
+            _isMoving = false;
+
+        public void Resume() =>
+            _isMoving = true;
+
         private void FixedUpdate()
         {
             if (_isMoving && _isActive)
@@ -58,11 +64,5 @@ namespace AsteroidsTest.Enemies.Asteroids
                 _asteroidsFactory.Despawn(this.gameObject);
             }
         }
-
-        public void Pause() => 
-            _isMoving = false;
-
-        public void Resume() => 
-            _isMoving = true;
     }
 }

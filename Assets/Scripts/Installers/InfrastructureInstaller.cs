@@ -1,14 +1,9 @@
 using AsteroidsTest.Assets;
-using AsteroidsTest.Enemies.Asteroids.Asteroid;
-using AsteroidsTest.Enemies.Asteroids.Fragment;
-using AsteroidsTest.Enemies.UFO;
 using AsteroidsTest.Factories;
 using AsteroidsTest.Input;
 using AsteroidsTest.Progress;
 using AsteroidsTest.Save;
 using AsteroidsTest.Services;
-using AsteroidsTest.Weapon.Bullet;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;

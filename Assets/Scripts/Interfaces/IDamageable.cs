@@ -1,7 +1,7 @@
-public interface IDamageable
-{
-    void TakeDamage();
-}
 namespace AsteroidsTest
 {
+    public interface IDamageable
+    {
+        void TakeDamage();
+    }
 }

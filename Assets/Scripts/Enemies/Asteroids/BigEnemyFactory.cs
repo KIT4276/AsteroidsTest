@@ -15,7 +15,7 @@ namespace AsteroidsTest.Enemies.Asteroids
         protected float _spawnTime;
         protected float _spawnPosLimit;
         protected Vector2 _screenLimits;
-        private Coroutine _spawnCoroutine;
+        protected Coroutine _spawnCoroutine;
 
         private bool _canSpawn = false;
     

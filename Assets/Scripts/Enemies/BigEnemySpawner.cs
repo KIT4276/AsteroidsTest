@@ -6,7 +6,6 @@ namespace AsteroidsTest.Enemies
     {
         public event Action GameStarted;
 
-
         public void OnGameStarted()
         {
             GameStarted?.Invoke();

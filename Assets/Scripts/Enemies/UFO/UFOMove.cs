@@ -31,6 +31,12 @@ namespace AsteroidsTest.Enemies.UFO
         public void StopMove() => 
             _isActive = false;
 
+        public void Pause() =>
+            _isMoving = false;
+
+        public void Resume() =>
+            _isMoving = true;
+
         private void FixedUpdate()
         {
             if (_isMoving && _isActive && _target != null)
@@ -52,11 +58,5 @@ namespace AsteroidsTest.Enemies.UFO
                 _isActive = false;
             }
         }
-
-        public void Pause() => 
-            _isMoving = false;
-
-        public void Resume() => 
-            _isMoving = true;
     }
 }
