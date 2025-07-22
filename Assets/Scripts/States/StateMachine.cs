@@ -56,7 +56,7 @@ namespace AsteroidsTest.States
 
             TState state = GetState<TState>();
             _activeState = state;
-           // Debug.Log(state);
+            //Debug.Log(state);
             return state;
         }
 

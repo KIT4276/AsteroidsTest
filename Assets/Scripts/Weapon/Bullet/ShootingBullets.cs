@@ -10,26 +10,39 @@ namespace AsteroidsTest.Weapon.Bullet
 
         private BulletsFactory _bulletsFactory;
         private BaseInputHandler _inputHandler;
+        private bool _initialized = false;
 
         [Inject]
-        private void Initialize(BaseInputHandler inputHandler, BulletsFactory bulletsFactory)
+        private void Construct(BaseInputHandler inputHandler, BulletsFactory bulletsFactory)
         {
+            if (_initialized) return;
+
             _bulletsFactory = bulletsFactory;
             _inputHandler = inputHandler;
 
-            inputHandler.BulletFireAction += BulletFire;
+            if (_inputHandler != null)
+            {
+                _inputHandler.BulletFireAction += BulletFire;
+            }
+
+            _initialized = true;
         }
 
         private void BulletFire()
         {
-            if (_inputHandler != null)
-                _bulletsFactory.Spawn(_gunBarrel);
+            if (!_initialized || _gunBarrel == null) return;
+
+            _bulletsFactory?.Spawn(_gunBarrel);
         }
 
         private void OnDestroy()
         {
-            if (_inputHandler != null)
+            if (!_initialized) return;
+
+            if (_inputHandler != null && !ReferenceEquals(_inputHandler, null))
+            {
                 _inputHandler.BulletFireAction -= BulletFire;
+            }
         }
     }
 }

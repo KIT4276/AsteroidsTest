@@ -35,6 +35,7 @@ namespace AsteroidsTest.Installers
             InstallTargetDefeatPoints();
             InstallData();
             InstallFactories();
+
             InstallShip();
         }
 
@@ -71,24 +72,25 @@ namespace AsteroidsTest.Installers
             InstallModels();
             InstallViewModels();
 
-            _ship = Container.InstantiatePrefabForComponent<ShipCollision>(_shipPrefab);
-           // _ship = Instantiate(_shipPrefab).GetComponent<ShipCollision>();
+            Container.Bind<ShipCollision>()
+                .FromComponentInNewPrefab(_shipPrefab)
+                .AsSingle()
+                .NonLazy();
 
-            Container.Bind<ShipCollision>().
-                FromInstance(_ship.GetComponent<ShipCollision>()).
-                AsSingle();
+            Container.Bind<ShipStateUpdater>()
+                .FromComponentOnRoot()
+                .AsSingle()
+                .WhenInjectedInto<ShipCollision>(); 
 
-            Container.Bind<ShipStateUpdater>().
-                FromInstance(_ship.GetComponent<ShipStateUpdater>()).
-                AsSingle();
+            Container.Bind<ShootingLaser>()
+               .FromComponentOnRoot() 
+                .AsSingle()
+                .WhenInjectedInto<ShipCollision>();
 
-            Container.Bind<ShootingLaser>().
-                FromInstance(_ship.GetComponent<ShootingLaser>()).
-                AsSingle();
-
-            Container.Bind<ShootingBullets>().
-                FromInstance(_ship.GetComponent<ShootingBullets>()).
-                AsSingle();
+            Container.Bind<ShootingBullets>()
+                .FromComponentOnRoot() 
+                .AsSingle()
+                .WhenInjectedInto<ShipCollision>();
         }
 
         private void InstallViewModels()

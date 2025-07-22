@@ -16,6 +16,11 @@ namespace AsteroidsTest.Factories
         {
             _staticData = staticData;
         }
+
+        public void Restart()
+        {
+            _pool.Clear();
+        }
     
         public virtual void Despawn(GameObject despawnedObject)
         {

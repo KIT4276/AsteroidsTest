@@ -10,7 +10,7 @@ namespace AsteroidsTest.Ship
         private GameOverModel _gameOverModel;
     
         [Inject]
-        private void PseudoConstruct(GameOverModel gameOverModel)
+        private void Construct(GameOverModel gameOverModel)
         {
             _gameOverModel = gameOverModel;
         }

@@ -1,13 +1,14 @@
 using AsteroidsTest.Pause;
 using AsteroidsTest.Services;
 using AsteroidsTest.SOScripts;
+using System;
 using System.Collections;
 using UnityEngine;
 using Zenject;
 
 namespace AsteroidsTest.Enemies.Asteroids
 {
-    public class BigEnemyFactory : BaseEnemyFactory, IInitializable, IPausable, ILateDisposable
+    public class BigEnemyFactory : BaseEnemyFactory, IInitializable, IPausable, IDisposable
     {
         protected ICoroutineRunner _coroutineRunner;
         protected BigEnemySpawner _bigEnemySpawner;
@@ -36,7 +37,6 @@ namespace AsteroidsTest.Enemies.Asteroids
            
             _pauser.Register(this);
             _bigEnemySpawner.GameStarted += StartSpawn;
-           // StartSpawn();
         }
 
         public void Pause()
@@ -76,7 +76,7 @@ namespace AsteroidsTest.Enemies.Asteroids
         }
 
         protected float GenRandom() =>
-            Random.Range(-_spawnPosLimit, _spawnPosLimit);
+            UnityEngine.Random.Range(-_spawnPosLimit, _spawnPosLimit);
 
         protected override Transform GetSpawnPoint(Transform spawnPoint)
         {
@@ -99,9 +99,10 @@ namespace AsteroidsTest.Enemies.Asteroids
             return tr;
         }
 
-        public void LateDispose()
+        public void Dispose()
         {
             _canSpawn = false;
+            _bigEnemySpawner.GameStarted -= StartSpawn;
         }
     }
 }

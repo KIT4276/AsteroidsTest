@@ -21,6 +21,7 @@ namespace AsteroidsTest.Weapon.Bullet
     
         protected override void InitializeSpawnedObject(GameObject spawnedObject)
         {
+            if (spawnedObject == null) return;
             spawnedObject.SetActive(true);
             spawnedObject.GetComponent<ProjectileMove>().Initialize(GetSpawnPoint(_gunBarrel), this, _staticData);
             spawnedObject.GetComponent<BulletCollision>().Initialize(this);
