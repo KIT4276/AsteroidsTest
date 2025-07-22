@@ -61,7 +61,8 @@ namespace AsteroidsTest.Installers
         private void InstallInput()
         {
             Container.Bind<PlayerInput>().
-                FromComponentInNewPrefab(_playerInputPrefab).AsSingle();
+                FromComponentInNewPrefab(_playerInputPrefab).
+                AsSingle();
 
             Container.BindInterfacesAndSelfTo<BaseInputHandler>().
                 AsSingle();

@@ -1,12 +1,11 @@
 using TMPro;
 using UnityEngine;
 using R3;
-using Zenject;
 using System;
 
 namespace AsteroidsTest.UI
 {
-    public class GameOverView : MonoBehaviour, IInitializable
+    public class GameOverView : MonoBehaviour
     {
         [SerializeField] private GameObject _gameOverPanel;
         [SerializeField] private GameObject _mainPanel;
@@ -16,14 +15,10 @@ namespace AsteroidsTest.UI
 
         private GameOverViewModel _gameOverViewModel;
 
-        [Inject]
-        public void Construct(GameOverViewModel gameOverViewModel)
+        public void Initialize(GameOverViewModel gameOverViewModel)
         {
             _gameOverViewModel = gameOverViewModel;
-        }
 
-        public void Initialize()
-        {
             _gameOverViewModel.GameOver += OnGameOver;
             _gameOverViewModel.StartGame += OnGameStarted;
             _scoreSub = _gameOverViewModel.Score.Subscribe(OnScoreChanged);

@@ -10,6 +10,7 @@ namespace AsteroidsTest.Enemies.Asteroids
     public class BigEnemyFactory : BaseEnemyFactory, IInitializable, IPausable, ILateDisposable
     {
         protected ICoroutineRunner _coroutineRunner;
+        protected BigEnemySpawner _bigEnemySpawner;
         protected float _spawnTime;
         protected float _spawnPosLimit;
         protected Vector2 _screenLimits;
@@ -18,13 +19,14 @@ namespace AsteroidsTest.Enemies.Asteroids
         private bool _canSpawn = false;
     
         protected BigEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
-            ICoroutineRunner coroutineRunner, Transform spawnPoint, Pauser pauser)
+            ICoroutineRunner coroutineRunner, Transform spawnPoint, Pauser pauser, BigEnemySpawner bigEnemySpawner)
             : base(staticData, defeatPointsData, targetDefeatPoints, pauser)
         {
             _spawnPosLimit = staticData.SpawnPosLimit;
             _screenLimits = staticData.ScreenLimits;
     
             _coroutineRunner = coroutineRunner;
+            _bigEnemySpawner = bigEnemySpawner;
             _spawnPoint = spawnPoint;
         }
     
@@ -33,9 +35,10 @@ namespace AsteroidsTest.Enemies.Asteroids
             _canSpawn = true;
            
             _pauser.Register(this);
+            _bigEnemySpawner.GameStarted += StartSpawn;
            // StartSpawn();
         }
-    
+
         public void Pause()
         {
             if (_spawnCoroutine != null)

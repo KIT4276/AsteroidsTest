@@ -29,16 +29,13 @@ namespace AsteroidsTest.Installers
         public override void InstallBindings()
         {
             InstallPause();
+            InstallBigEnemySpawner();
 
             InstallGameOver();
             InstallTargetDefeatPoints();
             InstallData();
             InstallFactories();
             InstallShip();
-
-            InstallMainUI();
-
-            InstallBigEnemySpawner();
         }
 
         private void InstallBigEnemySpawner()
@@ -46,16 +43,6 @@ namespace AsteroidsTest.Installers
             Container.BindInterfacesAndSelfTo<BigEnemySpawner>().
                 AsSingle().
                 NonLazy();
-        }
-
-        private void InstallMainUI()
-        {
-            var ui = Container.InstantiatePrefabForComponent<GameOverView>(_mainUIPrefab);
-           // var ui = Instantiate(_mainUIPrefab);
-
-            Container.BindInterfacesAndSelfTo<GameOverView>().FromInstance(ui.GetComponent <GameOverView>()).AsSingle();
-            Container.BindInterfacesAndSelfTo<ShipStateView>().FromInstance(ui.GetComponent<ShipStateView>()).AsSingle();
-            Container.BindInterfacesAndSelfTo<LaserView>().FromInstance(ui.GetComponent<LaserView>()).AsSingle();
         }
 
         private void InstallPause()

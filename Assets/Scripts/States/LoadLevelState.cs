@@ -1,4 +1,5 @@
-﻿using AsteroidsTest.Services;
+﻿using AsteroidsTest.Factories;
+using AsteroidsTest.Services;
 
 namespace AsteroidsTest.States
 {
@@ -6,11 +7,13 @@ namespace AsteroidsTest.States
     {
         private readonly StateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
+        private readonly UIFactory _uIFactory;
 
-        public LoadLevelState(StateMachine stateMachine, SceneLoader sceneLoader)
+        public LoadLevelState(StateMachine stateMachine, SceneLoader sceneLoader, UIFactory uIFactory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
+            _uIFactory = uIFactory;
         }
 
         public void Enter(string sceneName)
@@ -36,7 +39,7 @@ namespace AsteroidsTest.States
 
         private void InitGameWorld()
         {
-            //TODO
+            _uIFactory.CreateMainUI();
         }
     }
 }

@@ -1828,6 +1828,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641f870e7d5614e45b33321003ce18ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _laserView: {fileID: 2841544830112698383}
+  _shipStateView: {fileID: 4221246208621881658}
+  _gameOverView: {fileID: 6591615664529249524}
 --- !u!1 &7301710519075777618
 GameObject:
   m_ObjectHideFlags: 0

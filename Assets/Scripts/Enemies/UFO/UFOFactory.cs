@@ -12,8 +12,8 @@ namespace AsteroidsTest.Enemies.UFO
         private ShipCollision _shipCollision;
     
         public UFOFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints, 
-            ICoroutineRunner coroutineRunner, Transform spawnPoint, ShipCollision shipCollision, Pauser pauser) :
-            base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint, pauser)
+            ICoroutineRunner coroutineRunner, Transform spawnPoint, ShipCollision shipCollision, Pauser pauser, BigEnemySpawner bigEnemySpawner) :
+            base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint, pauser, bigEnemySpawner)
         {
             _prefab = staticData.UFOPrefab;
             _spawnTime = staticData.UFOSpawnTime;

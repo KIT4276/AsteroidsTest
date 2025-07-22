@@ -4,11 +4,10 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace AsteroidsTest.UI
 {
-    public class LaserView : MonoBehaviour, IInitializable
+    public class LaserView : MonoBehaviour
     {
         [SerializeField] private TMP_Text _laserShotsLeft;
         [SerializeField] private Image _laserRecovery;
@@ -18,14 +17,9 @@ namespace AsteroidsTest.UI
 
         private LaserViewModel _viewModel;
 
-        [Inject]
-        public void Construct(LaserViewModel viewModel)
+        public void Initialize(LaserViewModel viewModel)
         {
             _viewModel = viewModel;
-        }
-
-        public void Initialize()
-        {
             _numberOfShotsSub = _viewModel.ShotsLeft.Subscribe(OnNumberOfShotsChange);
             _timerSub = _viewModel.ShotsTimer.Subscribe(OnTimerChanged);
         }

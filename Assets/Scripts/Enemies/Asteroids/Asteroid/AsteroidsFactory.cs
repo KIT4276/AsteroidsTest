@@ -11,8 +11,8 @@ namespace AsteroidsTest.Enemies.Asteroids.Asteroid
         private FragmentsFactory _fragmentsFactory;
     
         public AsteroidsFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
-            Transform spawnPoint, FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner, Pauser pauser)
-            : base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint, pauser)
+            Transform spawnPoint, FragmentsFactory fragmentsFactory, ICoroutineRunner coroutineRunner, Pauser pauser, BigEnemySpawner bigEnemySpawner)
+            : base(staticData, defeatPointsData, targetDefeatPoints, coroutineRunner, spawnPoint, pauser, bigEnemySpawner)
         {
             _prefab = staticData.AsteroidPrefab;
     

@@ -2,11 +2,10 @@ using R3;
 using System;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace AsteroidsTest.UI
 {
-    public class ShipStateView : MonoBehaviour, IInitializable
+    public class ShipStateView : MonoBehaviour
     {
         [SerializeField] private TMP_Text _coordinateX;
         [SerializeField] private TMP_Text _coordinateY;
@@ -20,14 +19,9 @@ namespace AsteroidsTest.UI
 
         private ShipStateViewModel _viewModel;
 
-        [Inject]
-        public void Construct( ShipStateViewModel viewModel)
+        public void Initialize( ShipStateViewModel viewModel)
         {
             _viewModel = viewModel;
-        }
-
-        public void Initialize()
-        {
             _positionXSub = _viewModel.PositionX.Subscribe(OnPositionXChanged);
             _positionYSub = _viewModel.PositionY.Subscribe(OnPositionYChanged);
             _angleSub = _viewModel.NormalizeAngle.Subscribe(OnAngleChanged);
