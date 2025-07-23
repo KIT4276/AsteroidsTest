@@ -6,7 +6,7 @@ namespace AsteroidsTest.Progress
     {
         public PlayerProgress Progress { get; set; }
 
-        public ProgressService()
-            => Progress = new PlayerProgress(); 
+        //public ProgressService()
+        //    => Progress = new PlayerProgress(); 
     }
 }

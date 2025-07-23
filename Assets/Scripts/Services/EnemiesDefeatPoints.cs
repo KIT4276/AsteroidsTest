@@ -11,7 +11,7 @@ namespace AsteroidsTest.Services
         public void OnEnemyDestroyed(int points)
         {
             CurrentPoints += points;
-            Debug.Log("CurrentPoints " + CurrentPoints);
+            //Debug.Log("CurrentPoints " + CurrentPoints);
         }
 
         public void UpdateProgress(PlayerProgress progress)
