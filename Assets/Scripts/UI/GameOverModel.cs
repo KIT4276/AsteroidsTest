@@ -3,6 +3,7 @@ using UnityEditor;
 using AsteroidsTest.Pause;
 using AsteroidsTest.Services;
 using AsteroidsTest.States;
+using System;
 
 namespace AsteroidsTest.UI
 {
@@ -10,13 +11,18 @@ namespace AsteroidsTest.UI
     {
         private ReactiveProperty<int> _points = new();
         private ReactiveProperty<bool> _isGameOver = new();
+       // private ReactiveProperty<bool> _isGameStoped = new();
 
         public Observable<int> Points => _points.AsObservable();
         public Observable<bool> IsGameOver => _isGameOver.AsObservable();
+        //public Observable<bool> IsGameStoped => _isGameStoped.AsObservable();
 
         private readonly Pauser _pauser;
         private readonly EnemiesDefeatPoints _enemiesDefeatPoints;
         private readonly StateMachine _stateMachine;
+
+        public event Action GameStoprd;
+        public event Action GameResume;
 
         public GameOverModel(Pauser pauser, EnemiesDefeatPoints enemiesDefeatPoints,  StateMachine  stateMachine)
         {
@@ -24,13 +30,30 @@ namespace AsteroidsTest.UI
             _enemiesDefeatPoints = enemiesDefeatPoints;
 
             _isGameOver.Value = false;
+            //_isGameStoped.Value = false;
             _stateMachine = stateMachine;
+        }
+
+
+        public void StopGame()
+        {
+            _pauser.Pause();
+            _stateMachine.Enter<SaveProgressState>();
+            _points.Value = _enemiesDefeatPoints.CurrentPoints;
+
+            GameStoprd?.Invoke();
+        }
+
+        public void ContinueGame()
+        {
+            _pauser.Resume();
+            GameResume?.Invoke();
         }
 
         public void GameOver()
         {
             _pauser.Pause();
-            _stateMachine.Enter<SaveProgressState>();
+            //_stateMachine.Enter<SaveProgressState>();
             _isGameOver.Value = true;
             _points.Value = _enemiesDefeatPoints.CurrentPoints;
         }
@@ -49,5 +72,6 @@ namespace AsteroidsTest.UI
             Application.Quit();
 #endif
         }
+
     }
 }

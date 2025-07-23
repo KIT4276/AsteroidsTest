@@ -10,6 +10,7 @@ namespace AsteroidsTest.UI
         [SerializeField] private GameObject _gameOverPanel;
         [SerializeField] private GameObject _mainPanel;
         [SerializeField] private TMP_Text _points;
+        [SerializeField] private GameObject _stopGamePanel;
 
         private IDisposable _scoreSub;
 
@@ -22,8 +23,33 @@ namespace AsteroidsTest.UI
             _gameOverViewModel.GameOver += OnGameOver;
             _gameOverViewModel.StartGame += OnGameStarted;
             _scoreSub = _gameOverViewModel.Score.Subscribe(OnScoreChanged);
+            _gameOverViewModel.GameStoprd += OnGameStoped;
 
             OnGameStarted();
+        }
+
+        private void Update()
+        {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+            {
+                StopGame();
+            }
+        }
+
+        private void OnGameStoped()
+        {
+            _gameOverPanel.SetActive(true);
+            _stopGamePanel.SetActive(true);
+        }
+
+        private void StopGame()
+        {
+            _gameOverViewModel.StopGame();
+        }
+
+        public void ContinueGame()
+        {
+            _gameOverViewModel.ContinueGame();
         }
 
         public void NewGame()
@@ -45,6 +71,7 @@ namespace AsteroidsTest.UI
         {
             _mainPanel.SetActive(true);
             _gameOverPanel.SetActive(false);
+            _stopGamePanel.SetActive(false);
         }
 
         private void OnGameOver()
@@ -58,6 +85,7 @@ namespace AsteroidsTest.UI
             _gameOverViewModel.GameOver -= OnGameOver;
             _gameOverViewModel.StartGame -= OnGameStarted;
             _scoreSub?.Dispose();
+            _gameOverViewModel.GameStoprd -= OnGameStoped;
         }
     }
 }

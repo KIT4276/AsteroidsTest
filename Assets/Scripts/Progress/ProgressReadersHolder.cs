@@ -23,7 +23,7 @@ namespace AsteroidsTest.Progress
 
         public void Register(ISavedProgressReader progressReader)
         {
-            Debug.Log("Register " + progressReader);
+            //Debug.Log("Register " + progressReader);
             if (progressReader is ISavedProgress progressWriter)
                 ProgressWriters.Add(progressWriter);
 

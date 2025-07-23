@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AsteroidsTest.Pause
 {
@@ -9,7 +11,6 @@ namespace AsteroidsTest.Pause
     
         public void Register(IPausable pausable)
         {
-    
             if (!_pausables.Contains(pausable))
             {
                 _pausables.Add(pausable);
@@ -27,10 +28,10 @@ namespace AsteroidsTest.Pause
             if (!_isPaused)
             {
                 _isPaused = true;
-    
-                foreach (var pausable in _pausables)
+                for (int i = 0; i < _pausables.Count; i++)
+                //foreach (var pausable in _pausables)
                 {
-                    pausable.Pause();
+                    _pausables[i].Pause();
                 }
             }
         }
@@ -40,17 +41,19 @@ namespace AsteroidsTest.Pause
             if (_isPaused)
             {
                 _isPaused = false;
-                foreach (var pausable in _pausables)
+
+                for(int i = 0;  i < _pausables.Count; i++) 
+               // foreach (var pausable in _pausables)
                 {
-                    pausable.Resume();
+                    _pausables[i].Resume();
                 }
             }
         }
     
-        public void Reset()
-        {
-            _pausables.Clear();
-            _isPaused = false;
-        }
+        //public void Reset()
+        //{
+        //    _pausables.Clear();
+        //    _isPaused = false;
+        //}
     }
 }

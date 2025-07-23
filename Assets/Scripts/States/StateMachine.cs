@@ -32,8 +32,6 @@ namespace AsteroidsTest.States
                 .CreateState<LoadLevelState>(),
                 [typeof(GameLoopState)] = _stateFactory
                 .CreateState<GameLoopState>(),
-                [typeof(GameOverState)] = _stateFactory
-               .CreateState <GameOverState>(),
                 [typeof(SaveProgressState)] = _stateFactory
                .CreateState<SaveProgressState>()
             };

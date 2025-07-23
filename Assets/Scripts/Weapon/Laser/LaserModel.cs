@@ -1,14 +1,15 @@
+using AsteroidsTest.Pause;
 using AsteroidsTest.Save.Data;
 using AsteroidsTest.SOScripts;
 using R3;
+using UnityEngine;
 
 namespace AsteroidsTest.Weapon.Laser
 {
-    public class LaserModel: ISavedProgress
+    public class LaserModel: ISavedProgress, IPausable
     {
         private ReactiveProperty<int> _shotsRemaining = new();
         private ReactiveProperty<float> _shotsTimer = new();
-
 
         //public int LaserShots = 0;
 
@@ -18,17 +19,26 @@ namespace AsteroidsTest.Weapon.Laser
         public float RecoveryTime { get; }
 
         private int _maxShots;
+        private bool _isPause;
 
-        public LaserModel(GameStaticData gameStaticData)
+        public LaserModel(GameStaticData gameStaticData, Pauser pauser)
         {
             _maxShots = gameStaticData.NumberOfLaserShots;
             RecoveryTime = gameStaticData.LaserShotRecoveryTime;
 
             _shotsRemaining = new();
             _shotsTimer = new();
-
+            _isPause = false;
             _shotsRemaining.Value = _maxShots;
+
+            pauser.Register(this);
         }
+
+        public void Pause() => 
+            _isPause = true;
+
+        public void Resume() => 
+            _isPause = false;
 
         public bool TryFire()
         {
@@ -41,7 +51,7 @@ namespace AsteroidsTest.Weapon.Laser
 
         public void UpdateTimer(float deltaTime)
         {
-            if (_shotsRemaining.Value >= _maxShots) return;
+            if (_shotsRemaining.Value >= _maxShots || _isPause) return;
 
             _shotsTimer.Value += deltaTime;
 
