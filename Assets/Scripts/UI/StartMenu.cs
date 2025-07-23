@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEngine;
 
 namespace AsteroidsTest.UI
@@ -9,8 +10,7 @@ namespace AsteroidsTest.UI
 
         public void StartNewGame()
         {
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
+            ClearProgress();
 
             ContinueGame();
         }
@@ -18,6 +18,18 @@ namespace AsteroidsTest.UI
         public void ContinueGame()
         {
             OnStarted?.Invoke();
+        }
+
+        private void ClearProgress()
+        {
+            string savePath = Path.Combine(Application.persistentDataPath, "player_progress.json");
+            string backupPath = savePath + ".bak";
+
+            if (File.Exists(savePath))
+                File.Delete(savePath);
+
+            if (File.Exists(backupPath))
+                File.Delete(backupPath);
         }
     }
 }
