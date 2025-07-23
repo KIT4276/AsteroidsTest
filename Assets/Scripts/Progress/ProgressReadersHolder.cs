@@ -9,9 +9,13 @@ namespace AsteroidsTest.Progress
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
-        //TODO find all ProgressWatchers
+        public void ClearAll()
+        {
+            ProgressReaders.Clear();
+            ProgressWriters.Clear();
+        }
 
-        private void RegisterProgressWatchers(GameObject gameObject)
+        public void RegisterProgressWatchers(GameObject gameObject)
         {
             foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
                 Register(progressReader);

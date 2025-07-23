@@ -1,6 +1,8 @@
 using AsteroidsTest.Enemies.Asteroids.Asteroid;
 using AsteroidsTest.Enemies.UFO;
 using AsteroidsTest.Factories;
+using AsteroidsTest.Progress;
+using AsteroidsTest.Save.Data;
 using AsteroidsTest.Services;
 using AsteroidsTest.Weapon.Bullet;
 
@@ -16,8 +18,10 @@ namespace AsteroidsTest.States
         private readonly BulletsFactory _bulletsFactory;
         private readonly AsteroidsFactory _asteroidsFactory;
         private readonly UFOFactory _uFOFactory;
+        private readonly ProgressReadersHolder _progressReadersHolder;
 
-        public BootstrapState(StateMachine stateMachine, SceneLoader sceneLoader,
+
+        public BootstrapState(StateMachine stateMachine, SceneLoader sceneLoader, ProgressReadersHolder progressReadersHolder,
             UIFactory uiFactory, BulletsFactory bulletsFactory, AsteroidsFactory asteroidsFactory, UFOFactory uFOFactory)
         {
             _stateMachine = stateMachine;
@@ -26,11 +30,13 @@ namespace AsteroidsTest.States
             _bulletsFactory = bulletsFactory;
             _asteroidsFactory = asteroidsFactory;
             _uFOFactory = uFOFactory;
+            _progressReadersHolder = progressReadersHolder;
         }
 
         public void Enter()
         {
             RestartFactories();
+            _progressReadersHolder.ClearAll();
             _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
         }
 

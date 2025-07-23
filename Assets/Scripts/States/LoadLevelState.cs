@@ -1,4 +1,6 @@
 ﻿using AsteroidsTest.Factories;
+using AsteroidsTest.Progress;
+using AsteroidsTest.Save.Data;
 using AsteroidsTest.Services;
 
 namespace AsteroidsTest.States
@@ -9,7 +11,7 @@ namespace AsteroidsTest.States
         private readonly SceneLoader _sceneLoader;
         private readonly UIFactory _uIFactory;
 
-        public LoadLevelState(StateMachine stateMachine, SceneLoader sceneLoader, UIFactory uIFactory)
+        public LoadLevelState(StateMachine stateMachine, SceneLoader sceneLoader, UIFactory uIFactory, ProgressReadersHolder progressReadersHolder)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
@@ -40,6 +42,8 @@ namespace AsteroidsTest.States
         private void InitGameWorld()
         {
             _uIFactory.CreateMainUI();
+
+           
         }
     }
 }

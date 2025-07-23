@@ -13,6 +13,7 @@ namespace AsteroidsTest.Installers
             Container.Bind<LoadLevelState>().AsSingle();
             Container.Bind<GameLoopState>().AsSingle();
             Container.Bind<GameOverState>().AsSingle();
+            Container.Bind<SaveProgressState>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<StateMachine>().AsSingle();
         }

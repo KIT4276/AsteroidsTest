@@ -63,7 +63,7 @@ namespace AsteroidsTest.Installers
 
         private void InstallTargetDefeatPoints()
         {
-            Container.Bind<EnemiesDefeatPoints>().
+            Container.BindInterfacesAndSelfTo<EnemiesDefeatPoints>().
                 AsSingle();
         }
 

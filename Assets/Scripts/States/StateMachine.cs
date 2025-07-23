@@ -2,6 +2,7 @@ using AsteroidsTest.Factories;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.LightTransport;
 
 namespace AsteroidsTest.States
 {
@@ -32,7 +33,9 @@ namespace AsteroidsTest.States
                 [typeof(GameLoopState)] = _stateFactory
                 .CreateState<GameLoopState>(),
                 [typeof(GameOverState)] = _stateFactory
-               .CreateState <GameOverState>()
+               .CreateState <GameOverState>(),
+                [typeof(SaveProgressState)] = _stateFactory
+               .CreateState<SaveProgressState>()
             };
             Enter<BootstrapState>();
             _isInited = true;

@@ -30,6 +30,7 @@ namespace AsteroidsTest.UI
         public void GameOver()
         {
             _pauser.Pause();
+            _stateMachine.Enter<SaveProgressState>();
             _isGameOver.Value = true;
             _points.Value = _enemiesDefeatPoints.CurrentPoints;
         }
