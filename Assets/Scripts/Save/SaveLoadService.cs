@@ -11,34 +11,32 @@ namespace AsteroidsTest.Save
         private readonly ProgressService _progressService;
         private readonly ProgressReadersHolder _progressReadersHolder;
         private readonly string _saveFilePath;
+        private readonly string _backupFilePath;
 
         public SaveLoadService(ProgressService progressService, ProgressReadersHolder progressReadersHolder)
         {
             _progressService = progressService;
             _progressReadersHolder = progressReadersHolder;
             _saveFilePath = Path.Combine(Application.persistentDataPath, "player_progress.json");
+            _backupFilePath = _saveFilePath + ".bak";
 
-            Debug.Log("Save file path: " + _saveFilePath);
+            //Debug.Log("Save file path: " + _saveFilePath);
         }
 
         public void SaveProgress()
         {
             try
             {
-                //Debug.Log("[Save] Starting save process...");
-
                 foreach (ISavedProgress progressWriter in _progressReadersHolder.ProgressWriters)
                 {
                     progressWriter.UpdateProgress(_progressService.Progress);
                 }
 
                 string json = JsonUtility.ToJson(_progressService.Progress, prettyPrint: true);
-                //Debug.Log("[Save] JSON data: " + json);
 
                 CreateBackup();
 
                 File.WriteAllText(_saveFilePath, json);
-                //Debug.Log($"[Save] Progress successfully saved to: " + _saveFilePath);
             }
             catch (Exception e)
             {
@@ -49,22 +47,17 @@ namespace AsteroidsTest.Save
 
         public PlayerProgress LoadProgress()
         {
+            if (!File.Exists(_saveFilePath))
+            {
+                return CreateNewProgress();
+            }
+
             try
             {
-                if (!File.Exists(_saveFilePath))
-                {
-                    //Debug.Log("[Load] No save file found. Creating new progress.");
-                    return CreateNewProgress();
-                }
-
-                string json = File.ReadAllText(_saveFilePath);
-                //Debug.Log($"[Load] Loaded JSON: " + json);
-
-                PlayerProgress progress = JsonUtility.FromJson<PlayerProgress>(json);
+                PlayerProgress progress = LoadFromFile(_saveFilePath);
 
                 if (progress == null)
                 {
-                    // Debug.LogWarning("[Load] Invalid save data. Trying backup...");
                     return TryLoadBackup() ?? CreateNewProgress();
                 }
 
@@ -75,7 +68,6 @@ namespace AsteroidsTest.Save
                     reader.LoadProgress(progress);
                 }
 
-                //Debug.Log($"[Load] Success! Score: " + progress.Score + " LaserShots: " + progress.LaserShotsRemaining);
                 return progress;
             }
             catch (Exception e)
@@ -85,16 +77,28 @@ namespace AsteroidsTest.Save
             }
         }
 
+        private PlayerProgress LoadFromFile(string path)
+        {
+            try
+            {
+                string json = File.ReadAllText(path);
+                return JsonUtility.FromJson<PlayerProgress>(json);
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[LoadFromFile] Failed to read or deserialize from {path}: {e.Message}");
+                return null;
+            }
+        }
+
         private PlayerProgress CreateNewProgress()
         {
-            PlayerProgress newProgress = new PlayerProgress();
+            var newProgress = new PlayerProgress();
             _progressService.Progress = newProgress;
-            //Debug.Log("[System] Created new progress");
             return newProgress;
         }
 
         #region Backup System
-        private string GetBackupPath() => _saveFilePath + ".bak";
 
         private void CreateBackup()
         {
@@ -102,8 +106,7 @@ namespace AsteroidsTest.Save
             {
                 if (File.Exists(_saveFilePath))
                 {
-                    File.Copy(_saveFilePath, GetBackupPath(), overwrite: true);
-                   // Debug.Log("[Backup] Created backup copy");
+                    File.Copy(_saveFilePath, _backupFilePath, overwrite: true);
                 }
             }
             catch (Exception e)
@@ -114,36 +117,27 @@ namespace AsteroidsTest.Save
 
         private PlayerProgress TryLoadBackup()
         {
-            string backupPath = GetBackupPath();
-            if (!File.Exists(backupPath)) return null;
+            if (!File.Exists(_backupFilePath))
+                return null;
+
+            return LoadFromFile(_backupFilePath);
+        }
+
+        private void RestoreFromBackup()
+        {
+            if (!File.Exists(_backupFilePath))
+                return;
 
             try
             {
-                string json = File.ReadAllText(backupPath);
-                var progress = JsonUtility.FromJson<PlayerProgress>(json);
-                if (progress != null)
-                {
-                   // Debug.Log("[Backup] Successfully restored from backup");
-                    return progress;
-                }
+                File.Copy(_backupFilePath, _saveFilePath, overwrite: true);
             }
             catch (Exception e)
             {
                 Debug.LogWarning($"[Backup] Failed to restore from backup: {e.Message}");
             }
-
-            return null;
         }
 
-        private void RestoreFromBackup()
-        {
-            var backup = TryLoadBackup();
-            if (backup != null)
-            {
-                File.Copy(GetBackupPath(), _saveFilePath, overwrite: true);
-                //Debug.Log("[Backup] Restored main file from backup");
-            }
-        }
         #endregion
     }
 }
