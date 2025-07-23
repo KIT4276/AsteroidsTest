@@ -6,10 +6,13 @@ namespace AsteroidsTest.Weapon.Laser
 {
     public class LaserModel: ISavedProgress
     {
-        private ReactiveProperty<int> _shotsLeft = new();
+        private ReactiveProperty<int> _shotsRemaining = new();
         private ReactiveProperty<float> _shotsTimer = new();
 
-        public Observable<int> ShotsLeft => _shotsLeft.AsObservable();
+
+        //public int LaserShots = 0;
+
+        public Observable<int> ShotsLeft => _shotsRemaining.AsObservable();
         public Observable<float> ShotsTimer => _shotsTimer.AsObservable();
 
         public float RecoveryTime { get; }
@@ -21,42 +24,42 @@ namespace AsteroidsTest.Weapon.Laser
             _maxShots = gameStaticData.NumberOfLaserShots;
             RecoveryTime = gameStaticData.LaserShotRecoveryTime;
 
-            _shotsLeft = new();
+            _shotsRemaining = new();
             _shotsTimer = new();
 
-            _shotsLeft.Value = _maxShots;
+            _shotsRemaining.Value = _maxShots;
         }
 
         public bool TryFire()
         {
-            if (_shotsLeft.Value <= 0)
+            if (_shotsRemaining.Value <= 0)
                 return false;
 
-            _shotsLeft.Value--;
+            _shotsRemaining.Value--;
             return true;
         }
 
         public void UpdateTimer(float deltaTime)
         {
-            if (_shotsLeft.Value >= _maxShots) return;
+            if (_shotsRemaining.Value >= _maxShots) return;
 
             _shotsTimer.Value += deltaTime;
 
             if (_shotsTimer.Value >= RecoveryTime)
             {
                 _shotsTimer.Value = 0;
-                _shotsLeft.Value++;
+                _shotsRemaining.Value++;
             }
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.LaserShots = _shotsLeft.Value;
+            progress.LaserShotsRemaining = _shotsRemaining.Value;
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
-            _shotsLeft.Value = progress.LaserShots;
+            _shotsRemaining.Value = progress.LaserShotsRemaining;
         }
     }
 }

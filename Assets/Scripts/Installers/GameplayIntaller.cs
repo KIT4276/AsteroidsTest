@@ -103,7 +103,7 @@ namespace AsteroidsTest.Installers
 
         private void InstallModels()
         {
-            Container.Bind<LaserModel>().
+            Container.BindInterfacesAndSelfTo<LaserModel>().
                 AsSingle();
 
             Container.Bind<ShipStateModel>().

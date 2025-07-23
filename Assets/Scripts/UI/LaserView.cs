@@ -9,7 +9,7 @@ namespace AsteroidsTest.UI
 {
     public class LaserView : MonoBehaviour
     {
-        [SerializeField] private TMP_Text _laserShotsLeft;
+        [SerializeField] private TMP_Text _laserShotsRemaining;
         [SerializeField] private Image _laserRecovery;
 
         private IDisposable _numberOfShotsSub;
@@ -28,7 +28,7 @@ namespace AsteroidsTest.UI
             _laserRecovery.fillAmount = fill;
 
         private void OnNumberOfShotsChange(string numberOfShotsLeft) =>
-            _laserShotsLeft.text = numberOfShotsLeft;
+            _laserShotsRemaining.text = numberOfShotsLeft;
 
         private void OnDisable()
         {

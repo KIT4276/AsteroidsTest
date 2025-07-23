@@ -6,6 +6,7 @@ namespace AsteroidsTest.Save.Data
     public class PlayerProgress
     {
         public int Score;
-        public int LaserShots;
+        public int LaserShotsRemaining;
+        public int LaserShotsRight;
     }
 }
