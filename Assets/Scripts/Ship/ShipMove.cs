@@ -24,18 +24,6 @@ namespace AsteroidsTest.Ship
             _inputHandler = inputHandler;
         }
 
-        //void Start()
-        //{
-        //    DebugPlayerPrefs();
-        //}
-
-        //public void DebugPlayerPrefs()
-        //{
-        //    string savedJson = PlayerPrefs.GetString(ProgressKey, "NOT_FOUND");
-        //    Debug.Log($"Key '{ProgressKey}' exists: {savedJson != "NOT_FOUND"}");
-        //    Debug.Log($"Value: {savedJson}");
-        //}
-
         private void Update()
         {
             if (_inputHandler != null)

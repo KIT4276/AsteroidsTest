@@ -13,7 +13,6 @@ namespace AsteroidsTest.UI
 
         private IDisposable _gameOverSub;
         private IDisposable _pointsSub;
-       // private IDisposable _stopGameSub;
 
         private GameOverModel _gameOverModel;
 
@@ -30,14 +29,8 @@ namespace AsteroidsTest.UI
         {
             _gameOverSub = _gameOverModel.IsGameOver.Subscribe(OnGameOverChanged);
             _pointsSub = _gameOverModel.Points.Subscribe(OnPointsChange);
-            //_stopGameSub = _gameOverModel.IsGameStoped.Subscribe(OnGameStoped);
             _gameOverModel.GameStoprd += OnGameStoped;
             _gameOverModel.GameResume += OnGameContinued;
-        }
-
-        private void OnGameContinued()
-        {
-            StartGame?.Invoke();
         }
 
         public void StopGame()
@@ -50,17 +43,29 @@ namespace AsteroidsTest.UI
             _gameOverModel.ContinueGame();
         }
 
-        private void OnGameStoped()
-        {
-            GameStoprd?.Invoke();
-        }
-
         public void StartNewGame() =>
             _gameOverModel.StartNewGame();
 
         public void QuitGame() =>
             _gameOverModel.QuitGame();
 
+        public void Dispose()
+        {
+            _gameOverSub?.Dispose();
+            _pointsSub?.Dispose();
+            _gameOverModel.GameStoprd -= OnGameStoped;
+        }
+
+
+        private void OnGameContinued()
+        {
+            StartGame?.Invoke();
+        }
+
+        private void OnGameStoped()
+        {
+            GameStoprd?.Invoke();
+        }
         private void OnPointsChange(int points)
         {
             _score.Value = "SCORE: " + points;
@@ -77,13 +82,5 @@ namespace AsteroidsTest.UI
                 StartGame?.Invoke();
             }
         }
-
-        public void Dispose()
-        {
-            _gameOverSub?.Dispose();
-            _pointsSub?.Dispose();
-            _gameOverModel.GameStoprd -= OnGameStoped;
-        }
-
     }
 }

@@ -24,9 +24,6 @@ namespace AsteroidsTest.Weapon.Bullet
             _positionLimits = gameStaticData.BulletsMoveLimits;
         }
 
-        public void StopMove() =>
-            _isActive = false;
-
         private void FixedUpdate()
         {
             if (_isActive)
@@ -36,10 +33,14 @@ namespace AsteroidsTest.Weapon.Bullet
             }
         }
 
-        private void Move()
-        {
-            _rigidbody.linearVelocity = transform.up * _moveSpeed;
-        }
+        public void StopMove() =>
+            _isActive = false;
+
+        public void Pause() => 
+            _isActive = false;
+
+        public void Resume() => 
+            _isActive = true;
 
         protected void CheckPosition()
         {
@@ -50,10 +51,9 @@ namespace AsteroidsTest.Weapon.Bullet
             }
         }
 
-        public void Pause() => 
-            _isActive = false;
-
-        public void Resume() => 
-            _isActive = true;
+        private void Move()
+        {
+            _rigidbody.linearVelocity = transform.up * _moveSpeed;
+        }
     }
 }

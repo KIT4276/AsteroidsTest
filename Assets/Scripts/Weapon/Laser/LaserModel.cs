@@ -2,7 +2,6 @@ using AsteroidsTest.Pause;
 using AsteroidsTest.Save.Data;
 using AsteroidsTest.SOScripts;
 using R3;
-using UnityEngine;
 
 namespace AsteroidsTest.Weapon.Laser
 {
@@ -10,8 +9,6 @@ namespace AsteroidsTest.Weapon.Laser
     {
         private ReactiveProperty<int> _shotsRemaining = new();
         private ReactiveProperty<float> _shotsTimer = new();
-
-        //public int LaserShots = 0;
 
         public Observable<int> ShotsLeft => _shotsRemaining.AsObservable();
         public Observable<float> ShotsTimer => _shotsTimer.AsObservable();

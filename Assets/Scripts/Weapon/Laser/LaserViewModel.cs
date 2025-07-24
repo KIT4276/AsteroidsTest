@@ -28,16 +28,16 @@ namespace AsteroidsTest.Weapon.Laser
             _timerSub = _model.ShotsTimer.Subscribe(OnTimerChanged);
         }
 
-        private void OnShotsChanged(int numberOfShotsLeft) =>
-            _shotsRemaining.Value = numberOfShotsLeft.ToString("F0");
-
-        private void OnTimerChanged(float timer) =>
-            _shotsTimer.Value = (timer / _model.RecoveryTime);
-
         public void Dispose()
         {
             _shotsSub?.Dispose();
             _timerSub?.Dispose();
         }
+
+        private void OnShotsChanged(int numberOfShotsLeft) =>
+            _shotsRemaining.Value = numberOfShotsLeft.ToString("F0");
+
+        private void OnTimerChanged(float timer) =>
+            _shotsTimer.Value = (timer / _model.RecoveryTime);
     }
 }

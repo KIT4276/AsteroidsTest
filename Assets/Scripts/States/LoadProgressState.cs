@@ -1,8 +1,6 @@
 ﻿using AsteroidsTest.Progress;
 using AsteroidsTest.Save;
 using AsteroidsTest.Save.Data;
-using System;
-using UnityEngine;
 
 namespace AsteroidsTest.States
 {
@@ -42,12 +40,6 @@ namespace AsteroidsTest.States
         }
 
         private void LoadProgressOrInitNew() =>
-            _progressService.Progress = _saveLoadService.LoadProgress();// ?? NewProgress();
-
-        private PlayerProgress NewProgress()
-        {
-            Debug.Log("NewProgress");
-            return new PlayerProgress();
-        }
+            _progressService.Progress = _saveLoadService.LoadProgress();
     }
 }

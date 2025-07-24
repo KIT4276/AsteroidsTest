@@ -11,15 +11,13 @@ namespace AsteroidsTest.UI
     {
         private ReactiveProperty<int> _points = new();
         private ReactiveProperty<bool> _isGameOver = new();
-       // private ReactiveProperty<bool> _isGameStoped = new();
-
-        public Observable<int> Points => _points.AsObservable();
-        public Observable<bool> IsGameOver => _isGameOver.AsObservable();
-        //public Observable<bool> IsGameStoped => _isGameStoped.AsObservable();
 
         private readonly Pauser _pauser;
         private readonly EnemiesDefeatPoints _enemiesDefeatPoints;
         private readonly StateMachine _stateMachine;
+
+        public Observable<int> Points => _points.AsObservable();
+        public Observable<bool> IsGameOver => _isGameOver.AsObservable();
 
         public event Action GameStoprd;
         public event Action GameResume;
@@ -30,7 +28,6 @@ namespace AsteroidsTest.UI
             _enemiesDefeatPoints = enemiesDefeatPoints;
 
             _isGameOver.Value = false;
-            //_isGameStoped.Value = false;
             _stateMachine = stateMachine;
         }
 
@@ -53,7 +50,6 @@ namespace AsteroidsTest.UI
         public void GameOver()
         {
             _pauser.Pause();
-            //_stateMachine.Enter<SaveProgressState>();
             _isGameOver.Value = true;
             _points.Value = _enemiesDefeatPoints.CurrentPoints;
         }
@@ -72,6 +68,5 @@ namespace AsteroidsTest.UI
             Application.Quit();
 #endif
         }
-
     }
 }

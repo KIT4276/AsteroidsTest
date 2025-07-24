@@ -36,17 +36,6 @@ namespace AsteroidsTest.UI
             }
         }
 
-        private void OnGameStoped()
-        {
-            _gameOverPanel.SetActive(true);
-            _stopGamePanel.SetActive(true);
-        }
-
-        private void StopGame()
-        {
-            _gameOverViewModel.StopGame();
-        }
-
         public void ContinueGame()
         {
             _gameOverViewModel.ContinueGame();
@@ -60,6 +49,17 @@ namespace AsteroidsTest.UI
         public void Quit()
         {
             _gameOverViewModel.QuitGame();
+        }
+
+        private void OnGameStoped()
+        {
+            _gameOverPanel.SetActive(true);
+            _stopGamePanel.SetActive(true);
+        }
+
+        private void StopGame()
+        {
+            _gameOverViewModel.StopGame();
         }
 
         private void OnScoreChanged(string score)

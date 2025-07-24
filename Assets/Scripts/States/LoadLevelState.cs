@@ -1,6 +1,5 @@
 ﻿using AsteroidsTest.Factories;
 using AsteroidsTest.Progress;
-using AsteroidsTest.Save.Data;
 using AsteroidsTest.Services;
 
 namespace AsteroidsTest.States
@@ -27,23 +26,9 @@ namespace AsteroidsTest.States
 
         private void OnLoaded()
         {
-            InitGameWorld();
-            InformProgressReaders();
-
-            _stateMachine.Enter<GameLoopState>();
-        }
-
-        private void InformProgressReaders()
-        {
-
-            //TODO
-        }
-
-        private void InitGameWorld()
-        {
             _uIFactory.CreateMainUI();
 
-           
+            _stateMachine.Enter<GameLoopState>();
         }
     }
 }

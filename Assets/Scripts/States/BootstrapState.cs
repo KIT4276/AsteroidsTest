@@ -2,7 +2,6 @@ using AsteroidsTest.Enemies.Asteroids.Asteroid;
 using AsteroidsTest.Enemies.UFO;
 using AsteroidsTest.Factories;
 using AsteroidsTest.Progress;
-using AsteroidsTest.Save.Data;
 using AsteroidsTest.Services;
 using AsteroidsTest.Weapon.Bullet;
 
@@ -39,6 +38,8 @@ namespace AsteroidsTest.States
             _progressReadersHolder.ClearAll();
             _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
         }
+        
+        public void Exit() { }
 
         private void RestartFactories()
         {
@@ -47,12 +48,8 @@ namespace AsteroidsTest.States
             _uFOFactory.Restart();
         }
 
-        public void Exit() { }
-
-        private void EnterLoadLevel()
-        {
+        private void EnterLoadLevel() => 
             InstallStartMenu();
-        }
 
         private void InstallStartMenu() =>
             _uiFactory.CreateStartMenu().OnStarted += ContinueLoad;

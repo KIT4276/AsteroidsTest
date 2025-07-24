@@ -13,6 +13,9 @@ namespace AsteroidsTest.UI
         private ReactiveProperty<string> _normalizeAngle = new();
         private ReactiveProperty<string> _speed = new();
 
+        private ShipStateModel _model;
+        private float _multiplier;
+
         public Observable<string> PositionX => _positionX.AsObservable();
         public Observable<string> PositionY => _positionY.AsObservable();
         public Observable<string> NormalizeAngle => _normalizeAngle.AsObservable();
@@ -22,9 +25,6 @@ namespace AsteroidsTest.UI
         private IDisposable _subY;
         private IDisposable _subAngle;
         private IDisposable _subSpeed;
-
-        private ShipStateModel _model;
-        private float _multiplier;
 
         public ShipStateViewModel(ShipStateModel model, GameStaticData gameStaticData)
         {
@@ -45,6 +45,14 @@ namespace AsteroidsTest.UI
             _subSpeed = _model.Speed.Subscribe(OnSpeedChanged);
         }
 
+        public void Dispose()
+        {
+            _subX?.Dispose();
+            _subY?.Dispose();
+            _subAngle?.Dispose();
+            _subSpeed?.Dispose();
+        }
+
         private void OnPositionXChanged(float x) =>
             _positionX.Value = (x * _multiplier).ToString("F0");
 
@@ -56,13 +64,5 @@ namespace AsteroidsTest.UI
 
         private void OnSpeedChanged(float speed) =>
             _speed.Value = (speed * _multiplier).ToString("F0");
-
-        public void Dispose()
-        {
-            _subX?.Dispose();
-            _subY?.Dispose();
-            _subAngle?.Dispose();
-            _subSpeed?.Dispose();
-        }
     }
 }
