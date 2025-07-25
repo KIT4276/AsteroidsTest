@@ -27,6 +27,12 @@ namespace AsteroidsTest.Enemies.Asteroids
         public override void Spawn(Transform spawnTransform) => 
             base.Spawn(spawnTransform);
 
+        public override void Despawn(GameObject despawnedObject)
+        {
+            despawnedObject.GetComponent<PausableRegistrator>().Disable(_pauser);
+            base.Despawn(despawnedObject);
+        }
+
         protected override Transform GetSpawnPoint(Transform transform) =>
             transform;
 

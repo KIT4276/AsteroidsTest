@@ -8,7 +8,7 @@ namespace AsteroidsTest.Pause
     {
         private readonly List<IPausable> _pausables = new();
         private bool _isPaused;
-    
+
         public void Register(IPausable pausable)
         {
             if (!_pausables.Contains(pausable))
@@ -16,13 +16,13 @@ namespace AsteroidsTest.Pause
                 _pausables.Add(pausable);
             }
         }
-    
+
         public void Unregister(IPausable pausable)
         {
-            _pausables.Remove(pausable);
-    
+            if (_pausables.Contains(pausable))
+                _pausables.Remove(pausable);
         }
-    
+
         public void Pause()
         {
             if (!_isPaused)
@@ -35,21 +35,21 @@ namespace AsteroidsTest.Pause
                 }
             }
         }
-    
+
         public void Resume()
         {
             if (_isPaused)
             {
                 _isPaused = false;
 
-                for(int i = 0;  i < _pausables.Count; i++) 
-               // foreach (var pausable in _pausables)
+                for (int i = 0; i < _pausables.Count; i++)
+                // foreach (var pausable in _pausables)
                 {
                     _pausables[i].Resume();
                 }
             }
         }
-    
+
         //public void Reset()
         //{
         //    _pausables.Clear();

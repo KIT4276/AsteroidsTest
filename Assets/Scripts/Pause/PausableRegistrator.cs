@@ -14,5 +14,16 @@ namespace AsteroidsTest.Pause
                 //}
             }
         }
+
+        public void Disable(Pauser pauser)
+        {
+            foreach (var pausable in GetComponentsInChildren<IPausable>())
+            {
+                //if( monoBeh is IPausable pausable)
+                //{
+                pauser.Unregister(pausable);
+                //}
+            }
+        }
     }
 }
