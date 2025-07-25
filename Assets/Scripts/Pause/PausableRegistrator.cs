@@ -6,12 +6,9 @@ namespace AsteroidsTest.Pause
     {
         public void Initialize(Pauser pauser)
         {
-            foreach( var pausable in GetComponentsInChildren<IPausable>() )
+            foreach (var pausable in GetComponentsInChildren<IPausable>())
             {
-                //if( monoBeh is IPausable pausable)
-                //{
-                    pauser.Register(pausable);
-                //}
+                pauser.Register(pausable);
             }
         }
 
@@ -19,10 +16,7 @@ namespace AsteroidsTest.Pause
         {
             foreach (var pausable in GetComponentsInChildren<IPausable>())
             {
-                //if( monoBeh is IPausable pausable)
-                //{
                 pauser.Unregister(pausable);
-                //}
             }
         }
     }

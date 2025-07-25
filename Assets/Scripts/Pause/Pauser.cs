@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AsteroidsTest.Pause
 {
@@ -29,7 +27,6 @@ namespace AsteroidsTest.Pause
             {
                 _isPaused = true;
                 for (int i = 0; i < _pausables.Count; i++)
-                //foreach (var pausable in _pausables)
                 {
                     _pausables[i].Pause();
                 }
@@ -43,17 +40,10 @@ namespace AsteroidsTest.Pause
                 _isPaused = false;
 
                 for (int i = 0; i < _pausables.Count; i++)
-                // foreach (var pausable in _pausables)
                 {
                     _pausables[i].Resume();
                 }
             }
         }
-
-        //public void Reset()
-        //{
-        //    _pausables.Clear();
-        //    _isPaused = false;
-        //}
     }
 }

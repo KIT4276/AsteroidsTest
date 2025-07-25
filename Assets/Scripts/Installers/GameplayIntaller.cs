@@ -22,9 +22,6 @@ namespace AsteroidsTest.Installers
         [SerializeField] private GameObject _astersSpawnPointPewfab;
 
         [SerializeField] private GameObject _shipPrefab;
-        [SerializeField] private GameObject _mainUIPrefab;
-
-        private ShipCollision _ship;
 
         public override void InstallBindings()
         {
@@ -132,7 +129,6 @@ namespace AsteroidsTest.Installers
 
         private void InstallUFOFactory()
         {
-            //var point = Container.InstantiatePrefabForComponent<EnemiesSpawnPoint>(_UFOSpawnPointPrefab);
             var point = GameObject.Instantiate(_UFOSpawnPointPrefab);
 
             Container.BindInterfacesAndSelfTo<UFOFactory>().
@@ -154,7 +150,6 @@ namespace AsteroidsTest.Installers
 
         private void InstallAsteroidsFactory()
         {
-            //var point = Container.InstantiatePrefabForComponent<EnemiesSpawnPoint>(_astersSpawnPointPewfab);
             var point = GameObject.Instantiate(_astersSpawnPointPewfab);
 
             Container.BindInterfacesAndSelfTo<AsteroidsFactory>().
