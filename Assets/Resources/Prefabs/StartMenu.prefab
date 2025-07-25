@@ -116,6 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff7f7cfce56b19942ad0822d64d2bb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startNewGameButton: {fileID: 2681071168174734944}
+  _continueGameButton: {fileID: 3897168779240357530}
 --- !u!1 &2324259208787928385
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,19 +376,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7541485914087651318}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5539907400265725197}
-        m_TargetAssemblyTypeName: AsteroidsTest.UI.StartMenu, Assembly-CSharp
-        m_MethodName: ContinueGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6420874204769749664
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,19 +497,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1229102724973688878}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5539907400265725197}
-        m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
-        m_MethodName: StartNewGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7003960603379936024
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,11 +2,16 @@ using TMPro;
 using UnityEngine;
 using R3;
 using System;
+using UnityEngine.UI;
 
 namespace AsteroidsTest.UI
 {
     public class GameOverView : MonoBehaviour
     {
+        [SerializeField] private Button _continueGameButton;
+        [SerializeField] private Button _newGameButton;
+        [SerializeField] private Button _quitButton;
+        [Space]
         [SerializeField] private GameObject _gameOverPanel;
         [SerializeField] private GameObject _mainPanel;
         [SerializeField] private TMP_Text _points;
@@ -26,6 +31,13 @@ namespace AsteroidsTest.UI
             _gameOverViewModel.GameStoprd += OnGameStoped;
 
             OnGameStarted();
+        }
+
+        private void Awake()
+        {
+            _continueGameButton.onClick.AddListener(ContinueGame);
+            _newGameButton.onClick.AddListener(NewGame);
+            _quitButton.onClick.AddListener(Quit);
         }
 
         private void Update()

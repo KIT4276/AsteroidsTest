@@ -13,8 +13,6 @@ namespace AsteroidsTest.Ship
         [SerializeField] private float _y_limits;
         [SerializeField] private float _indentation = 1;
 
-        private const string ProgressKey = "Progress";
-
         private BaseInputHandler _inputHandler;
         private float _currentInput;
     
@@ -23,6 +21,13 @@ namespace AsteroidsTest.Ship
         {
             _inputHandler = inputHandler;
         }
+
+        //{
+        // TODO on start game, including when we restart the game : 
+
+        //     transform.localPosition = Vector3.zero;
+        //     transform.localRotation = Quaternion.identity;
+        // }
 
         private void Update()
         {

@@ -1,21 +1,31 @@
 using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AsteroidsTest.UI
 {
     public class StartMenu : MonoBehaviour
     {
+        [SerializeField] private Button _startNewGameButton;
+        [SerializeField] private Button _continueGameButton;
+
         public event Action OnStarted;
 
-        public void StartNewGame()
+        private void Awake()
+        {
+            _startNewGameButton.onClick.AddListener(StartNewGame);
+            _continueGameButton.onClick.AddListener(ContinueGame);
+        }
+
+        private void StartNewGame()
         {
             ClearProgress();
 
             ContinueGame();
         }
 
-        public void ContinueGame()
+        private void ContinueGame()
         {
             OnStarted?.Invoke();
         }

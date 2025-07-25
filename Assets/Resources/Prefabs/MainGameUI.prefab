@@ -332,19 +332,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1960806803910280329}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6591615664529249524}
-        m_TargetAssemblyTypeName: AsteroidsTest.UI.GameOverView, Assembly-CSharp
-        m_MethodName: NewGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &903606021276005020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,19 +1908,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3099233259211001183}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6591615664529249524}
-        m_TargetAssemblyTypeName: AsteroidsTest.UI.GameOverView, Assembly-CSharp
-        m_MethodName: ContinueGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6882884278946631661
 GameObject:
   m_ObjectHideFlags: 0
@@ -2280,6 +2256,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a680dd6ce59414faad505bb2fcfaca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _continueGameButton: {fileID: 3805101199834662909}
+  _newGameButton: {fileID: 8463491073153708700}
+  _quitButton: {fileID: 8348081742131347206}
   _gameOverPanel: {fileID: 8356996406644999892}
   _mainPanel: {fileID: 5571656718513811497}
   _points: {fileID: 7678798903039241925}
@@ -2913,16 +2892,4 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5183645929567738191}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6591615664529249524}
-        m_TargetAssemblyTypeName: AsteroidsTest.UI.GameOverView, Assembly-CSharp
-        m_MethodName: Quit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
