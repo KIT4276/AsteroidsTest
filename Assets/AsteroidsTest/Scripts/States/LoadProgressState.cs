@@ -6,8 +6,6 @@ namespace AsteroidsTest.States
 {
     public class LoadProgressState : IState
     {
-        private const string Main = "GameScene";
-
         private readonly StateMachine _gameStateMachine;
         private readonly SaveLoadService _saveLoadService;
         private readonly ProgressService _progressService;
@@ -28,7 +26,7 @@ namespace AsteroidsTest.States
         {
             RegisterProgressReaders();
             LoadProgressOrInitNew();
-            _gameStateMachine.Enter<LoadLevelState, string>(Main);
+            _gameStateMachine.Enter<LoadLevelState>();
         }
 
         public void Exit() { }

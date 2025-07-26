@@ -9,8 +9,6 @@ namespace AsteroidsTest.States
 {
     public class BootstrapState : IState
     {
-        private const string Initial = "BootstrapScene";
-
         private readonly StateMachine _stateMachine;
         private readonly ISceneLoader _sceneLoader;
         private readonly UIFactory _uiFactory;
@@ -35,7 +33,7 @@ namespace AsteroidsTest.States
         {
             RestartFactories();
             _progressReadersHolder.ClearAll();
-            _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
+            _sceneLoader.LoadBootstrapScene(onLoaded: EnterLoadLevel);
         }
         
         public void Exit() { }

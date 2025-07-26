@@ -7,15 +7,20 @@ namespace AsteroidsTest.Services
 {
     public class SceneLoader : ISceneLoader
     {
+        private const string GameSceneName = "GameScene";
+        private const string BootstrapSceneName = "BootstrapScene";
         private readonly ICoroutineRunner _coroutineRunner;
 
         public SceneLoader(ICoroutineRunner coroutineRunner) =>
             _coroutineRunner = coroutineRunner;
 
-        public void Load(string name, Action onLoaded = null) =>
-            _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
+        public void LoadMainGameScene(Action onLoaded = null) =>
+            _coroutineRunner.StartCoroutine(LoadScene(GameSceneName, onLoaded));
 
-        public IEnumerator LoadScene(string name, Action onLoaded = null)
+        public void LoadBootstrapScene(Action onLoaded = null) =>
+            _coroutineRunner.StartCoroutine(LoadScene(BootstrapSceneName, onLoaded));
+
+        private IEnumerator LoadScene(string name, Action onLoaded = null)
         {
             if (SceneManager.GetActiveScene().name == name)
             {

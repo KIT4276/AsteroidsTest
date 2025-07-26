@@ -5,8 +5,7 @@ namespace AsteroidsTest.Services
 {
     public interface ISceneLoader
     {
-        void Load(string name, Action onLoaded = null);
-
-        IEnumerator LoadScene(string name, Action onLoaded = null);
+        public void LoadMainGameScene(Action onLoaded);
+        public void LoadBootstrapScene(Action onLoaded);
     }
 }

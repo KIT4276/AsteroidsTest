@@ -48,20 +48,14 @@ namespace AsteroidsTest.UI
             }
         }
 
-        public void ContinueGame()
-        {
+        private void ContinueGame() => 
             _gameOverViewModel.ContinueGame();
-        }
 
-        public void NewGame()
-        {
+        private void NewGame() => 
             _gameOverViewModel.StartNewGame();
-        }
 
-        public void Quit()
-        {
+        private void Quit() => 
             _gameOverViewModel.QuitGame();
-        }
 
         private void OnGameStoped()
         {
@@ -69,15 +63,11 @@ namespace AsteroidsTest.UI
             _stopGamePanel.SetActive(true);
         }
 
-        private void StopGame()
-        {
+        private void StopGame() => 
             _gameOverViewModel.StopGame();
-        }
 
-        private void OnScoreChanged(string score)
-        {
+        private void OnScoreChanged(string score) => 
             _points.text = score;
-        }
 
         private void OnGameStarted()
         {

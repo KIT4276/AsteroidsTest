@@ -4,7 +4,7 @@ using AsteroidsTest.Services;
 
 namespace AsteroidsTest.States
 {
-    public class LoadLevelState : IPayloadedState<string>
+    public class LoadLevelState : IState
     {
         private readonly StateMachine _stateMachine;
         private readonly ISceneLoader _sceneLoader;
@@ -17,9 +17,9 @@ namespace AsteroidsTest.States
             _uIFactory = uIFactory;
         }
 
-        public void Enter(string sceneName)
+        public void Enter()
         {
-            _sceneLoader.Load(sceneName, OnLoaded);
+            _sceneLoader.LoadMainGameScene(OnLoaded);
         }
 
         public void Exit() { }
