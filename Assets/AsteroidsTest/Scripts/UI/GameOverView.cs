@@ -20,10 +20,12 @@ namespace AsteroidsTest.UI
         private IDisposable _scoreSub;
 
         private GameOverViewModel _gameOverViewModel;
+        private bool _isPaused;
 
         public void Initialize(GameOverViewModel gameOverViewModel)
         {
             _gameOverViewModel = gameOverViewModel;
+            _isPaused = false;
 
             _gameOverViewModel.GameOver += OnGameOver;
             _gameOverViewModel.StartGame += OnGameStarted;
@@ -44,17 +46,26 @@ namespace AsteroidsTest.UI
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
             {
-                StopGame();
+                if (!_isPaused)
+                {
+                    _isPaused = true;
+                    StopGame();
+                }
+                else
+                {
+                    _isPaused = false;
+                    ContinueGame();
+                }
             }
         }
 
-        private void ContinueGame() => 
+        private void ContinueGame() =>
             _gameOverViewModel.ContinueGame();
 
-        private void NewGame() => 
+        private void NewGame() =>
             _gameOverViewModel.StartNewGame();
 
-        private void Quit() => 
+        private void Quit() =>
             _gameOverViewModel.QuitGame();
 
         private void OnGameStoped()
@@ -63,10 +74,10 @@ namespace AsteroidsTest.UI
             _stopGamePanel.SetActive(true);
         }
 
-        private void StopGame() => 
+        private void StopGame() =>
             _gameOverViewModel.StopGame();
 
-        private void OnScoreChanged(string score) => 
+        private void OnScoreChanged(string score) =>
             _points.text = score;
 
         private void OnGameStarted()

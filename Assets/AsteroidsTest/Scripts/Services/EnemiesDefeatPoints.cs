@@ -1,5 +1,6 @@
 using AsteroidsTest.Progress;
 using AsteroidsTest.Save.Data;
+using System;
 
 namespace AsteroidsTest.Services
 {
@@ -20,6 +21,11 @@ namespace AsteroidsTest.Services
         public void LoadProgress(PlayerProgress progress)
         {
             CurrentPoints = progress.Score;
+        }
+
+        public void Restart()
+        {
+            CurrentPoints = 0;
         }
     }
 }

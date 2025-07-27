@@ -1,6 +1,7 @@
 ﻿using AsteroidsTest.Progress;
 using AsteroidsTest.Save;
 using AsteroidsTest.Save.Data;
+using AsteroidsTest.Ship;
 
 namespace AsteroidsTest.States
 {

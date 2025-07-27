@@ -1,4 +1,5 @@
 ﻿using AsteroidsTest.Enemies;
+using AsteroidsTest.Ship;
 using System;
 
 namespace AsteroidsTest.States

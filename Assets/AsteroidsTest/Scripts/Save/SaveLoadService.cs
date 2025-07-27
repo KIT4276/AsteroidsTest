@@ -3,6 +3,7 @@ using AsteroidsTest.Save.Data;
 using System;
 using System.IO;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace AsteroidsTest.Save
 {
@@ -21,7 +22,7 @@ namespace AsteroidsTest.Save
             _backupFilePath = _saveFilePath + ".bak";
         }
 
-        public void SaveProgress()
+        public void SaveProgress(Action onSaved = null)
         {
             try
             {
@@ -30,7 +31,7 @@ namespace AsteroidsTest.Save
                     progressWriter.UpdateProgress(_progressService.Progress);
                 }
 
-                string json = JsonUtility.ToJson(_progressService.Progress, prettyPrint: true);
+                string json = JsonConvert.SerializeObject(_progressService.Progress, Formatting.Indented);
 
                 CreateBackup();
 
@@ -41,6 +42,8 @@ namespace AsteroidsTest.Save
                 Debug.LogError($"[Save] Failed to save progress: {e.Message}");
                 RestoreFromBackup();
             }
+
+            onSaved?.Invoke();
         }
 
         public PlayerProgress LoadProgress()
@@ -80,7 +83,7 @@ namespace AsteroidsTest.Save
             try
             {
                 string json = File.ReadAllText(path);
-                return JsonUtility.FromJson<PlayerProgress>(json);
+                return JsonConvert.DeserializeObject<PlayerProgress>(json);
             }
             catch (Exception e)
             {

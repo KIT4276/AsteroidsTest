@@ -17,7 +17,7 @@ namespace AsteroidsTest.Ship
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent<BaseEnemyCollision>(out var enemy))
+            if (collision.gameObject.GetComponent<BaseEnemyCollision>() != null)
             {
                 TakeDamage();
             }

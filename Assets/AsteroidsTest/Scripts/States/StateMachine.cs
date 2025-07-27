@@ -1,6 +1,7 @@
 using AsteroidsTest.Factories;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AsteroidsTest.States
 {
@@ -29,9 +30,7 @@ namespace AsteroidsTest.States
                 [typeof(LoadLevelState)] = _stateFactory
                 .CreateState<LoadLevelState>(),
                 [typeof(GameLoopState)] = _stateFactory
-                .CreateState<GameLoopState>(),
-                [typeof(SaveProgressState)] = _stateFactory
-               .CreateState<SaveProgressState>()
+                .CreateState<GameLoopState>()
             };
             Enter<BootstrapState>();
             _isInited = true;

@@ -7,8 +7,8 @@ namespace AsteroidsTest.Weapon.Laser
 {
     public class LaserModel: ISavedProgress, IPausable
     {
-        private ReactiveProperty<int> _shotsRemaining = new();
-        private ReactiveProperty<float> _shotsTimer = new();
+        private ReactiveProperty<int> _shotsRemaining;
+        private ReactiveProperty<float> _shotsTimer;
 
         public Observable<int> ShotsLeft => _shotsRemaining.AsObservable();
         public Observable<float> ShotsTimer => _shotsTimer.AsObservable();
@@ -29,6 +29,13 @@ namespace AsteroidsTest.Weapon.Laser
             _shotsRemaining.Value = _maxShots;
 
             pauser.Register(this);
+        }
+
+        public void Restart()
+        {
+            _shotsRemaining.Value = _maxShots;
+            _shotsTimer.Value = 0;
+            _isPause = false;
         }
 
         public void Pause() => 

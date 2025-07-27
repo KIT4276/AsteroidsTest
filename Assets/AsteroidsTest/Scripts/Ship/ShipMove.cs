@@ -1,4 +1,7 @@
 using AsteroidsTest.Input;
+using AsteroidsTest.Save.Data;
+using AsteroidsTest.States;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -21,6 +24,18 @@ namespace AsteroidsTest.Ship
         {
             _inputHandler = inputHandler;
         }
+
+        //public void OnBootstrap()
+        //{
+        //    this.gameObject.SetActive(false);
+        //}
+
+        //public void OnGameStarted()
+        //{
+        //    this.gameObject.SetActive(true);
+        //    transform.position = Vector3.zero;  
+        //    transform.rotation = Quaternion.identity;
+        //}
 
         private void Update()
         {
