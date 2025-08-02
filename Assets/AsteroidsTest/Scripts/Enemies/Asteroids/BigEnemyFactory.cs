@@ -18,6 +18,7 @@ namespace AsteroidsTest.Enemies.Asteroids
         protected Coroutine _spawnCoroutine;
 
         private bool _canSpawn = false;
+        private bool _isStarted = false;
     
         protected BigEnemyFactory(GameStaticData staticData, DefeatPointsData defeatPointsData, EnemiesDefeatPoints targetDefeatPoints,
             ICoroutineRunner coroutineRunner, Transform spawnPoint, Pauser pauser, BigEnemySpawner bigEnemySpawner)
@@ -36,7 +37,12 @@ namespace AsteroidsTest.Enemies.Asteroids
             _canSpawn = true;
            
             _pauser.Register(this);
-            _bigEnemySpawner.GameStarted += StartSpawn;
+
+            if (!_isStarted)
+            {
+                _bigEnemySpawner.GameStarted += StartSpawn;
+                _isStarted = true;
+            }
         }
 
         public void Pause()
@@ -50,6 +56,7 @@ namespace AsteroidsTest.Enemies.Asteroids
     
         public void Resume()
         {
+            Debug.Log("Resume BigEnemyFactory");
             if (_spawnCoroutine == null)
                 StartSpawn();
         }
@@ -100,7 +107,13 @@ namespace AsteroidsTest.Enemies.Asteroids
 
         public void Dispose()
         {
+            _isStarted = false;
             _canSpawn = false;
+            if (_spawnCoroutine != null)
+            {
+                _coroutineRunner.StopCoroutine(_spawnCoroutine);
+                _spawnCoroutine = null;
+            }
             _bigEnemySpawner.GameStarted -= StartSpawn;
         }
     }
