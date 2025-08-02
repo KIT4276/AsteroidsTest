@@ -4,10 +4,8 @@ using AsteroidsTest.Factories;
 using AsteroidsTest.Progress;
 using AsteroidsTest.Save.Data;
 using AsteroidsTest.Services;
-using AsteroidsTest.Ship;
 using AsteroidsTest.Weapon.Bullet;
 using System;
-using UnityEngine;
 
 namespace AsteroidsTest.States
 {
@@ -41,7 +39,6 @@ namespace AsteroidsTest.States
         public void Enter()
         {
             RestartFactories();
-            //Debug.Log(_savedProgress.Length);
             foreach (var item in _savedProgress)
                 item.Restart();
 
