@@ -56,7 +56,6 @@ namespace AsteroidsTest.Enemies.Asteroids
     
         public void Resume()
         {
-            Debug.Log("Resume BigEnemyFactory");
             if (_spawnCoroutine == null)
                 StartSpawn();
         }

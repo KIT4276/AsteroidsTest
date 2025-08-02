@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AsteroidsTest.Pause
 {
@@ -44,7 +43,6 @@ namespace AsteroidsTest.Pause
 
                 for (int i = 0; i < _pausables.Count; i++)
                 {
-                    Debug.Log(_pausables[i].GetType().Name);
                     _pausables[i].Resume();
                 }
             }
