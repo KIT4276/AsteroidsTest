@@ -17,6 +17,8 @@ namespace AsteroidsTest.States
         public StateMachine(StateFactory stateFactory) =>
             _stateFactory = stateFactory;
 
+        public event Action<IExitableState> StateChanged;
+
         public void Initialize()
         {
             if (_isInited) return;
@@ -54,6 +56,8 @@ namespace AsteroidsTest.States
 
             TState state = GetState<TState>();
             _activeState = state;
+
+            StateChanged?.Invoke(_activeState);
             return state;
         }
 

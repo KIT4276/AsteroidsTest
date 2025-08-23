@@ -30,8 +30,7 @@ namespace AsteroidsTest.Services
 
             AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(name);
 
-            while (!waitNextScene.isDone)
-                yield return null;
+            yield return new WaitUntil(() => waitNextScene.isDone);
 
             onLoaded?.Invoke();
         }

@@ -1,4 +1,5 @@
 using AsteroidsTest.Input;
+using AsteroidsTest.States;
 using UnityEngine;
 using Zenject;
 
@@ -15,18 +16,36 @@ namespace AsteroidsTest.Weapon.Laser
 
         private LaserModel _laserModel;
         private BaseInputHandler _inputHandler;
+        private StateMachine _stateMachine;
+        private bool _isGameLoop;
 
         [Inject]
-        private void Construct(BaseInputHandler inputHandler, LaserModel laserModel)
+        private void Construct(BaseInputHandler inputHandler, LaserModel laserModel, StateMachine stateMachine)
         {
             _laserModel = laserModel;
             _inputHandler = inputHandler;
+            _stateMachine = stateMachine;
 
+            _stateMachine.StateChanged += OnStateChange;
             inputHandler.LaserFireAction += LaserFire;
+        }
+
+        private void OnStateChange(IExitableState state)
+        {
+            if (state is GameLoopState)
+            {
+                _isGameLoop = true;
+            }
+            else
+            {
+                _isGameLoop = false;
+            }
         }
 
         private void LaserFire()
         {
+            if (!_isGameLoop) return;
+            
             if (_laserModel.TryFire())
             {
                 RaycastHit2D[] hits = Physics2D
@@ -54,7 +73,10 @@ namespace AsteroidsTest.Weapon.Laser
                 _laserModel.UpdateTimer(Time.deltaTime);
         }
 
-        private void OnDestroy() =>
+        private void OnDestroy()
+        {
             _inputHandler.LaserFireAction -= LaserFire;
+            _stateMachine.StateChanged -= OnStateChange;
+        }
     }
 }
